@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ApiPaths } from 'src/app/enums/ApiPath.enum';
+import { ILoginFormData } from 'src/app/interfaces/loginFormData.interface';
 import { UserFormData } from 'src/app/interfaces/userFormData.interface';
 import { baseUrl } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
@@ -17,14 +18,19 @@ export class AuthService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  public login(data: ILoginFormData) {
+    return this.authenticate(data, ApiPaths.LOGIN)
+  }
+
   public register(data: UserFormData) {
     return this.authenticate(data, ApiPaths.REGISTER);
   }
 
-  private authenticate(data: UserFormData, path: string): Observable<any> {
+  private authenticate(data: UserFormData | ILoginFormData, path: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}${path}`, data, { observe: 'response' }).pipe(
       tap((response: HttpResponse<any>) => {
-        const accessToken = response.headers.get('access-token');
+        const accessToken = response.body['access-token']
+        console.log(response, accessToken)
 
         if (accessToken) {
           this.saveToken(accessToken);

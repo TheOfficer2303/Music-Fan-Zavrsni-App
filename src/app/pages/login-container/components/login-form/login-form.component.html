@@ -1,0 +1,23 @@
+
+<form [formGroup]="loginForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput  formControlName="email">
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error *ngIf="loginForm.get('email')?.errors?.['required'] else notEmpty">Cannot be empty</mat-error>
+        <ng-template #notEmpty>
+            <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">Hey! That's not an email!</mat-error>
+        </ng-template>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="'password'" formControlName="password">
+        <mat-icon matPrefix>lock</mat-icon>
+        <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">Cannot be empty</mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button  color="primary" (click)="onLogin()" [disabled]="loginForm.invalid">Sign up</button>
+    <p>Don't have an account <a [routerLink]="'/register'" > <b>Register</b></a></p>
+</form>

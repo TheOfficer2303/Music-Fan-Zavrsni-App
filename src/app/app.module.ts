@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,8 @@ import { RegistrationContainerComponent } from './pages/registration-container/r
 import { RegistrationFormComponent } from './pages/registration-container/components/registration-form/registration-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { LoginContainerComponent } from './pages/login-container/login-container.component';
+import { LoginFormComponent } from './pages/login-container/components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     AuthLayoutComponent,
     RegistrationContainerComponent,
     RegistrationFormComponent,
+    LoginContainerComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatButtonModule,
     HttpClientModule,
     MatSelectModule,
+    MatAutocompleteModule,
   ],
   providers: [
     
