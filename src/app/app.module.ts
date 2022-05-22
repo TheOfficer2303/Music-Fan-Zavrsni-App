@@ -6,7 +6,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,7 @@ import { AuthLayoutComponent } from './components/auth-layout/auth-layout.compon
 import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
 import { RegistrationFormComponent } from './pages/registration-container/components/registration-form/registration-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,9 +36,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatFormFieldModule,
     FormsModule,
     MatButtonModule,
-    HttpClient,
+    HttpClientModule,
+    MatSelectModule,
   ],
-  providers: [],
+  providers: [
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
