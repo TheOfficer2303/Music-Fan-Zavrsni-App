@@ -1,4 +1,4 @@
 export enum ApiPaths {
-    REGISTER = '/register',
+    REGISTER = '/users',
     LOCATIONS = '/locations',
 }

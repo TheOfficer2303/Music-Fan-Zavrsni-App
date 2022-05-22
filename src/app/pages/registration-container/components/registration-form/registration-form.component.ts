@@ -1,11 +1,10 @@
 import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-export interface UserFormData {
-  email: string,
-  password: string,
-  password_confirmation: string
-}
+import { finalize, Observable, tap } from 'rxjs';
+import { Location } from 'src/app/services/location/location.model';
+import { LocationService } from 'src/app/services/location/location.service';
+import { samePasswordsValidator } from 'src/app/validators/samePasswords.validator';
+import { UserFormData } from 'src/app/interfaces/userFormData.interface';
 
 @Component({
   selector: 'app-registration-form',
@@ -20,25 +19,38 @@ export class RegistrationFormComponent {
     firstName: ['', Validators.required, Validators.name],
     lastName: ['', Validators.required, Validators.name],
     info: ['', Validators.required, Validators.name],
-    
+    postNumber: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     passwords: this.fb.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]]
-    }
+    },
+      {validator: samePasswordsValidator}
     )
-  })
+  });
 
-  constructor(private fb: FormBuilder) { }
+  locations$!: Observable<Location[]>;
+
+  constructor(private fb: FormBuilder, private locationService: LocationService) { }
 
   public onRegister():void {
     this.registerUser.emit({
-      email: this.registration.get("email")?.value,
-      password: this.registration.get(['passwords', 'password'])?.value,
-      password_confirmation: this.registration.get(['passwords', 'confirmPassword'])?.value
+      user : {
+        firstName: this.registration.get('firstName')?.value,
+        lastName: this.registration.get('lastName')?.value,
+        email: this.registration.get('email')?.value,
+        password: this.registration.get(['passwords', 'password'])?.value,
+        confirmPassword: this.registration.get(['passwords', 'confirmPassword'])?.value,
+        info: this.registration.get('info')?.value,
+        postNumber: this.registration.get('postNumber')?.value,
+      }
     });
     this.registration.reset();
   }
 
-  
+  ngOnInit() {
+    this.locations$ = this.locationService.getLocations().pipe(
+      tap(console.log)
+    )
+  }
 }

@@ -18,7 +18,7 @@ export class AuthService {
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
   public register(data: UserFormData) {
-    this.authenticate(data, ApiPaths.REGISTER);
+    return this.authenticate(data, ApiPaths.REGISTER);
   }
 
   private authenticate(data: UserFormData, path: string): Observable<any> {

@@ -14,12 +14,9 @@
         <mat-label>Email</mat-label>
         <input matInput  formControlName="email">
         <mat-icon matPrefix>person</mat-icon>
-        <!-- <mat-error *ngIf="registration.get('email')?.errors?.required else notEmpty">Cannot be empty</mat-error> -->
+        <mat-error *ngIf="registration.get('email')?.errors?.['required'] else notEmpty">Cannot be empty</mat-error>
         <ng-template #notEmpty>
-            <!-- <mat-error *ngIf="registration.get('email')?.errors?.email else letterCheckValidator">Hey! That's not an email!</mat-error> -->
-            <ng-template #letterCheckValidator>
-                <!-- <mat-error *ngIf="registration.get('email')?.errors?.onlyLetters">Please do not include special characters</mat-error> -->
-            </ng-template>
+            <mat-error *ngIf="registration.get('email')?.errors?.['email']">Hey! That's not an email!</mat-error>
         </ng-template>
     </mat-form-field>
 
@@ -28,28 +25,36 @@
             <mat-label>Password</mat-label>
             <input matInput [type]="'password'" formControlName="password">
             <mat-icon matPrefix>lock</mat-icon>
-            <!-- <mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.required">Cannot be empty</mat-error> -->
-            <!-- <mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.minlength">Password must be at least 8 characters long</mat-error> -->
+            <mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.['required']">Cannot be empty</mat-error>
+            <mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.['minlength']">Password must be at least 8 characters long</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Confirm password</mat-label>
             <input matInput [type]="'password'" formControlName="confirmPassword">
             <mat-icon matPrefix>lock</mat-icon>
-            <!-- <mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.required">Cannot be empty</mat-error> -->
+            <mat-error *ngIf="registration.get(['passwords', 'password'])?.errors?.['required']">Cannot be empty</mat-error>
         </mat-form-field>
-        <!-- <mat-error *ngIf="registration.get('passwords')?.errors?.notSame">
+        <mat-error *ngIf="registration.get('passwords')?.errors?.['notSame']">
             Passwords mismatch!
-        </mat-error> -->
+        </mat-error>
     </div>
-
-    
 
     <mat-form-field appearance="outline">
         <mat-label>Info</mat-label>
         <input matInput [type]="'text'" formControlName="info">
+        <mat-error *ngIf="registration.get('info')?.errors?.['required']">Cannot be empty</mat-error>
     </mat-form-field>
-    
+
+    <mat-form-field>
+        <mat-select formControlName="postNumber">
+            <ng-container *ngFor="let location of (locations$ | async)">
+                <mat-option [value]="location.postNumber">{{location.name}}</mat-option>                 
+            </ng-container>
+        </mat-select>
+        
+        <mat-error *ngIf="registration.get('info')?.errors?.['required']">Cannot be unselected</mat-error>
+    </mat-form-field>
 
     <button mat-raised-button  color="primary" (click)="onRegister()" [disabled]="registration.invalid">Sign up</button>
     <p>Already have an account? <a [routerLink]="'/login'" > <b>Login</b></a></p>

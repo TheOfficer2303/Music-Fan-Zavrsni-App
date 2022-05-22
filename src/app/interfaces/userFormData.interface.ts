@@ -1,4 +1,5 @@
 export interface UserFormData {
+  user: {
     firstName: string,
     lastName: string,
     email: string,
@@ -7,3 +8,4 @@ export interface UserFormData {
     info: string,
     postNumber: number
   }
+}
