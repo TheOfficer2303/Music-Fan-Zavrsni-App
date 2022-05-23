@@ -7,7 +7,7 @@ import { ILoginFormData } from 'src/app/interfaces/loginFormData.interface';
 import { UserFormData } from 'src/app/interfaces/userFormData.interface';
 import { baseUrl } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
-import { User } from './user.model';
+import { User } from '../user/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +38,9 @@ export class AuthService {
           const userResponse = response.body['user'];
           const currentUser = new User(
               userResponse.id,
-              userResponse.firstName, 
-              userResponse.lastName, 
-              userResponse.avatarUrl,
+              userResponse.first_name, 
+              userResponse.last_name, 
+              userResponse.avatar_url,
               userResponse.info,
               userResponse.location
           );

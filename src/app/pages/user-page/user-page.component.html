@@ -1,6 +1,25 @@
-<app-avatar [avatarUrl]="person?.avatarUrl"></app-avatar>
+<div *ngIf="user$ | async; let user">
+    <app-avatar [avatarUrl]="user?.avatarUrl"></app-avatar>
 
-<div>
-    <p>{{person?.firstName}} {{person?.lastName}}</p>
-    <p>{{person?.location}}</p>
+    <div>
+        <p>{{user.firstName}}</p>
+        <p>{{user.lastName}}</p>
+    </div>
+
+
+    <div class="buttons">
+        <span *ngIf="followed$ | async; else elseBlock">
+            <button mat-button disabled>Followed</button>
+        </span>
+        <ng-template #elseBlock>
+            <span *ngIf="getCurrentUser()?.id != user.id">
+                <button mat-button (click)="onFollow()">Follow</button>
+            </span>
+        </ng-template>
+        
+        <button mat-button>Message</button>
+    </div>
 </div>
+
+
+
