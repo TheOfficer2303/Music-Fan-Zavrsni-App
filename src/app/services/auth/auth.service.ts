@@ -2,10 +2,12 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ApiPaths } from 'src/app/enums/ApiPath.enum';
+import { IAuthData } from 'src/app/interfaces/authData.interface';
 import { ILoginFormData } from 'src/app/interfaces/loginFormData.interface';
 import { UserFormData } from 'src/app/interfaces/userFormData.interface';
 import { baseUrl } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ import { StorageService } from '../storage/storage.service';
 export class AuthService {
   private baseUrl = baseUrl;
 
-  private _isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(Boolean(this.getToken()));
+  private _isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(Boolean(this.getAuthData()));
   public isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
@@ -33,23 +35,38 @@ export class AuthService {
         console.log(response, accessToken)
 
         if (accessToken) {
-          this.saveToken(accessToken);
+          const userResponse = response.body['user'];
+          const currentUser = new User(
+              userResponse.id,
+              userResponse.firstName, 
+              userResponse.lastName, 
+              userResponse.avatarUrl,
+              userResponse.info,
+              userResponse.location
+          );
+
+          const authData: IAuthData = {
+            token: accessToken,
+            currentUser: currentUser
+          }
+
+          this.saveAuthData(authData);
           this._isLoggedIn$.next(true);
         }
       })
     )
   }
 
-  private saveToken(token: string): void {
-    this.storageService.add('access-token', token)
+  public saveAuthData(authData: IAuthData): void {
+    this.storageService.add('auth-data', authData);
   }
 
-  private getToken(): string | null {
-    return this.storageService.get('access-token');
+  public getAuthData(): IAuthData | null {
+    return this.storageService.get('auth-data');
   }
 
   public logOut() {
-    this.storageService.delete('access-token');
+    this.storageService.delete('auth-data');
     this._isLoggedIn$.next(false);
   }
 }
