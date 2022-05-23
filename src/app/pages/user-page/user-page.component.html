@@ -9,7 +9,7 @@
 
     <div class="buttons">
         <span *ngIf="followed$ | async; else elseBlock">
-            <button mat-button disabled>Followed</button>
+            <button mat-button (click)="onUnfollow()">Unfollow</button>
         </span>
         <ng-template #elseBlock>
             <span *ngIf="getCurrentUser()?.id != user.id">

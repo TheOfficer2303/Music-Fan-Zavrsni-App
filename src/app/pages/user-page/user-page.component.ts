@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, finalize, map, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { User } from 'src/app/services/user/user.model';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -10,7 +9,9 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.scss']
 })
-export class UserPageComponent implements OnInit {
+export class UserPageComponent {
+  public followed$ = new BehaviorSubject(false)
+
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
       return paramMap.get('id');
@@ -27,24 +28,35 @@ export class UserPageComponent implements OnInit {
     return this.userService.getUserById(id!);
   };
 
-  public followed$ = this.user$?.pipe(
+  private _followed$ = this.user$?.pipe(
     switchMap((user) => {
-      debugger
       return this.userService.isFollowedBy(this.getCurrentUser()!.id, user.id)
     }),
-    
-  )
-
-  constructor(private authService: AuthService, private userService: UserService, private activatedRoute: ActivatedRoute) { }
+  ).subscribe((val: boolean) => {
+    this.followed$.next(val)
+  })
  
   public onFollow() {
-    console.log("aaa")
+    this.followed$.next(true);
+    this.user$.pipe(
+      switchMap((user) => {
+        return this.userService.followUser(user.id);
+      })
+    ).subscribe()
+  }
+
+  public onUnfollow() {
+    this.followed$.next(false);
+    this.user$.pipe(
+      switchMap((user) => {
+        return this.userService.unfollowUser(user.id);
+      })
+    ).subscribe()
   }
 
   public getCurrentUser() {
     return this.authService.getAuthData()?.currentUser;
   }
 
-  ngOnInit(): void {}
-
+  constructor(private authService: AuthService, private userService: UserService, private activatedRoute: ActivatedRoute) { }
 }

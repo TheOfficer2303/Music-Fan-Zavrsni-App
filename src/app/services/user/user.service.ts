@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { IRawUser } from 'src/app/interfaces/rawUser.interface';
 import { baseUrl } from 'src/environments/environment';
@@ -21,6 +21,20 @@ export class UserService {
     );
   }
 
+  public followUser(userId: number) {
+    const url = `${baseUrl}${ApiPaths.USER}/${userId}${ApiPaths.FOLLOW}`
+    return this.http.post<any>(url, {}, {observe: 'response'}).pipe(
+      tap(console.log)
+    );
+  }
+
+  public unfollowUser(userId: number) {
+    const url = `${baseUrl}${ApiPaths.USER}/${userId}${ApiPaths.FOLLOW}`
+    return this.http.delete<any>(url, {}).pipe(
+      tap(console.log)
+    );
+  }
+
   public isFollowedBy(followerId: number, followeeId: number) {
     const url = `${baseUrl}${ApiPaths.USER}/${followerId}${ApiPaths.USER_FOLLOWING}`
     console.log(url)
@@ -30,7 +44,7 @@ export class UserService {
         if (response.followees.length === 0) {
           return false;
         } else {
-          const followees = response.followees[0];
+          const followees = response.followees;
           
           const value = followees.find((followee: { user_id: number; }) => followee.user_id == followeeId);
           console.log(value)
@@ -42,6 +56,6 @@ export class UserService {
           }
         }
       })
-    )
+    );
   }
 }
