@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, finalize, map, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Orchestra, OrchestraMembership } from 'src/app/services/orchestra/orchestra.model';
+import { OrchestraService } from 'src/app/services/orchestra/orchestra.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -10,7 +12,9 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent {
-  public followed$ = new BehaviorSubject(false)
+  public followed$ = new BehaviorSubject(false);
+
+  
 
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
@@ -21,6 +25,12 @@ export class UserPageComponent {
   public user$ = this.id$.pipe(
     switchMap((id) => {
       return this.getUser(id);
+    })
+  );
+
+  public orchestraMembership$: Observable<OrchestraMembership | null> = this.id$.pipe(
+    switchMap((id) => {
+      return this.orchestraService.getOrchestraByPlayerId(id!);
     })
   );
 
@@ -58,5 +68,6 @@ export class UserPageComponent {
     return this.authService.getAuthData()?.currentUser;
   }
 
-  constructor(private authService: AuthService, private userService: UserService, private activatedRoute: ActivatedRoute) { }
+  constructor(private authService: AuthService, private userService: UserService, private orchestraService: OrchestraService,
+    private activatedRoute: ActivatedRoute) { }
 }

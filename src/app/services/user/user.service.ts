@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public getUserById(id: string) {
+  public getUserById(id: string | number) {
     return this.http.get<IRawUser>(`${baseUrl}${ApiPaths.USER}/${id}`).pipe(
       map((response) => {
         return new User(response.user.id, response.user.first_name, response.user.last_name, response.user.avatar_url, response.user.info, response.user.location)
