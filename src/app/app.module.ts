@@ -20,6 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoginContainerComponent } from './pages/login-container/login-container.component';
 import { LoginFormComponent } from './pages/login-container/components/login-form/login-form.component';
+import { MainLayoutComponent } from './components/main-layout/main-layout/main-layout.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
+import { AvatarComponent } from './pages/user-page/components/avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { LoginFormComponent } from './pages/login-container/components/login-for
     RegistrationFormComponent,
     LoginContainerComponent,
     LoginFormComponent,
+    MainLayoutComponent,
+    UserPageComponent,
+    AvatarComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,11 @@ import { LoginFormComponent } from './pages/login-container/components/login-for
     MatAutocompleteModule,
   ],
   providers: [
-    
+    {
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true,
+		},
   ],
   bootstrap: [AppComponent]
 })
