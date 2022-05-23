@@ -4,11 +4,13 @@ export class OrchestraMembership {
     orchestra: Orchestra;
     joinedAt: string;
     instrument: string;
+    player: User;
 
-    constructor(orchestra: Orchestra, joinedAt: string, instrument: string) {
+    constructor(orchestra: Orchestra, joinedAt: string, instrument: string, player: User) {
         this.orchestra = orchestra;
         this.joinedAt = joinedAt;
         this.instrument = instrument;
+        this.player = player;
     }
 }
 

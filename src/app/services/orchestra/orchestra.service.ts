@@ -14,9 +14,9 @@ import { Orchestra, OrchestraMembership } from './orchestra.model';
 })
 export class OrchestraService {
 
-  public getOrchestraByPlayerId(playerId: number | string): Observable<OrchestraMembership | null>{
+  public getOrchestraByPlayer(user: User): Observable<OrchestraMembership | null>{
     const url = `${baseUrl}${ApiPaths.ORCHESTRA_MEMBERSHIP}`
-    const query = `player_id=${playerId}`
+    const query = `player_id=${user.id}`
     return this.http.get<IRawOrchMemb>(`${url}?${query}`).pipe(
       mergeMap((response) => {
         return combineLatest([
@@ -31,7 +31,7 @@ export class OrchestraService {
 
           const orchestra = new Orchestra(responseOrchestra.orchestra_id, conductor!, responseOrchestra.name, 
             responseOrchestra.info, responseOrchestra.players_no, responseOrchestra.founded_at, responseOrchestra.country_iso_code);
-          return new OrchestraMembership(orchestra, responseMembership.joined_at, responseMembership.instrument); 
+          return new OrchestraMembership(orchestra, responseMembership.joined_at, responseMembership.instrument, user); 
       }),
       catchError((error) => {
         console.log(error);

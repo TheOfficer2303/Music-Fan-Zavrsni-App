@@ -28,15 +28,11 @@ export class UserPageComponent {
     })
   );
 
-  public orchestraMembership$: Observable<OrchestraMembership | null> = this.id$.pipe(
-    switchMap((id) => {
-      return this.orchestraService.getOrchestraByPlayerId(id!);
+  public orchestraMembership$: Observable<OrchestraMembership | null> = this.user$.pipe(
+    switchMap((user) => {
+      return this.orchestraService.getOrchestraByPlayer(user);
     })
   );
-
-  public getUser(id: string | null) {
-    return this.userService.getUserById(id!);
-  };
 
   private _followed$ = this.user$?.pipe(
     switchMap((user) => {
@@ -45,6 +41,10 @@ export class UserPageComponent {
   ).subscribe((val: boolean) => {
     this.followed$.next(val)
   })
+
+  public getUser(id: string | null) {
+    return this.userService.getUserById(id!);
+  };
  
   public onFollow() {
     this.followed$.next(true);

@@ -1,0 +1,21 @@
+<span *ngIf="orchestraMembership; let orchestraMembership; else noPlay"> 
+    <div>
+        Orchestra name:
+        {{orchestraMembership.orchestra.name}}
+    </div>
+    <div>
+        Conductor
+        {{orchestraMembership.orchestra.conductor.firstName}} {{orchestraMembership.orchestra.conductor.lastName}}
+    </div>
+    <div>
+        Joined at:
+        {{orchestraMembership.joinedAt}}
+    </div>
+    <div>
+        Playing:
+        {{orchestraMembership.instrument}}
+    </div>
+</span>
+<ng-template #noPlay>
+    <span>I don't play in any orchestra</span>
+</ng-template>

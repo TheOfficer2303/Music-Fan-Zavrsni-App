@@ -23,6 +23,7 @@ import { LoginFormComponent } from './pages/login-container/components/login-for
 import { MainLayoutComponent } from './components/main-layout/main-layout/main-layout.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { AvatarComponent } from './pages/user-page/components/avatar/avatar.component';
+import { OrchestraMembershipComponent } from './pages/user-page/components/orchestra-membership/orchestra-membership.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AvatarComponent } from './pages/user-page/components/avatar/avatar.comp
     MainLayoutComponent,
     UserPageComponent,
     AvatarComponent,
+    OrchestraMembershipComponent,
   ],
   imports: [
     BrowserModule,
