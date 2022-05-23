@@ -24,6 +24,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout/main-l
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { AvatarComponent } from './pages/user-page/components/avatar/avatar.component';
 import { OrchestraMembershipComponent } from './pages/user-page/components/orchestra-membership/orchestra-membership.component';
+import { GroupMembershipsComponent } from './pages/user-page/components/group-memberships/group-memberships.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { OrchestraMembershipComponent } from './pages/user-page/components/orche
     UserPageComponent,
     AvatarComponent,
     OrchestraMembershipComponent,
+    GroupMembershipsComponent,
   ],
   imports: [
     BrowserModule,

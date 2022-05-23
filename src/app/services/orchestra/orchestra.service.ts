@@ -25,7 +25,6 @@ export class OrchestraService {
         ])
       }),
       map(([response, conductor]) => {
-          debugger
           const responseOrchestra = response.orchMembs.orchestra[0];
           const responseMembership = response.orchMembs.membership[0];
 

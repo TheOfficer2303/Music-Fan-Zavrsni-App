@@ -5,5 +5,7 @@ export enum ApiPaths {
     USER = '/users',
     USER_FOLLOWING = '/following',
     FOLLOW = '/follow',
-    ORCHESTRA_MEMBERSHIP = '/orchestra_memberships'
+    ORCHESTRA_MEMBERSHIP = '/orchestra_memberships',
+    GROUP_MEMBERSHIP = '/group_memberships',
+    
 }

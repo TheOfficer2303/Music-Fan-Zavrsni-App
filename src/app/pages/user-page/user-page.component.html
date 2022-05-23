@@ -20,9 +20,24 @@
         <button mat-button>Message</button>
     </div>
 
-    <div class="orchestra">
-        <h2>My orchestra</h2>
-        <app-orchestra-membership [orchestraMembership]="orchestraMembership$ | async"></app-orchestra-membership>
+    <div class="memberships">
+        <div class="orchestra">
+            <h2>My orchestra</h2>
+            <app-orchestra-membership [orchestraMembership]="orchestraMembership$ | async"></app-orchestra-membership>
+        </div>
+
+        <div class="groups">
+            <h2>My groups</h2>
+            <div *ngIf="groupMemberships$ | async; let groupMemberships; else noGroup">
+                <app-group-memberships [groupMemberships]="groupMemberships"></app-group-memberships>
+            </div>
+
+            <ng-template #noGroup>
+                <div>I'm in no groups whatsoever.</div>
+            </ng-template>
+
+        </div>
+
     </div>
 </div>
 
