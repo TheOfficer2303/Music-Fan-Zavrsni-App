@@ -35,9 +35,16 @@
             <ng-template #noGroup>
                 <div>I'm in no groups whatsoever.</div>
             </ng-template>
-
         </div>
+    </div>
 
+    <div class="info-posts">
+        <mat-tab-group>
+            <mat-tab label="Info"> {{user.info}} </mat-tab>
+            <mat-tab label="Posts"> 
+                <app-post-list [posts]="posts$ | async"></app-post-list>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>
 

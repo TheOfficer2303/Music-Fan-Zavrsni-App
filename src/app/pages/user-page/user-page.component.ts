@@ -6,6 +6,8 @@ import { GroupMembership } from 'src/app/services/group/group.model';
 import { GroupService } from 'src/app/services/group/group.service';
 import { Orchestra, OrchestraMembership } from 'src/app/services/orchestra/orchestra.model';
 import { OrchestraService } from 'src/app/services/orchestra/orchestra.service';
+import { Post } from 'src/app/services/post/post.model';
+import { PostService } from 'src/app/services/post/post.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -33,6 +35,12 @@ export class UserPageComponent {
       return this.groupService.getGroupsByUser(user);
     }),
     tap(console.log)
+  );
+
+  public posts$: Observable<Array<Post>> = this.user$.pipe(
+    switchMap((user) => {
+      return this.postService.getPostsOfUser(user);
+    })
   )
 
   public orchestraMembership$: Observable<OrchestraMembership | null> = this.user$.pipe(
@@ -69,5 +77,6 @@ export class UserPageComponent {
   }
 
   constructor(private authService: AuthService, private userService: UserService, private orchestraService: OrchestraService,
-    private activatedRoute: ActivatedRoute, private groupService: GroupService) { }
+    private activatedRoute: ActivatedRoute, private groupService: GroupService,
+    private postService: PostService) { }
 }
