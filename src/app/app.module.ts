@@ -9,6 +9,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +26,8 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 import { AvatarComponent } from './pages/user-page/components/avatar/avatar.component';
 import { OrchestraMembershipComponent } from './pages/user-page/components/orchestra-membership/orchestra-membership.component';
 import { GroupMembershipsComponent } from './pages/user-page/components/group-memberships/group-memberships.component';
+import { PostListComponent } from './components/post-list/post-list.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { GroupMembershipsComponent } from './pages/user-page/components/group-me
     AvatarComponent,
     OrchestraMembershipComponent,
     GroupMembershipsComponent,
+    PostListComponent,
+    PostCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ import { GroupMembershipsComponent } from './pages/user-page/components/group-me
     HttpClientModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatTabsModule,
   ],
   providers: [
     {
