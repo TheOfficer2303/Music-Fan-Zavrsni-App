@@ -1,4 +1,4 @@
-export interface UserFormData {
+export interface IUserFormData {
   user: {
     firstName: string,
     lastName: string,

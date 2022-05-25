@@ -28,6 +28,8 @@ import { OrchestraMembershipComponent } from './pages/user-page/components/orche
 import { GroupMembershipsComponent } from './pages/user-page/components/group-memberships/group-memberships.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserEditFormComponent } from './pages/user-page/components/user-edit-form/user-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
     GroupMembershipsComponent,
     PostListComponent,
     PostCardComponent,
+    UserEditFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
     MatSelectModule,
     MatAutocompleteModule,
     MatTabsModule,
+    NgbModule,
   ],
   providers: [
     {

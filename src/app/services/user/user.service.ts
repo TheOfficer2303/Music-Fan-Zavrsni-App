@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { ApiPaths } from 'src/app/enums/ApiPath.enum';
+import { IAuthData } from 'src/app/interfaces/authData.interface';
 import { IRawUser } from 'src/app/interfaces/rawUser.interface';
 import { baseUrl } from 'src/environments/environment';
+import { AuthService } from '../auth/auth.service';
 import { User } from './user.model';
 
 @Injectable({
@@ -11,7 +13,7 @@ import { User } from './user.model';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   public getUserById(id: string | number) {
     return this.http.get<IRawUser>(`${baseUrl}${ApiPaths.USER}/${id}`).pipe(
@@ -33,6 +35,27 @@ export class UserService {
     return this.http.delete<any>(url, {}).pipe(
       tap(console.log)
     );
+  }
+
+  public updateUser(user: User) {
+    
+    const url = `${baseUrl}${ApiPaths.USER}/${user.id}`;
+    console.log(url)
+    return this.http.put<any>(url, {user: user}, {observe: 'response'}).pipe(
+      map((response) => {
+        console.log(response)
+        const userResponse = response.body?.user;
+        const editedUser = new User(userResponse!.id, userResponse!.first_name, userResponse!.last_name, userResponse!.avatar_url,
+          userResponse!.info, userResponse!.location);
+
+        const token = this.authService.getAuthData()?.token;
+        const newAuthData: IAuthData = {
+          token: token!,
+          currentUser: editedUser
+        };
+        this.authService.saveAuthData(newAuthData);
+      })
+    )
   }
 
   public isFollowedBy(followerId: number, followeeId: number) {

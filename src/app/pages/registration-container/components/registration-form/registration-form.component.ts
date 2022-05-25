@@ -4,7 +4,7 @@ import { finalize, Observable, tap } from 'rxjs';
 import { Location } from 'src/app/services/location/location.model';
 import { LocationService } from 'src/app/services/location/location.service';
 import { samePasswordsValidator } from 'src/app/validators/samePasswords.validator';
-import { UserFormData } from 'src/app/interfaces/userFormData.interface';
+import { IUserFormData } from 'src/app/interfaces/userFormData.interface';
 
 @Component({
   selector: 'app-registration-form',
@@ -13,7 +13,7 @@ import { UserFormData } from 'src/app/interfaces/userFormData.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationFormComponent {
-  @Output() registerUser: EventEmitter<UserFormData> = new EventEmitter()
+  @Output() registerUser: EventEmitter<IUserFormData> = new EventEmitter()
 
   public registration: FormGroup = this.fb.group({
     firstName: ['', Validators.required, Validators.name],

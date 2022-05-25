@@ -9,15 +9,35 @@
 
     <div class="buttons">
         <span *ngIf="followed$ | async; else elseBlock">
-            <button mat-button (click)="onUnfollow()">Unfollow</button>
+            <button mat-button (click)="onUnfollow()">
+                <mat-icon>person_remove</mat-icon>
+                Unfollow
+            </button>
         </span>
         <ng-template #elseBlock>
-            <span *ngIf="getCurrentUser()?.id != user.id">
-                <button mat-button (click)="onFollow()">Follow</button>
+            <span *ngIf="getCurrentUser()?.id != user.id; else currentUser">
+                <button mat-button (click)="onFollow()">
+                    <span class="material-icons">person_add</span>
+                    Follow
+                </button>
+
+                <button mat-button>
+                    <span class="material-icons">chat</span>
+                    Message
+                </button>
             </span>
         </ng-template>
-        
-        <button mat-button>Message</button>
+
+        <ng-template #currentUser>
+            <button mat-button (click)="openEditModal(editForm)">
+                <span class="material-icons">edit</span>
+                Edit profile
+            </button>
+        </ng-template>
+
+        <ng-template #editForm>
+            <app-user-edit-form [user]="user" (editUser)="onEditUser($event)"></app-user-edit-form>
+        </ng-template>
     </div>
 
     <div class="memberships">

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { UserFormData } from 'src/app/interfaces/userFormData.interface';
+import { IUserFormData } from 'src/app/interfaces/userFormData.interface';
 
 @Component({
   selector: 'app-registration-container',
@@ -17,7 +17,7 @@ export class RegistrationContainerComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  public onRegisterUser(userFormData: UserFormData) {
+  public onRegisterUser(userFormData: IUserFormData) {
     console.log(userFormData)
     this.isLoading$.next(true);
     this.authService.register(userFormData).pipe(
@@ -25,7 +25,7 @@ export class RegistrationContainerComponent {
         this.isLoading$.next(false);
       })
     )
-    .subscribe((userData: UserFormData) => {
+    .subscribe((userData: IUserFormData) => {
       this.router.navigate(['']);
     }, (errResponse: HttpErrorResponse) => {
       this.router.navigate(['/register'])

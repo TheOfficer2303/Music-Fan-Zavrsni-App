@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { IAuthData } from 'src/app/interfaces/authData.interface';
 import { ILoginFormData } from 'src/app/interfaces/loginFormData.interface';
-import { UserFormData } from 'src/app/interfaces/userFormData.interface';
+import { IUserFormData } from 'src/app/interfaces/userFormData.interface';
 import { baseUrl } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
 import { User } from '../user/user.model';
@@ -24,11 +24,11 @@ export class AuthService {
     return this.authenticate(data, ApiPaths.LOGIN)
   }
 
-  public register(data: UserFormData) {
+  public register(data: IUserFormData) {
     return this.authenticate(data, ApiPaths.REGISTER);
   }
 
-  private authenticate(data: UserFormData | ILoginFormData, path: string): Observable<any> {
+  private authenticate(data: IUserFormData | ILoginFormData, path: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}${path}`, data, { observe: 'response' }).pipe(
       tap((response: HttpResponse<any>) => {
         const accessToken = response.body['access-token']
