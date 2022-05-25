@@ -16,9 +16,9 @@ export class RegistrationFormComponent {
   @Output() registerUser: EventEmitter<IUserFormData> = new EventEmitter()
 
   public registration: FormGroup = this.fb.group({
-    firstName: ['', Validators.required, Validators.name],
-    lastName: ['', Validators.required, Validators.name],
-    info: ['', Validators.required, Validators.name],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    info: ['', Validators.required],
     postNumber: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     passwords: this.fb.group({
