@@ -1,0 +1,9 @@
+<div class="commentator">
+    <img src="" alt="neka slika">
+    <span>{{ comment?.commentator?.firstName}} {{comment?.commentator?.lastName }}</span>
+    <div>{{ comment?.createdAt | date }}</div>
+</div>
+
+<div class="content">
+    {{ comment?.content }}
+</div>

@@ -7,6 +7,7 @@ import { Post } from 'src/app/models/post.model';
   styleUrls: ['./post-card.component.scss']
 })
 export class PostCardComponent implements OnInit {
+  public isCollapsed = true;
   @Input() post?: Post;
 
   constructor() { }

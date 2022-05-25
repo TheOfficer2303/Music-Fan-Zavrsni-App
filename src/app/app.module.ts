@@ -34,6 +34,9 @@ import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     UserEditFormComponent,
     TopNavComponent,
     HomePageComponent,
+    CommentComponent,
+    CommentListComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     MatTabsModule,
     NgbModule,
     MatSnackBarModule,
+    MatDividerModule,
   ],
   providers: [
     {
