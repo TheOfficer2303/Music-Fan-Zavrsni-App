@@ -19,7 +19,7 @@ export class PostService {
     return this.http.get<IPostResponse>(`${url}?${query}`).pipe(
       map((response) => {
         return response.posts.map((post: IRawPost) => {
-          return new Post(post.post_id, creator, post.content, post.image_url, post.created_at);
+          return new Post(post.id, creator, post.content, post.imageUrl, post.createdAt);
         })
       })
     );

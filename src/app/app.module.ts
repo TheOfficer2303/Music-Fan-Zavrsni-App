@@ -33,6 +33,7 @@ import { UserEditFormComponent } from './pages/user-page/components/user-edit-fo
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     PostCardComponent,
     UserEditFormComponent,
     TopNavComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
