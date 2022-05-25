@@ -1,0 +1,31 @@
+<div class="logo">
+    <h1>VELIKI LOGO APLIKACIJE</h1>
+</div>
+
+<div class="links">
+    <div>
+        <a class="link" [routerLink]="''" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+            <button mat-button>
+                <span class="material-icons">home</span>
+                Home
+            </button>
+        </a>
+    </div>
+
+    <div>
+        <a class="link" [routerLink]="getCurrentUserProfileLink()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+            <button mat-button>
+                <span class="material-icons">person</span>
+                My profile
+            </button>
+            
+        </a>
+    </div>
+
+    <div>
+        <button mat-button (click)="logOut()">
+            <span class="material-icons">logout</span>
+            Logout
+        </button>
+    </div>
+</div>

@@ -21,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoginContainerComponent } from './pages/login-container/login-container.component';
 import { LoginFormComponent } from './pages/login-container/components/login-form/login-form.component';
-import { MainLayoutComponent } from './components/main-layout/main-layout/main-layout.component';
+import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { AvatarComponent } from './pages/user-page/components/avatar/avatar.component';
 import { OrchestraMembershipComponent } from './pages/user-page/components/orchestra-membership/orchestra-membership.component';
@@ -30,6 +30,9 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserEditFormComponent } from './pages/user-page/components/user-edit-form/user-edit-form.component';
+import { TopNavComponent } from './components/top-nav/top-nav.component';
+import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { UserEditFormComponent } from './pages/user-page/components/user-edit-fo
     PostListComponent,
     PostCardComponent,
     UserEditFormComponent,
+    TopNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,11 +68,17 @@ import { UserEditFormComponent } from './pages/user-page/components/user-edit-fo
     MatAutocompleteModule,
     MatTabsModule,
     NgbModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
+			multi: true,
+		},
+    {
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthErrorInterceptor,
 			multi: true,
 		},
   ],
