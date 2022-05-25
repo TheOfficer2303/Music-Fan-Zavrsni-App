@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GroupMembership } from 'src/app/services/group/group.model';
+import { GroupMembership } from 'src/app/models/group.model';
 
 @Component({
   selector: 'app-group-memberships',

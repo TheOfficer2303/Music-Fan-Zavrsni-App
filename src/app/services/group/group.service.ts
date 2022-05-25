@@ -4,8 +4,8 @@ import { map } from 'rxjs';
 import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { IRawGroupMemb } from 'src/app/interfaces/rawGroupMemb.interface';
 import { baseUrl } from 'src/environments/environment';
-import { User } from '../user/user.model';
-import { Group, GroupMembership } from './group.model';
+import { User } from '../../models/user.model';
+import { Group, GroupMembership } from '../../models/group.model';
 
 @Injectable({
   providedIn: 'root'

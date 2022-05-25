@@ -5,7 +5,7 @@ import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { ILocationResponse } from 'src/app/interfaces/locationResponse.interface';
 import { IRawLocation } from 'src/app/interfaces/rawLocation.interface';
 import { baseUrl } from 'src/environments/environment';
-import { Location } from './location.model';
+import { Location } from '../../models/location.model';
 
 @Injectable({
   providedIn: 'root'

@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
 import { IUserEditFormData } from 'src/app/interfaces/userEditFormData.interface';
-import { Location } from 'src/app/services/location/location.model';
+import { Location } from 'src/app/models/location.model';
 import { LocationService } from 'src/app/services/location/location.service';
-import { User } from 'src/app/services/user/user.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-user-edit-form',

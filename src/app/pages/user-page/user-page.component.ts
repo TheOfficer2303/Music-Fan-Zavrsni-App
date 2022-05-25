@@ -4,13 +4,13 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, finalize, map, Observable, switchMap, tap } from 'rxjs';
 import { IUserEditFormData } from 'src/app/interfaces/userEditFormData.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { GroupMembership } from 'src/app/services/group/group.model';
+import { GroupMembership } from 'src/app/models/group.model';
 import { GroupService } from 'src/app/services/group/group.service';
-import { Orchestra, OrchestraMembership } from 'src/app/services/orchestra/orchestra.model';
+import { Orchestra, OrchestraMembership } from 'src/app/models/orchestra.model';
 import { OrchestraService } from 'src/app/services/orchestra/orchestra.service';
-import { Post } from 'src/app/services/post/post.model';
+import { Post } from 'src/app/models/post.model';
 import { PostService } from 'src/app/services/post/post.service';
-import { User } from 'src/app/services/user/user.model';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({

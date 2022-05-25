@@ -7,7 +7,7 @@ import { ILoginFormData } from 'src/app/interfaces/loginFormData.interface';
 import { IUserFormData } from 'src/app/interfaces/userFormData.interface';
 import { baseUrl } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
-import { User } from '../user/user.model';
+import { User } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'

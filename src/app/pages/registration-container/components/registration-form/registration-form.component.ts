@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize, Observable, tap } from 'rxjs';
-import { Location } from 'src/app/services/location/location.model';
+import { Location } from 'src/app/models/location.model';
 import { LocationService } from 'src/app/services/location/location.service';
 import { samePasswordsValidator } from 'src/app/validators/samePasswords.validator';
 import { IUserFormData } from 'src/app/interfaces/userFormData.interface';

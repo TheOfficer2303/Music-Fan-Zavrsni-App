@@ -5,9 +5,9 @@ import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { IRawOrchestra } from 'src/app/interfaces/rawOrchestra.interface';
 import { IRawOrchMemb } from 'src/app/interfaces/rawOrchMemb.interface';
 import { baseUrl } from 'src/environments/environment';
-import { User } from '../user/user.model';
+import { User } from '../../models/user.model';
 import { UserService } from '../user/user.service';
-import { Orchestra, OrchestraMembership } from './orchestra.model';
+import { Orchestra, OrchestraMembership } from '../../models/orchestra.model';
 
 @Injectable({
   providedIn: 'root'

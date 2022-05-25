@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrchestraMembership } from 'src/app/services/orchestra/orchestra.model';
+import { OrchestraMembership } from 'src/app/models/orchestra.model';
 
 @Component({
   selector: 'app-orchestra-membership',

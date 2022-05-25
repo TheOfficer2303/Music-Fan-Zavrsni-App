@@ -6,7 +6,7 @@ import { IAuthData } from 'src/app/interfaces/authData.interface';
 import { IRawUser } from 'src/app/interfaces/rawUser.interface';
 import { baseUrl } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { User } from './user.model';
+import { User } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
