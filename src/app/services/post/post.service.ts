@@ -6,6 +6,8 @@ import { IPostResponse, IRawPost } from 'src/app/interfaces/rawPost.interface';
 import { baseUrl } from 'src/environments/environment';
 import { User } from '../../models/user.model';
 import { Post } from '../../models/post.model';
+import { IRawComment } from 'src/app/interfaces/rawComment.interface';
+import { Comment } from 'src/app/models/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,11 @@ export class PostService {
     return this.http.get<IPostResponse>(`${url}?${query}`).pipe(
       map((response) => {
         return response.posts.map((post: IRawPost) => {
-          return new Post(post.id, creator, post.content, post.imageUrl, post.createdAt);
+          let comments: Comment[] = [];
+          comments = post.comments.map((comment: IRawComment) => {
+            return new Comment(comment.id, post.id, comment.content, comment.commentatorId, comment.createdAt);
+          });
+          return new Post(post.id, creator, post.content, post.imageUrl, post.createdAt, comments);
         })
       })
     );

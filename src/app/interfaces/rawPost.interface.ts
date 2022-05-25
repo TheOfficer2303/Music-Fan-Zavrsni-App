@@ -1,3 +1,5 @@
+import { IRawComment } from "./rawComment.interface";
+
 export interface IPostResponse {
     posts: Array<IRawPost>
 }
@@ -7,5 +9,6 @@ export interface IRawPost {
     content: string;
     creator_id: number;
     createdAt: string;
-    imageUrl: string
+    imageUrl: string;
+    comments: Array<IRawComment>;
 }
