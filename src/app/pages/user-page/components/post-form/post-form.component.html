@@ -1,0 +1,9 @@
+<form [formGroup]="postForm">
+    <mat-form-field appearance="outline">
+        <input matInput formControlName="content" placeholder="Content">
+    </mat-form-field>
+
+    <input type="file" formControlName="image" (change)="onChange($event)">
+
+    <button mat-raised-button color="primary" (click)="onSave()">Add</button>
+</form>

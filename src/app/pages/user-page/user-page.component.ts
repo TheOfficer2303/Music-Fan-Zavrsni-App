@@ -21,6 +21,7 @@ import { EventService } from 'src/app/services/event/event.service';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent {
+  public isCollapsed = true;
   public followed$ = new BehaviorSubject(false);
   public trigger$ = new BehaviorSubject<boolean>(true);
 
@@ -103,6 +104,16 @@ export class UserPageComponent {
       currentUser!.avatarUrl, userEditFormData.user.info, currentUser!.location);
 
     this.userService.updateUser(userToEdit).subscribe(console.log);
+  }
+
+  public onSave(event: any) {
+    console.log(event);
+    const post = {
+      content: event.content,
+      imageUrl: event.imageSource
+    }
+    console.log(post)
+    this.postService.createPost(post).subscribe();
   }
 
   public onComment(event: any) {

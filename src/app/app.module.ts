@@ -39,6 +39,7 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { PostFormComponent } from './pages/user-page/components/post-form/post-form.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
     CommentComponent,
     CommentListComponent,
     CommentFormComponent,
+    PostFormComponent,
   ],
   imports: [
     BrowserModule,

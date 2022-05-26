@@ -69,7 +69,20 @@
         <div class="info-posts">
             <mat-tab-group>
                 <mat-tab label="Info"> {{user.info}} </mat-tab>
-                <mat-tab label="Posts"> 
+                <mat-tab label="Posts">
+                    <p>
+                        <button type="button" mat-button (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed">
+                          <span class="material-icons">add</span>
+                        <span>New post</span>
+                        </button>
+                      </p>
+                      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                        <div class="card">
+                          <div class="card-body">
+                            <app-post-form (post)="onSave($event)"></app-post-form>
+                          </div>
+                        </div>
+                      </div>
                     <app-post-list (comment)="onComment($event)" [posts]="posts$ | async"></app-post-list>
                 </mat-tab>
                 <mat-tab label="Events"> 

@@ -14,6 +14,17 @@ import { Comment } from 'src/app/models/comment.model';
 })
 export class PostService {
 
+  public createPost(post: any) {
+    let formData = new FormData()
+    let a = post.content;
+    console.log(a)
+    formData.append("content", a);
+    formData.append("imageUrl", post.imageUrl);
+    const url = `${baseUrl}${ApiPaths.POSTS}`;
+
+    return this.http.post(url, formData);
+  }
+
   public getPostsOfUser(creator: User) {
     const url = `${baseUrl}${ApiPaths.POSTS}`
     const query = `creator_id=${creator.id}`
