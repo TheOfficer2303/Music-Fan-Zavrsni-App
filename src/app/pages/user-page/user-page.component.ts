@@ -106,14 +106,16 @@ export class UserPageComponent {
     this.userService.updateUser(userToEdit).subscribe(console.log);
   }
 
-  public onSave(event: any) {
+  public onSavePost(event: any) {
     console.log(event);
     const post = {
       content: event.content,
       imageUrl: event.imageSource
     }
     console.log(post)
-    this.postService.createPost(post).subscribe();
+    this.postService.createPost(post).subscribe(() => {
+      this.trigger$.next(true);
+    });
   }
 
   public onComment(event: any) {
@@ -121,6 +123,12 @@ export class UserPageComponent {
     .subscribe(() => {
       this.trigger$.next(true);
     });
+  }
+
+  public onDeletePost(postId: number) {
+    this.postService.deletePost(postId).subscribe(() => {
+      this.trigger$.next(true);
+    })
   }
 
   constructor(private authService: AuthService, private userService: UserService, private orchestraService: OrchestraService,

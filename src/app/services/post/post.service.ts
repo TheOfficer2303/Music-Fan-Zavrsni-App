@@ -17,12 +17,16 @@ export class PostService {
   public createPost(post: any) {
     let formData = new FormData()
     let a = post.content;
-    console.log(a)
     formData.append("content", a);
     formData.append("imageUrl", post.imageUrl);
     const url = `${baseUrl}${ApiPaths.POSTS}`;
 
     return this.http.post(url, formData);
+  }
+
+  public deletePost(postId: number) {
+    const url = `${baseUrl}${ApiPaths.POSTS}/${postId}`;
+    return this.http.delete(url);
   }
 
   public getPostsOfUser(creator: User) {

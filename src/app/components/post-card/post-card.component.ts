@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post } from 'src/app/models/post.model';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-post-card',
@@ -7,19 +9,25 @@ import { Post } from 'src/app/models/post.model';
   styleUrls: ['./post-card.component.scss']
 })
 export class PostCardComponent implements OnInit {
-  public isCollapsed = false;
   @Input() post?: Post;
-  @Output() comment: EventEmitter<any> = new EventEmitter()
+  @Input() currentUser?: User;
+  @Output() comment: EventEmitter<any> = new EventEmitter();
+  @Output() deletePost: EventEmitter<any> = new EventEmitter();
 
-
-  constructor() { }
-
+  public isCollapsed = false;
+  
   onComment(event: any) {
     this.comment.emit({event, postId: this.post?.id})
   }
 
+  onDelete() {
+    this.deletePost.emit(this.post?.id);
+  }
+
+  constructor(private authService: AuthService) { }
+
   ngOnInit(): void {
-    console.log(this.post)
+    this.currentUser = this.authService.getAuthData()?.currentUser;
   }
 
 }

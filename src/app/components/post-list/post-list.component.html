@@ -1,5 +1,11 @@
 <ng-container *ngFor="let post of posts">
    
-   <app-post-card (comment)="onComment($event)" [post]="post"></app-post-card>
+   <app-post-card 
+      (deletePost)="onDelete($event)" 
+      (comment)="onComment($event)" 
+      [currentUser]="currentUser" 
+      [post]="post"
+   >
+   </app-post-card>
 
 </ng-container>

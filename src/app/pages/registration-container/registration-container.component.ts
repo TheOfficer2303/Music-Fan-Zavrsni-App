@@ -23,6 +23,7 @@ export class RegistrationContainerComponent {
     this.authService.register(userFormData).pipe(
       finalize(() => {
         this.isLoading$.next(false);
+        this.router.navigate(['']);
       })
     )
     .subscribe((userData: IUserFormData) => {

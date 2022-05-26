@@ -40,6 +40,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { PostFormComponent } from './pages/user-page/components/post-form/post-form.component';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -83,6 +85,7 @@ import { PostFormComponent } from './pages/user-page/components/post-form/post-f
     MatSnackBarModule,
     MatDividerModule,
     MatExpansionModule,
+    MatMenuModule,
   ],
   providers: [
     {

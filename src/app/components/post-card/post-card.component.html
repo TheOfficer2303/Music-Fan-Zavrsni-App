@@ -8,6 +8,20 @@
             </mat-card-title>
             
         </a>
+
+        <button *ngIf="post?.creator?.id === currentUser?.id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onDelete()">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+          <!-- <button mat-menu-item (click)="onEdit()">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button> -->
+        </mat-menu>
     </mat-card-header>
     <img mat-card-image src="{{post?.imageUrl}}" alt="Photo of a Shiba Inu">
     <mat-card-content>
