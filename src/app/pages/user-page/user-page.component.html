@@ -70,10 +70,10 @@
             <mat-tab-group>
                 <mat-tab label="Info"> {{user.info}} </mat-tab>
                 <mat-tab label="Posts"> 
-                    <app-post-list [posts]="posts$ | async"></app-post-list>
+                    <app-post-list (comment)="onComment($event)" [posts]="posts$ | async"></app-post-list>
                 </mat-tab>
                 <mat-tab label="Events"> 
-                    <app-post-list [posts]="posts$ | async"></app-post-list>
+                    {{events$ | async}}
                 </mat-tab>
             </mat-tab-group>
         </div>

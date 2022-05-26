@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, finalize, map, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, finalize, map, Observable, switchMap, tap } from 'rxjs';
 import { IUserEditFormData } from 'src/app/interfaces/userEditFormData.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GroupMembership } from 'src/app/models/group.model';
@@ -12,6 +12,8 @@ import { Post } from 'src/app/models/post.model';
 import { PostService } from 'src/app/services/post/post.service';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user/user.service';
+import { Event } from 'src/app/models/event.model';
+import { EventService } from 'src/app/services/event/event.service';
 
 @Component({
   selector: 'app-user-page',
@@ -20,6 +22,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class UserPageComponent {
   public followed$ = new BehaviorSubject(false);
+  public trigger$ = new BehaviorSubject<boolean>(true);
 
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
@@ -40,11 +43,21 @@ export class UserPageComponent {
     tap(console.log)
   );
 
-  public posts$: Observable<Array<Post>> = this.user$.pipe(
+
+  public posts$: Observable<Array<Post>> = combineLatest([this.user$, this.trigger$]).pipe(
+    map(([user]) => {
+      return user;
+    }),
     switchMap((user) => {
       return this.postService.getPostsOfUser(user);
     })
-  )
+  );
+
+  public events$: Observable<Array<Event>> = this.user$.pipe(
+    switchMap((user) => {
+      return this.eventService.getEventsOfUser(user);
+    })
+  );
 
   public orchestraMembership$: Observable<OrchestraMembership | null> = this.user$.pipe(
     switchMap((user) => {
@@ -92,7 +105,14 @@ export class UserPageComponent {
     this.userService.updateUser(userToEdit).subscribe(console.log);
   }
 
+  public onComment(event: any) {
+    this.postService.createCommentOnPost(event.postId, event.event.comment)
+    .subscribe(() => {
+      this.trigger$.next(true);
+    });
+  }
+
   constructor(private authService: AuthService, private userService: UserService, private orchestraService: OrchestraService,
     private activatedRoute: ActivatedRoute, private groupService: GroupService,
-    private postService: PostService, private modalService: NgbModal) { }
+    private postService: PostService, private modalService: NgbModal, private eventService: EventService) { }
 }

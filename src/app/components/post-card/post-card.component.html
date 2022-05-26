@@ -16,7 +16,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button  (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
+        <button mat-button (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
           aria-controls="collapseExample">
           COMMENT
         </button>
@@ -29,10 +29,7 @@
             <app-comment-list [comments]="post?.comments"></app-comment-list>
           </ng-template>
 
-          <button mat-button>
-            <span class="material-icons">add_comment</span>
-            Add comment
-          </button>
+          <app-comment-form (comment)="onComment($event)"></app-comment-form>
         </div>
       </div>
     </mat-card-actions>

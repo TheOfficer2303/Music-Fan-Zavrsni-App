@@ -31,5 +31,18 @@ export class PostService {
     );
   }
 
+  public createCommentOnPost(postId: number, content: string) {
+    const url = `${baseUrl}${ApiPaths.COMMENTS}`
+    const body = {
+      comment: {
+        postId,
+        content
+      }
+    };
+    console.log(body)
+
+    return this.http.post<any>(url, body);
+  }
+
   constructor(private http: HttpClient) { }
 }

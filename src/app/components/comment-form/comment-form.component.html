@@ -1,0 +1,8 @@
+
+<form [formGroup]="commentForm">
+    <mat-form-field appearance="outline">
+        <input matInput formControlName="comment" placeholder="Type your comment here...">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="onComment()" [disabled]="commentForm.invalid">Add comment</button>
+</form>

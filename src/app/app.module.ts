@@ -37,6 +37,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import {MatDividerModule} from '@angular/material/divider';
     HomePageComponent,
     CommentComponent,
     CommentListComponent,
+    CommentFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ import {MatDividerModule} from '@angular/material/divider';
     NgbModule,
     MatSnackBarModule,
     MatDividerModule,
+    MatExpansionModule,
   ],
   providers: [
     {
