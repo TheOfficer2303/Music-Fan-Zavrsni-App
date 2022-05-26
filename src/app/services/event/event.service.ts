@@ -12,16 +12,23 @@ import { baseUrl } from 'src/environments/environment';
 })
 export class EventService {
 
+  public deleteEvent(eventId: number) {
+    const url = `${baseUrl}${ApiPaths.EVENTS}/${eventId}`;
+
+    return this.http.delete(url);
+  }
+
   public getEventsOfUser(organizator: User) {
-    const url = `${baseUrl}${ApiPaths.EVENTS}`
-    const query = `organizator_id=${organizator.id}`
+    const url = `${baseUrl}${ApiPaths.EVENTS}`;
+    const query = `organizator_id=${organizator.id}`;
 
     console.log(query)
     
     return this.http.get<IEventResponse>(`${url}?${query}`).pipe(
       map((response) => {
         return response.events.map((event) => {
-          return new Event(event.id, event.name, event.description, event.startDate, event.endDate, event.startTime, event.address, event.organizator, event.location);
+          console.log(event)
+          return new Event(event.id, event.name, event.description, event.startDate, event.endDate, event.startTime, event.address, event.organizatorId, event.location);
         })    
       })
     );

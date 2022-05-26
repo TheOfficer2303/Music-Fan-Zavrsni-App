@@ -42,6 +42,8 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
 import { PostFormComponent } from './pages/user-page/components/post-form/post-form.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { PostEditFormComponent } from './components/post-edit-form/post-edit-form.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
+import { EventListComponent } from './components/event-list/event-list.component';
 
 
 @NgModule({
@@ -67,6 +69,8 @@ import { PostEditFormComponent } from './components/post-edit-form/post-edit-for
     CommentFormComponent,
     PostFormComponent,
     PostEditFormComponent,
+    EventCardComponent,
+    EventListComponent,
   ],
   imports: [
     BrowserModule,

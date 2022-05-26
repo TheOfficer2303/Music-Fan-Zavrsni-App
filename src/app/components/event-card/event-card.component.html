@@ -1,0 +1,52 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{event?.name}}</mat-card-title>
+        <mat-card-subtitle>
+            <div>
+                Organized by
+                <a class="header" [routerLink]="['/user/', event?.organizator?.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+                    <span>{{event?.organizator?.firstName}} {{event?.organizator?.lastName}}</span>
+                </a>
+            </div>
+            </mat-card-subtitle>
+
+            <button *ngIf="event?.organizator?.id === currentUser?.id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="onDelete()">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+                <!-- <button mat-menu-item (click)="onEdit(editForm)">
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
+                </button> -->
+              </mat-menu>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="info-tab">
+            <h2>FROM</h2>
+            <span>{{event?.startTime | date:'medium'}}</span>
+        </div>
+
+        <div class="info-tab">
+            <h2>TO</h2>
+            <span>{{event?.endDate | date:'medium'}}</span>
+        </div>
+
+        <div class="info-tab">
+            <h2>WHERE</h2>
+            <span>{{event?.location}}, {{event?.address}}</span>
+            </div>
+
+        <div class="info-tab">
+            <h2>INFO</h2>
+            <span>{{event?.description}}</span>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>JOIN</button>
+    </mat-card-actions>
+</mat-card>

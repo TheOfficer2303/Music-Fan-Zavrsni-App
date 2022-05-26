@@ -54,7 +54,10 @@ export class UserPageComponent {
     })
   );
 
-  public events$: Observable<Array<Event>> = this.user$.pipe(
+  public events$: Observable<Array<Event>> = combineLatest([this.user$, this.trigger$]).pipe(
+    map(([user]) => {
+      return user;
+    }),
     switchMap((user) => {
       return this.eventService.getEventsOfUser(user);
     })
@@ -136,6 +139,12 @@ export class UserPageComponent {
       this.trigger$.next(true);
       this.modalService.dismissAll();
     });
+  }
+
+  public onDeleteEvent(eventId: number) {
+    this.eventService.deleteEvent(eventId).subscribe(() => {
+      this.trigger$.next(true);
+    })
   }
 
 

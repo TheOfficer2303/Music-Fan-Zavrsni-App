@@ -13,6 +13,6 @@ export interface IRawEvent {
     endDate: string;
     startTime: string;
     address: string;
-    organizator: User;
+    organizatorId: User;
     location: string;
 }

@@ -1,0 +1,9 @@
+<ng-container *ngFor="let event of events">
+   
+    <app-event-card
+        (deleteEvent)="onDelete($event)"
+        [event]="event"
+        [currentUser]="currentUser"
+    >
+    </app-event-card>
+ </ng-container>

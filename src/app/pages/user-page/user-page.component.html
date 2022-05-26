@@ -97,7 +97,12 @@
                 </mat-tab>
 
                 <mat-tab label="Events"> 
-                    {{events$ | async}}
+                    <app-event-list
+                        (deletePost)="onDeleteEvent($event)"
+                        [events]="events$ | async"
+                        [currentUser]="getCurrentUser()"
+                    >
+                    </app-event-list>
                 </mat-tab>
             </mat-tab-group>
         </div>
