@@ -17,10 +17,10 @@
             <mat-icon>delete</mat-icon>
             <span>Delete</span>
           </button>
-          <!-- <button mat-menu-item (click)="onEdit()">
+          <button mat-menu-item (click)="onEdit(editForm)">
             <mat-icon>edit</mat-icon>
             <span>Edit</span>
-          </button> -->
+          </button>
         </mat-menu>
     </mat-card-header>
     <img mat-card-image src="{{post?.imageUrl}}" alt="Photo of a Shiba Inu">
@@ -48,3 +48,11 @@
       </div>
     </mat-card-actions>
   </mat-card>
+
+<ng-template #editForm>
+  <app-post-edit-form
+    [post]="this.post"
+    (editFormData)="onSave($event)"
+  >
+  </app-post-edit-form>
+</ng-template>

@@ -72,26 +72,30 @@
                 <mat-tab label="Posts">
                     <p>
                         <button type="button" mat-button (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed">
-                          <span class="material-icons">add</span>
-                        <span>New post</span>
+                            <span class="material-icons">add</span>
+                            <span>New post</span>
                         </button>
-                      </p>
-                      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                    </p>
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
                         <div class="card">
-                          <div class="card-body">
+                            <div class="card-body">
                             <app-post-form (post)="onSavePost($event)"></app-post-form>
-                          </div>
+                            </div>
                         </div>
-                      </div>
+                    </div>
 
                     <app-post-list 
                         (deletePost)="onDeletePost($event)"
                         (comment)="onComment($event)" 
+                        (editPost)="onEditPost($event)"
                         [currentUser]="getCurrentUser()" 
                         [posts]="posts$ | async"
                     >
                     </app-post-list>
+
+                
                 </mat-tab>
+
                 <mat-tab label="Events"> 
                     {{events$ | async}}
                 </mat-tab>

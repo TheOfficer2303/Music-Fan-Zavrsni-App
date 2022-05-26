@@ -16,7 +16,6 @@ export class PostFormComponent{
   });
 
   public onChange(event: any) {
-
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.postForm.patchValue({

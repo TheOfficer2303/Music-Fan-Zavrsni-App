@@ -12,6 +12,7 @@ export class PostListComponent {
   @Input() currentUser?: User;
   @Output() comment: EventEmitter<any> = new EventEmitter();
   @Output() deletePost: EventEmitter<any> = new EventEmitter();
+  @Output() editPost: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -21,5 +22,9 @@ export class PostListComponent {
 
   onDelete(event: any) {
     this.deletePost.emit(event)
+  }
+
+  onEdit(postFormData: any) {
+    this.editPost.emit(postFormData);
   }
 }

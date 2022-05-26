@@ -1,0 +1,11 @@
+<form [formGroup]="editForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Content</mat-label>
+        <input matInput [type]="'text'" formControlName="content">
+    </mat-form-field>
+
+    <img src="{{post?.imageUrl}}" alt="">
+    <input type="file" formControlName="image" (change)="onChange($event)">
+
+    <button mat-raised-button  color="primary" (click)="onEdit()" [disabled]="editForm.invalid">Save</button>
+</form>

@@ -41,6 +41,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { PostFormComponent } from './pages/user-page/components/post-form/post-form.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { PostEditFormComponent } from './components/post-edit-form/post-edit-form.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import {MatMenuModule} from '@angular/material/menu';
     CommentListComponent,
     CommentFormComponent,
     PostFormComponent,
+    PostEditFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -72,7 +72,7 @@ export class UserPageComponent {
 
   public getCurrentUser(): User | undefined {
     return this.authService.getAuthData()?.currentUser;
-  }
+  };
  
   public onFollow(): void {
     this.followed$.next(true);
@@ -81,7 +81,7 @@ export class UserPageComponent {
         return this.userService.followUser(user.id);
       })
     ).subscribe()
-  }
+  };
 
   public onUnfollow(): void {
     this.followed$.next(false);
@@ -90,11 +90,11 @@ export class UserPageComponent {
         return this.userService.unfollowUser(user.id);
       })
     ).subscribe()
-  }
+  };
 
   public openEditModal(editForm: any) {
     this.modalService.open(editForm);
-  }
+  };
 
   public onEditUser(userEditFormData: IUserEditFormData) {
     debugger
@@ -104,7 +104,7 @@ export class UserPageComponent {
       currentUser!.avatarUrl, userEditFormData.user.info, currentUser!.location);
 
     this.userService.updateUser(userToEdit).subscribe(console.log);
-  }
+  };
 
   public onSavePost(event: any) {
     console.log(event);
@@ -116,7 +116,7 @@ export class UserPageComponent {
     this.postService.createPost(post).subscribe(() => {
       this.trigger$.next(true);
     });
-  }
+  };
 
   public onComment(event: any) {
     this.postService.createCommentOnPost(event.postId, event.event.comment)
@@ -129,7 +129,15 @@ export class UserPageComponent {
     this.postService.deletePost(postId).subscribe(() => {
       this.trigger$.next(true);
     })
+  };
+
+  public onEditPost(postFormData: any) {
+    this.postService.editPost(postFormData).subscribe(() => {
+      this.trigger$.next(true);
+      this.modalService.dismissAll();
+    });
   }
+
 
   constructor(private authService: AuthService, private userService: UserService, private orchestraService: OrchestraService,
     private activatedRoute: ActivatedRoute, private groupService: GroupService,

@@ -3,6 +3,7 @@
    <app-post-card 
       (deletePost)="onDelete($event)" 
       (comment)="onComment($event)" 
+      (editPost)="onEdit($event)"
       [currentUser]="currentUser" 
       [post]="post"
    >

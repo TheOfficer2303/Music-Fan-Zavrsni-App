@@ -24,6 +24,15 @@ export class PostService {
     return this.http.post(url, formData);
   }
 
+  public editPost(post: any) {
+    let formData = new FormData();
+    formData.append("content", post.postFormData.content);
+    formData.append("imageUrl", post.postFormData.imageSource);
+    const url = `${baseUrl}${ApiPaths.POSTS}/${post.postId}`;
+    
+    return this.http.patch(url, formData);
+  }
+
   public deletePost(postId: number) {
     const url = `${baseUrl}${ApiPaths.POSTS}/${postId}`;
     return this.http.delete(url);
