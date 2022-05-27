@@ -70,19 +70,14 @@
             <mat-tab-group>
                 <mat-tab label="Info"> {{user.info}} </mat-tab>
                 <mat-tab label="Posts">
-                    <p>
-                        <button type="button" mat-button (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed">
-                            <span class="material-icons">add</span>
-                            <span>New post</span>
-                        </button>
-                    </p>
-                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                        <div class="card">
-                            <div class="card-body">
-                            <app-post-form (post)="onSavePost($event)"></app-post-form>
-                            </div>
-                        </div>
-                    </div>
+                    <button mat-button (click)="openEditModal(postForm)">
+                        <span class="material-icons">add</span>
+                        <span>New post</span>
+                    </button>
+
+                    <ng-template #postForm>
+                        <app-post-form (post)="onSavePost($event)"></app-post-form>
+                    </ng-template>
 
                     <app-post-list 
                         (deletePost)="onDeletePost($event)"
@@ -97,6 +92,15 @@
                 </mat-tab>
 
                 <mat-tab label="Events"> 
+                    <button mat-button (click)="openEditModal(eventForm)">
+                        <span class="material-icons">add</span>
+                        <span>New event</span>
+                    </button>
+
+                    <ng-template #eventForm>
+                        <app-event-form (eventFormData)="onSaveEvent($event)"></app-event-form>
+                    </ng-template>
+
                     <app-event-list
                         (deletePost)="onDeleteEvent($event)"
                         [events]="events$ | async"

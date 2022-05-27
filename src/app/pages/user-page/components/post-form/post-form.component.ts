@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./post-form.component.scss']
 })
 export class PostFormComponent{
-  @Output() post: EventEmitter<any> = new EventEmitter()
+  @Output() post: EventEmitter<any> = new EventEmitter();
 
   public postForm: FormGroup = this.fb.group({
     content: ['', Validators.required],

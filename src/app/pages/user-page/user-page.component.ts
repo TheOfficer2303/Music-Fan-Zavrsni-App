@@ -147,6 +147,10 @@ export class UserPageComponent {
     })
   }
 
+  public onSaveEvent(eventFormData: any) {
+    this.eventService.createEvent(eventFormData).subscribe()
+  }
+
 
   constructor(private authService: AuthService, private userService: UserService, private orchestraService: OrchestraService,
     private activatedRoute: ActivatedRoute, private groupService: GroupService,

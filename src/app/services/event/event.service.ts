@@ -18,6 +18,12 @@ export class EventService {
     return this.http.delete(url);
   }
 
+  public createEvent(eventFormData: any) {
+    const url = `${baseUrl}${ApiPaths.EVENTS}`;
+
+    return this.http.post(url, {event: eventFormData})
+  }
+
   public getEventsOfUser(organizator: User) {
     const url = `${baseUrl}${ApiPaths.EVENTS}`;
     const query = `organizator_id=${organizator.id}`;
