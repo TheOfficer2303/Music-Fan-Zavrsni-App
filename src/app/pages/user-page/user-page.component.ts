@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, finalize, map, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, finalize, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
 import { IUserEditFormData } from 'src/app/interfaces/userEditFormData.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GroupMembership } from 'src/app/models/group.model';
@@ -22,8 +22,8 @@ import { EventService } from 'src/app/services/event/event.service';
 })
 export class UserPageComponent {
   public isCollapsed = true;
-  public followed$ = new BehaviorSubject(false);
-
+  
+  public followTrigger$ = new BehaviorSubject<boolean>(true);
   public userTrigger$ = new BehaviorSubject<boolean>(true);
   public postTrigger$ = new BehaviorSubject<boolean>(true);
   public eventTrigger$ = new BehaviorSubject<boolean>(true);
@@ -37,6 +37,15 @@ export class UserPageComponent {
   public user$ = combineLatest([this.id$, this.userTrigger$]).pipe(
     switchMap(([id]) => {
       return this.getUser(id);
+    })
+  );
+
+  public followed$ = combineLatest([this.user$, this.postTrigger$]).pipe(
+    map(([user]) => {
+      return user;
+    }),
+    switchMap((user) => {
+      return this.userService.isFollowedBy(this.getCurrentUser()!.id, user.id,)
     })
   );
 
@@ -79,18 +88,30 @@ export class UserPageComponent {
   public getCurrentUser(): User | undefined {
     return this.authService.getAuthData()?.currentUser;
   };
- 
+
+  public followers$ = this.user$.pipe(
+    switchMap((user) => {
+      return this.userService.getFollowersOfUser(user);
+    })
+  );
+
+  public followees$ = this.user$.pipe(
+    switchMap((user) => {
+      return this.userService.getFollowedByUser(user);
+    })
+  );
+
   public onFollow(): void {
-    this.followed$.next(true);
+    this.followed$ = of(true);
     this.user$.pipe(
-      switchMap((user) => {
+      mergeMap((user) => {
         return this.userService.followUser(user.id);
       })
     ).subscribe()
   };
 
   public onUnfollow(): void {
-    this.followed$.next(false);
+    this.followed$ = of(false);
     this.user$.pipe(
       switchMap((user) => {
         return this.userService.unfollowUser(user.id);
@@ -98,8 +119,8 @@ export class UserPageComponent {
     ).subscribe()
   };
 
-  public openEditModal(editForm: any) {
-    this.modalService.open(editForm);
+  public openModal(modal: any) {
+    this.modalService.open(modal);
   };
 
   public onEditUser(userEditFormData: IUserEditFormData) {

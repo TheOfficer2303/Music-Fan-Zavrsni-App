@@ -58,8 +58,32 @@ export class UserService {
     )
   }
 
+  public getFollowersOfUser(user: User) {
+    const url = `${baseUrl}${ApiPaths.USER}/${user.id}${ApiPaths.USER_FOLLOWERS}`;
+
+    return this.http.get<any>(url).pipe(
+      map((response) => {
+        return response.followers.map((follower: any) => {
+          return new User(follower.user_id, follower.first_name, follower.last_name, follower.avatar_url, follower.info, follower.last_name);
+        })
+      })
+    )
+  }
+
+  public getFollowedByUser(user: User) {
+    const url = `${baseUrl}${ApiPaths.USER}/${user.id}${ApiPaths.USER_FOLLOWING}`;
+
+    return this.http.get<any>(url).pipe(
+      map((response) => {
+        return response.followees.map((follower: any) => {
+          return new User(follower.user_id, follower.first_name, follower.last_name, follower.avatar_url, follower.info, follower.last_name);
+        })
+      })
+    )
+  }
+
   public isFollowedBy(followerId: number, followeeId: number) {
-    const url = `${baseUrl}${ApiPaths.USER}/${followerId}${ApiPaths.USER_FOLLOWING}`
+    const url = `${baseUrl}${ApiPaths.USER}/${followerId}${ApiPaths.USER_FOLLOWING}`;
     console.log(url)
     return this.http.get<any>(url).pipe(
       map((response) => {

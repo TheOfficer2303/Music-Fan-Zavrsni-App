@@ -8,40 +8,61 @@
             </div>
         
             <div class="buttons">
-                <span *ngIf="followed$ | async; else elseBlock">
-                    <button class="button negative" mat-button (click)="onUnfollow()">
-                        <mat-icon>person_remove</mat-icon>
-                        <span>Unfollow</span>
-                    </button>
-
-                    <button mat-button class="button">
-                        <span class="material-icons">chat</span>
-                        <span>Message</span>
-                    </button>
-                </span>
-                <ng-template #elseBlock>
-                    <span *ngIf="getCurrentUser()?.id != user.id; else currentUser">
-                        <button mat-button class="button positive" (click)="onFollow()">
-                            <span class="material-icons">person_add</span>
-                            <span>Follow</span>
+                <span *ngIf="getCurrentUser()?.id != user.id; else currentUser">
+                    <span *ngIf="followed$ | async; else elseBlock">
+                        <button class="button negative" mat-button (click)="onUnfollow()">
+                            <mat-icon>person_remove</mat-icon>
+                            <span>Unfollow</span>
                         </button>
-        
+    
                         <button mat-button class="button">
                             <span class="material-icons">chat</span>
                             <span>Message</span>
                         </button>
                     </span>
-                </ng-template>
+
+                    <ng-template #elseBlock>
+                        <span *ngIf="getCurrentUser()?.id != user.id">
+                            <button mat-button class="button positive" (click)="onFollow()">
+                                <span class="material-icons">person_add</span>
+                                <span>Follow</span>
+                            </button>
+            
+                            <button mat-button class="button">
+                                <span class="material-icons">chat</span>
+                                <span>Message</span>
+                            </button>
+                        </span>
+                    </ng-template>
+                </span>
         
                 <ng-template #currentUser>
-                    <button mat-button class="button" (click)="openEditModal(editForm)">
+                    <button mat-button class="button" (click)="openModal(editForm)">
                         <span class="material-icons">edit</span>
                         <span>Edit profile</span>
                     </button>
                 </ng-template>
+
+                <button mat-button (click)="openModal(followers)">
+                    <span class="material-icons">people</span>
+                    <span>Followers</span>
+                </button>
+
+                <button mat-button (click)="openModal(followees)">
+                    <span class="material-icons">people</span>
+                    <span>Following</span>
+                </button>
         
                 <ng-template #editForm>
                     <app-user-edit-form [user]="user" (editUser)="onEditUser($event)"></app-user-edit-form>
+                </ng-template>
+
+                <ng-template #followers>
+                    <app-follower-list [followers]="followers$ | async"></app-follower-list>
+                </ng-template>
+
+                <ng-template #followees>
+                    <app-follower-list [followers]="followees$ | async"></app-follower-list>
                 </ng-template>
             </div>
         </div>
@@ -70,7 +91,7 @@
             <mat-tab-group>
                 <mat-tab label="Info"> {{user.info}} </mat-tab>
                 <mat-tab label="Posts">
-                    <button mat-button (click)="openEditModal(postForm)">
+                    <button mat-button (click)="openModal(postForm)">
                         <span class="material-icons">add</span>
                         <span>New post</span>
                     </button>
@@ -92,7 +113,7 @@
                 </mat-tab>
 
                 <mat-tab label="Events"> 
-                    <button mat-button (click)="openEditModal(eventForm)">
+                    <button mat-button (click)="openModal(eventForm)">
                         <span class="material-icons">add</span>
                         <span>New event</span>
                     </button>

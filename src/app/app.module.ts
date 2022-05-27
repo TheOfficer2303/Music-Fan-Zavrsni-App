@@ -45,6 +45,7 @@ import { PostEditFormComponent } from './components/post-edit-form/post-edit-for
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { EventFormComponent } from './pages/user-page/components/event-form/event-form.component';
+import { FollowerListComponent } from './pages/user-page/components/follower-list/follower-list.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { EventFormComponent } from './pages/user-page/components/event-form/even
     EventCardComponent,
     EventListComponent,
     EventFormComponent,
+    FollowerListComponent,
   ],
   imports: [
     BrowserModule,

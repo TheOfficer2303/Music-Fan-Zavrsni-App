@@ -26,7 +26,6 @@ export class EventService {
   }
 
   public editEvent(eventFormData: any) {
-    console.log(eventFormData);
     const url = `${baseUrl}${ApiPaths.EVENTS}/${eventFormData.id}`;
     eventFormData.startTime = `${eventFormData.startDate} ${eventFormData.startTime}`;
 
@@ -36,13 +35,10 @@ export class EventService {
   public getEventsOfUser(organizator: User) {
     const url = `${baseUrl}${ApiPaths.EVENTS}`;
     const query = `organizator_id=${organizator.id}`;
-
-    console.log(query)
     
     return this.http.get<IEventResponse>(`${url}?${query}`).pipe(
       map((response) => {
         return response.events.map((event) => {
-          console.log(event)
           return new Event(event.id, event.name, event.description, event.startDate, event.endDate, event.startTime, event.address, event.organizatorId, event.location);
         })    
       })
