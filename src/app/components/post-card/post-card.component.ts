@@ -39,6 +39,7 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getAuthData()?.currentUser;
+    console.log(this.post, this.currentUser)
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Event } from 'src/app/models/event.model';
 import { User } from 'src/app/models/user.model';
 
@@ -17,5 +18,14 @@ export class EventCardComponent {
     this.deleteEvent.emit(this.event?.id);
   }
 
-  constructor() { }
+  public onEdit(form: any) {
+    this.modalService.open(form)
+  }
+
+  public onSave(eventFormData: any) {
+    eventFormData.id = this.event?.id;
+    this.editEvent.emit(eventFormData)
+  }
+
+  constructor(private modalService: NgbModal) { }
 }

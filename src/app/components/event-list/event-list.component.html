@@ -2,6 +2,7 @@
    
     <app-event-card
         (deleteEvent)="onDelete($event)"
+        (editEvent)="onEdit($event)"
         [event]="event"
         [currentUser]="currentUser"
     >

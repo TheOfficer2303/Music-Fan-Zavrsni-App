@@ -23,7 +23,10 @@ import { EventService } from 'src/app/services/event/event.service';
 export class UserPageComponent {
   public isCollapsed = true;
   public followed$ = new BehaviorSubject(false);
-  public trigger$ = new BehaviorSubject<boolean>(true);
+
+  public userTrigger$ = new BehaviorSubject<boolean>(true);
+  public postTrigger$ = new BehaviorSubject<boolean>(true);
+  public eventTrigger$ = new BehaviorSubject<boolean>(true);
 
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
@@ -31,8 +34,8 @@ export class UserPageComponent {
     })
   );
 
-  public user$ = this.id$.pipe(
-    switchMap((id) => {
+  public user$ = combineLatest([this.id$, this.userTrigger$]).pipe(
+    switchMap(([id]) => {
       return this.getUser(id);
     })
   );
@@ -45,7 +48,7 @@ export class UserPageComponent {
   );
 
 
-  public posts$: Observable<Array<Post>> = combineLatest([this.user$, this.trigger$]).pipe(
+  public posts$: Observable<Array<Post> | null> = combineLatest([this.user$, this.postTrigger$]).pipe(
     map(([user]) => {
       return user;
     }),
@@ -54,7 +57,7 @@ export class UserPageComponent {
     })
   );
 
-  public events$: Observable<Array<Event>> = combineLatest([this.user$, this.trigger$]).pipe(
+  public events$: Observable<Array<Event>> = combineLatest([this.user$, this.eventTrigger$]).pipe(
     map(([user]) => {
       return user;
     }),
@@ -100,55 +103,64 @@ export class UserPageComponent {
   };
 
   public onEditUser(userEditFormData: IUserEditFormData) {
-    debugger
     this.modalService.dismissAll();
     const currentUser = this.getCurrentUser();
     const userToEdit = new User(currentUser!.id, userEditFormData.user.firstName, userEditFormData.user.lastName,
       currentUser!.avatarUrl, userEditFormData.user.info, currentUser!.location);
 
-    this.userService.updateUser(userToEdit).subscribe(console.log);
+    this.userService.updateUser(userToEdit).subscribe(() => {
+      this.userTrigger$.next(true);
+    });
   };
 
   public onSavePost(event: any) {
-    console.log(event);
     const post = {
       content: event.content,
       imageUrl: event.imageSource
     }
-    console.log(post)
     this.postService.createPost(post).subscribe(() => {
-      this.trigger$.next(true);
+      this.postTrigger$.next(true);
+      this.modalService.dismissAll();
     });
   };
 
   public onComment(event: any) {
     this.postService.createCommentOnPost(event.postId, event.event.comment)
     .subscribe(() => {
-      this.trigger$.next(true);
+      this.postTrigger$.next(true);
     });
   }
 
   public onDeletePost(postId: number) {
     this.postService.deletePost(postId).subscribe(() => {
-      this.trigger$.next(true);
+      this.postTrigger$.next(true);
     })
   };
 
   public onEditPost(postFormData: any) {
     this.postService.editPost(postFormData).subscribe(() => {
-      this.trigger$.next(true);
+      this.postTrigger$.next(true);
       this.modalService.dismissAll();
     });
   }
 
   public onDeleteEvent(eventId: number) {
     this.eventService.deleteEvent(eventId).subscribe(() => {
-      this.trigger$.next(true);
+      this.eventTrigger$.next(true);
     })
   }
 
   public onSaveEvent(eventFormData: any) {
-    this.eventService.createEvent(eventFormData).subscribe()
+    this.eventService.createEvent(eventFormData).subscribe(() => {
+      this.eventTrigger$.next(true);
+    });
+  }
+
+  public onEditEvent(eventFormData: any) {
+    console.log(eventFormData);
+    this.eventService.editEvent(eventFormData).subscribe(() => {
+      this.eventTrigger$.next(true);
+    });
   }
 
 

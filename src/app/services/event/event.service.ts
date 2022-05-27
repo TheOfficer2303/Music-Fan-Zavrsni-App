@@ -20,8 +20,17 @@ export class EventService {
 
   public createEvent(eventFormData: any) {
     const url = `${baseUrl}${ApiPaths.EVENTS}`;
+    eventFormData.startTime = `${eventFormData.startDate} ${eventFormData.startTime}`;
 
     return this.http.post(url, {event: eventFormData})
+  }
+
+  public editEvent(eventFormData: any) {
+    console.log(eventFormData);
+    const url = `${baseUrl}${ApiPaths.EVENTS}/${eventFormData.id}`;
+    eventFormData.startTime = `${eventFormData.startDate} ${eventFormData.startTime}`;
+
+    return this.http.put(url, {event: eventFormData})
   }
 
   public getEventsOfUser(organizator: User) {

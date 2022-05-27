@@ -11,11 +11,15 @@ export class EventListComponent {
   @Input() events?: Array<Event> | null;
   @Input() currentUser?: User;
   @Output() comment: EventEmitter<any> = new EventEmitter();
-  @Output() deletePost: EventEmitter<any> = new EventEmitter();
-  @Output() editPost: EventEmitter<any> = new EventEmitter();
+  @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
+  @Output() editEvent: EventEmitter<any> = new EventEmitter();
 
   public onDelete(eventId: any) {
-    this.deletePost.emit(eventId);
+    this.deleteEvent.emit(eventId);
+  }
+
+  public onEdit(eventFormData: any) {
+    this.editEvent.emit(eventFormData);
   }
 
   constructor() { }

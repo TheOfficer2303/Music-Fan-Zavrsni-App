@@ -44,6 +44,9 @@ export class PostService {
     
     return this.http.get<IPostResponse>(`${url}?${query}`).pipe(
       map((response) => {
+        if (!response.posts) {
+          return null;
+        }
         return response.posts.map((post: IRawPost) => {
           let comments: Comment[] = [];
           comments = post.comments.map((comment: IRawComment) => {

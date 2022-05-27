@@ -98,11 +98,15 @@
                     </button>
 
                     <ng-template #eventForm>
-                        <app-event-form (eventFormData)="onSaveEvent($event)"></app-event-form>
+                        <app-event-form
+                            (eventFormData)="onSaveEvent($event)"
+                        >
+                        </app-event-form>
                     </ng-template>
 
                     <app-event-list
-                        (deletePost)="onDeleteEvent($event)"
+                        (editEvent)="onEditEvent($event)"
+                        (deleteEvent)="onDeleteEvent($event)"
                         [events]="events$ | async"
                         [currentUser]="getCurrentUser()"
                     >

@@ -19,10 +19,10 @@
                   <mat-icon>delete</mat-icon>
                   <span>Delete</span>
                 </button>
-                <!-- <button mat-menu-item (click)="onEdit(editForm)">
+                <button mat-menu-item (click)="onEdit(eventForm)">
                   <mat-icon>edit</mat-icon>
                   <span>Edit</span>
-                </button> -->
+                </button>
               </mat-menu>
     </mat-card-header>
     <mat-card-content>
@@ -50,3 +50,7 @@
       <button mat-button>JOIN</button>
     </mat-card-actions>
 </mat-card>
+
+<ng-template #eventForm>
+    <app-event-form [event]="event" (eventFormData)="onSave($event)"></app-event-form>
+</ng-template>
