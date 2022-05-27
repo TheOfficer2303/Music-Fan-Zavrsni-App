@@ -3,8 +3,10 @@
     <app-event-card
         (deleteEvent)="onDelete($event)"
         (editEvent)="onEdit($event)"
-        (id)="onSeeParticipants($event)"
+        (joinEvent)="onJoinEvent($event)"
+        (quitEvent)="onQuitEvent($event)"
         [event]="event"
+        [joined$]="joined$"
         [currentUser]="currentUser"
     >
     </app-event-card>

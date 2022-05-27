@@ -29,6 +29,7 @@ export class UserPageComponent {
   public eventTrigger$ = new BehaviorSubject<boolean>(true);
 
   public participants$?: Observable<Array<User>>;
+  public joined$? = new BehaviorSubject<boolean>(false);
 
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
@@ -187,8 +188,18 @@ export class UserPageComponent {
     });
   }
 
-  public onShowParticipants(eventId: number) {
-    this.participants$ = this.eventService.getEventSubsByEventId(eventId);
+  public onJoinEvent(eventId: number) {
+    this.eventService.joinEvent(eventId).subscribe(() => {
+      this.eventTrigger$.next(true);
+      this.joined$?.next(true);
+    });
+  }
+
+  public onQuitEvent(eventId: number) {
+    this.eventService.quitEvent(eventId).subscribe(() => {
+      this.eventTrigger$.next(true);
+      this.joined$?.next(true);
+    });
   }
 
 

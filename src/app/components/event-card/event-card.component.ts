@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, of } from 'rxjs';
 import { Event } from 'src/app/models/event.model';
 import { User } from 'src/app/models/user.model';
 
@@ -8,13 +9,14 @@ import { User } from 'src/app/models/user.model';
   templateUrl: './event-card.component.html',
   styleUrls: ['./event-card.component.scss']
 })
-export class EventCardComponent {
+export class EventCardComponent implements OnInit {
   @Input() event?: Event;
   @Input() currentUser?: User;
+  @Input() joined$: Observable<boolean> | undefined;
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   @Output() editEvent: EventEmitter<any> = new EventEmitter();
   @Output() joinEvent: EventEmitter<any> = new EventEmitter();
-  @Output() id: EventEmitter<number> = new EventEmitter();
+  @Output() quitEvent: EventEmitter<any> = new EventEmitter();
 
   public isCollapsed = true;
 
@@ -35,10 +37,23 @@ export class EventCardComponent {
     this.joinEvent.emit(this.event?.id);
   }
 
-  public onSeeParticipants() {
-    this.id.emit(this.event?.id);
+  public onQuitEvent() {
+    this.quitEvent.emit(this.event?.id);
+  }
+
+  public checkIfJoined(user1: User) {
+    if (this.event?.coming.find(user => user.id == user1.id) ) {
+      return true;
+    }
+    return false;
   }
 
   constructor(private modalService: NgbModal) {
+  }
+
+  ngOnInit(): void {
+    console.log(this.event)
+    this.joined$ = of(this.checkIfJoined(this.currentUser!));
+    this.joined$.subscribe(console.log)
   }
 }

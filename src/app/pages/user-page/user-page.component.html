@@ -128,8 +128,10 @@
                     <app-event-list
                         (editEvent)="onEditEvent($event)"
                         (deleteEvent)="onDeleteEvent($event)"
-                        (eventId)="onShowParticipants($event)"
+                        (joinEventId)="onJoinEvent($event)"
+                        (quitEventId)="onQuitEvent($event)"
                         [events]="events$ | async"
+                        [joined$]="joined$"
                         [currentUser]="getCurrentUser()"
                     >
                     </app-event-list>

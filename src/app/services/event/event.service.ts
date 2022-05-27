@@ -32,6 +32,18 @@ export class EventService {
     return this.http.put(url, {event: eventFormData})
   }
 
+  public joinEvent(eventId: number) {
+    const url = `${baseUrl}${ApiPaths.EVENT_SUBSCRIPTION}`;
+
+    return this.http.post(url, {eventId: eventId});
+  }
+
+  public quitEvent(eventId: number) {
+    const url = `${baseUrl}${ApiPaths.EVENT_SUBSCRIPTION}/${eventId}`;
+
+    return this.http.delete(url);
+  }
+
   public getEventsOrganizedByUser(organizator: User) {
     const url = `${baseUrl}${ApiPaths.EVENTS}`;
     const query = `organizator_id=${organizator.id}`;
