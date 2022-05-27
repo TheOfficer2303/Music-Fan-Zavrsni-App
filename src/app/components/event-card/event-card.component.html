@@ -47,19 +47,22 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-      <button *ngIf="event?.organizator?.id !== currentUser?.id && !(joined$ |async); else joined" mat-button
-        (click)="onJoinEvent()"    
-      >
-      JOIN
-      </button>
-
-      <ng-template #joined>
-        <button  mat-button
-        (click)="onQuitEvent()"    
-        >
-        QUIT
-        </button>
-      </ng-template>
+        <span *ngIf="event?.organizator?.id !== currentUser?.id">
+            <button *ngIf="!(joined$ |async); else joined" mat-button
+                (click)="onJoinEvent()"    
+            >
+                JOIN
+            </button>
+    
+          <ng-template #joined>
+            <button  mat-button
+                (click)="onQuitEvent()"    
+            >
+                QUIT
+            </button>
+          </ng-template>
+        </span>
+      
 
       <button mat-button (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
           aria-controls="collapseExample">

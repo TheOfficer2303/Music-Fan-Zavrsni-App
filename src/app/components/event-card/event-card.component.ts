@@ -52,8 +52,6 @@ export class EventCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.event)
     this.joined$ = of(this.checkIfJoined(this.currentUser!));
-    this.joined$.subscribe(console.log)
   }
 }
