@@ -13,6 +13,10 @@ export class EventCardComponent {
   @Input() currentUser?: User;
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   @Output() editEvent: EventEmitter<any> = new EventEmitter();
+  @Output() joinEvent: EventEmitter<any> = new EventEmitter();
+  @Output() id: EventEmitter<number> = new EventEmitter();
+
+  public isCollapsed = true;
 
   public onDelete() {
     this.deleteEvent.emit(this.event?.id);
@@ -27,5 +31,14 @@ export class EventCardComponent {
     this.editEvent.emit(eventFormData)
   }
 
-  constructor(private modalService: NgbModal) { }
+  public onJoinEvent() {
+    this.joinEvent.emit(this.event?.id);
+  }
+
+  public onSeeParticipants() {
+    this.id.emit(this.event?.id);
+  }
+
+  constructor(private modalService: NgbModal) {
+  }
 }

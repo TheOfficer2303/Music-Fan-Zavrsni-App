@@ -47,7 +47,26 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>JOIN</button>
+      <button *ngIf="event?.organizator?.id !== currentUser?.id" mat-button
+        (click)="onJoinEvent()"    
+      >
+      JOIN
+      </button>
+
+      <button mat-button (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample">
+          SEE PARTICIPANTS
+        </button>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <div class="card">
+          <div class="card-body" *ngIf="!event?.coming; else elseBlock">
+            No comments on this post yet.
+          </div>
+          <ng-template #elseBlock>
+            <app-follower-list [followers]="event?.coming"></app-follower-list>
+          </ng-template>
+        </div>
+      </div>
     </mat-card-actions>
 </mat-card>
 

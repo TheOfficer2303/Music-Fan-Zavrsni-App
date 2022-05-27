@@ -15,4 +15,5 @@ export interface IRawEvent {
     address: string;
     organizatorId: User;
     location: string;
+    coming: any;
 }

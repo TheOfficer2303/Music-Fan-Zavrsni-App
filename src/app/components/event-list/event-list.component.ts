@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Event } from 'src/app/models/event.model';
 import { User } from 'src/app/models/user.model';
 
@@ -10,9 +10,11 @@ import { User } from 'src/app/models/user.model';
 export class EventListComponent {
   @Input() events?: Array<Event> | null;
   @Input() currentUser?: User;
+  @Input() comingToEvents?: Array<Event>;
   @Output() comment: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   @Output() editEvent: EventEmitter<any> = new EventEmitter();
+  @Output() eventId: EventEmitter<number> = new EventEmitter();
 
   public onDelete(eventId: any) {
     this.deleteEvent.emit(eventId);
@@ -22,5 +24,10 @@ export class EventListComponent {
     this.editEvent.emit(eventFormData);
   }
 
-  constructor() { }
+  public onSeeParticipants(id: number) {
+    this.eventId.emit(id);
+  }
+
+  constructor() {
+   }
 }

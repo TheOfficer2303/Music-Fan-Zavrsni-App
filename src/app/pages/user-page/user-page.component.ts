@@ -28,6 +28,8 @@ export class UserPageComponent {
   public postTrigger$ = new BehaviorSubject<boolean>(true);
   public eventTrigger$ = new BehaviorSubject<boolean>(true);
 
+  public participants$?: Observable<Array<User>>;
+
   private id$ = this.activatedRoute.paramMap.pipe(
     map((paramMap) => {
       return paramMap.get('id');
@@ -35,7 +37,7 @@ export class UserPageComponent {
   );
 
   public user$ = combineLatest([this.id$, this.userTrigger$]).pipe(
-    switchMap(([id]) => {
+    mergeMap(([id]) => {
       return this.getUser(id);
     })
   );
@@ -45,7 +47,7 @@ export class UserPageComponent {
       return user;
     }),
     switchMap((user) => {
-      return this.userService.isFollowedBy(this.getCurrentUser()!.id, user.id,)
+      return this.userService.isFollowedBy(this.getCurrentUser()!.id, user.id)
     })
   );
 
@@ -56,6 +58,11 @@ export class UserPageComponent {
     tap(console.log)
   );
 
+  public orchestraMembership$: Observable<OrchestraMembership | null> = this.user$.pipe(
+    switchMap((user) => {
+      return this.orchestraService.getOrchestraByPlayer(user);
+    })
+  );
 
   public posts$: Observable<Array<Post> | null> = combineLatest([this.user$, this.postTrigger$]).pipe(
     map(([user]) => {
@@ -71,23 +78,10 @@ export class UserPageComponent {
       return user;
     }),
     switchMap((user) => {
-      return this.eventService.getEventsOfUser(user);
-    })
+      return this.eventService.getEventsOrganizedByUser(user);
+    }),
+    tap(console.log)
   );
-
-  public orchestraMembership$: Observable<OrchestraMembership | null> = this.user$.pipe(
-    switchMap((user) => {
-      return this.orchestraService.getOrchestraByPlayer(user);
-    })
-  );
-
-  public getUser(id: string | null) {
-    return this.userService.getUserById(id!);
-  };
-
-  public getCurrentUser(): User | undefined {
-    return this.authService.getAuthData()?.currentUser;
-  };
 
   public followers$ = this.user$.pipe(
     switchMap((user) => {
@@ -101,6 +95,16 @@ export class UserPageComponent {
     })
   );
 
+  public getUser(id: string | null) {
+    return this.userService.getUserById(id!);
+  };
+
+  public getCurrentUser(): User | undefined {
+    return this.authService.getAuthData()?.currentUser;
+  };
+
+ 
+
   public onFollow(): void {
     this.followed$ = of(true);
     this.user$.pipe(
@@ -113,7 +117,7 @@ export class UserPageComponent {
   public onUnfollow(): void {
     this.followed$ = of(false);
     this.user$.pipe(
-      switchMap((user) => {
+      mergeMap((user) => {
         return this.userService.unfollowUser(user.id);
       })
     ).subscribe()
@@ -178,10 +182,13 @@ export class UserPageComponent {
   }
 
   public onEditEvent(eventFormData: any) {
-    console.log(eventFormData);
     this.eventService.editEvent(eventFormData).subscribe(() => {
       this.eventTrigger$.next(true);
     });
+  }
+
+  public onShowParticipants(eventId: number) {
+    this.participants$ = this.eventService.getEventSubsByEventId(eventId);
   }
 
 

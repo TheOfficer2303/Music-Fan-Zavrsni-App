@@ -128,6 +128,7 @@
                     <app-event-list
                         (editEvent)="onEditEvent($event)"
                         (deleteEvent)="onDeleteEvent($event)"
+                        (eventId)="onShowParticipants($event)"
                         [events]="events$ | async"
                         [currentUser]="getCurrentUser()"
                     >
