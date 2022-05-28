@@ -7,6 +7,10 @@ import { IRawUser } from 'src/app/interfaces/rawUser.interface';
 import { baseUrl } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../../models/user.model';
+import { Post } from 'src/app/models/post.model';
+import { IRawComment } from 'src/app/interfaces/rawComment.interface';
+import { Comment } from 'src/app/models/comment.model';
+import { Event } from 'src/app/models/event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +42,6 @@ export class UserService {
   }
 
   public updateUser(user: User) {
-    
     const url = `${baseUrl}${ApiPaths.USER}/${user.id}`;
     console.log(url)
     return this.http.put<any>(url, {user: user}, {observe: 'response'}).pipe(
@@ -104,5 +107,39 @@ export class UserService {
         }
       })
     );
+  }
+
+  public getPostsAndEventsOfFollowers(user: User) {
+    console.log("aaa")
+    const url = `${baseUrl}${ApiPaths.USER}/${user.id}${ApiPaths.USER_FOLLOWING}`;
+    const query = `include=posts,events`;
+    return this.http.get(`${url}?${query}`).pipe(
+      map((response: any) => {
+        // debugger;
+        return response.followees.map((followee: any) => {
+          let pe: {
+            posts: Post[],
+            events: Event[]
+          } = {posts: [], events: []}
+          pe.posts = followee.posts.map((post: any) => {
+            let comments: Comment[] = [];
+            comments = post.comments.map((comment: IRawComment) => {
+              return new Comment(comment.id, post.id, comment.content, comment.commentatorId, comment.createdAt);
+            });
+            return new Post(post.id, post.creatorId, post.content, post.imageUrl, post.createdAt, comments);
+          });
+
+          pe.events = followee.events.map((event: any) => {
+            let coming: User[] = [];
+            coming = event.coming.map((user: any) => {
+              return new User(user.user_id, user.first_name, user.last_name, user.avatar_url, user.info, user.location.name)
+            })
+            return new Event(event.id, event.name, event.description, event.startDate, event.endDate, 
+              event.startTime, event.address, event.organizatorId, event.location, coming);
+            })
+          return pe;
+        })
+      })
+    )
   }
 }

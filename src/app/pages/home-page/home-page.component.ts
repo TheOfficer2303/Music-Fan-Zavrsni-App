@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  public postsAndEvents$ = this.userService.getPostsAndEventsOfFollowers(this.authService.getAuthData()?.currentUser!)
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService, private userService: UserService) { 
   }
+
+  ngOnInit() {
+}
 
 }
