@@ -109,7 +109,7 @@ export class UserService {
     );
   }
 
-  public getPostsAndEventsOfFollowers(user: User) {
+  public getPostsAndEventsOfFollowees(user: User) {
     console.log("aaa")
     const url = `${baseUrl}${ApiPaths.USER}/${user.id}${ApiPaths.USER_FOLLOWING}`;
     const query = `include=posts,events`;
