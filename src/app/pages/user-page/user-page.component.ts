@@ -125,7 +125,7 @@ export class UserPageComponent {
     this.modalService.dismissAll();
     const currentUser = this.getCurrentUser();
     const userToEdit = new User(currentUser!.id, userEditFormData.user.firstName, userEditFormData.user.lastName,
-      currentUser!.avatarUrl, userEditFormData.user.info, currentUser!.location);
+      userEditFormData.user.imageSource, userEditFormData.user.info, currentUser!.location);
 
     this.userService.updateUser(userToEdit).subscribe(() => {
       this.userTrigger$.next(true);

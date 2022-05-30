@@ -16,6 +16,7 @@ import { SearchService } from 'src/app/services/search/search.service';
 })
 export class OrchestraPageComponent {
   public orchestra?: Orchestra;
+  public players?: Array<User>;
   
   public trigger$ = new BehaviorSubject(true);
   public searchTrigger$ = new Subject();
@@ -48,14 +49,13 @@ export class OrchestraPageComponent {
   );
 
   public openModal(form: any) {
-    this.modalService.open(form)
+    this.modalService.open(form);
   }
 
   public addPlayer(playerId: string) {
     this.modalService.dismissAll();
-    console.log(playerId, this.orchestra!)
     this.orchestraService.addPlayerToOrchestra(playerId, this.orchestra!).subscribe(() => {
-      this.snackBar.open("Player added. Please refresh the page!");
+      this.snackBar.open("Player added. Please refresh the page!", "Close");
     });
   }
 

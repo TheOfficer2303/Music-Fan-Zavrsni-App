@@ -43,8 +43,11 @@ export class UserService {
 
   public updateUser(user: User) {
     const url = `${baseUrl}${ApiPaths.USER}/${user.id}`;
+    let formData = new FormData();
+    formData = this.appendToFormData(formData, user);
+  
     console.log(url)
-    return this.http.put<any>(url, {user: user}, {observe: 'response'}).pipe(
+    return this.http.put<any>(url, formData, {observe: 'response'}).pipe(
       map((response) => {
         console.log(response)
         const userResponse = response.body?.user;
@@ -139,5 +142,14 @@ export class UserService {
         })
       })
     )
+  }
+
+  private appendToFormData(fd: FormData, user: User) {
+    fd.append("firstName", user.firstName);
+    fd.append("lastName", user.lastName);
+    fd.append("avatarUrl", user.avatarUrl);
+    fd.append("info", user.info);
+
+    return fd;
   }
 }

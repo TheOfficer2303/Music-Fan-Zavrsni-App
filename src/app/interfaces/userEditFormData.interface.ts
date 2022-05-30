@@ -3,5 +3,6 @@ export interface IUserEditFormData {
         firstName: string,
         lastName: string
         info: string
+        imageSource: string
       }
 }

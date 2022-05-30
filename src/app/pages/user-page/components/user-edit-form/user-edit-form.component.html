@@ -15,5 +15,7 @@
         <input matInput [type]="'text'" formControlName="info">
     </mat-form-field>
 
+    <input type="file" formControlName="image" (change)="onChange($event)" accept="image/*">
+
     <button mat-raised-button  color="primary" (click)="onEdit()" [disabled]="edit.invalid">Save</button>
 </form>

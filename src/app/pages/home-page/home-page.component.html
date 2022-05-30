@@ -22,8 +22,10 @@
 </div>
 
 <div class="conductor">
-    <ng-container *ngIf="(myOrchestra$ | async)?.name; else noOrch">
-        aaa
+    <ng-container *ngIf="(myOrchestra$ | async)?.name; let name; else noOrch">
+        <a class="header" [routerLink]="['/my-orchestra']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+            <span>{{name}}</span>
+        </a>
     </ng-container>
     
     <ng-template #noOrch>

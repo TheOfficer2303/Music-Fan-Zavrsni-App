@@ -18,7 +18,9 @@ export class UserEditFormComponent {
   public edit: FormGroup = this.fb.group({
     firstName: ['' , Validators.required],
     lastName: ['', Validators.required],
-    info: ['', Validators.required]
+    info: ['', Validators.required],
+    image: ['', Validators.required],
+    imageSource: ['']
   });
 
   locations$!: Observable<Location[]>;
@@ -30,6 +32,15 @@ export class UserEditFormComponent {
       user: this.edit.value
     });
     this.edit.reset();
+  }
+
+  public onChange(event: any): void {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.edit.patchValue({
+        imageSource: file
+      });
+    }
   }
 
   ngOnInit() {
