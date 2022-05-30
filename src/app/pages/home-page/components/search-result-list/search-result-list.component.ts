@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-search-result-list',
   templateUrl: './search-result-list.component.html',
@@ -7,11 +6,14 @@ import { Component, Input } from '@angular/core';
 })
 export class SearchResultListComponent {
   @Input() resultArray?: any
+  @Input() isSelectable?: Boolean
+  @Output() personId = new EventEmitter();
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.resultArray.subscribe(console.log)
-  } 
+  selectPerson(personId: any) {
+    console.log(personId);
+    this.personId.emit(personId);
+  }
 
 }

@@ -80,7 +80,16 @@ export class OrchestraService {
     return this.http.post(url, {orchestra});
   }
 
-
+  public addPlayerToOrchestra(playerId: string, orchestra: Orchestra) {
+    const url = `${baseUrl}${ApiPaths.ORCHESTRA_MEMBERSHIP}`;
+    const orchestraMembership = {
+      orchestraId: orchestra.id,
+      playerId: playerId,
+      instrument: "",
+      joinedAt: "1970-01-01"
+    }
+    return this.http.post(url, {orchestraMembership});
+  }
 
   constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) { }
 }

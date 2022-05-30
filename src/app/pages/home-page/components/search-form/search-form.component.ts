@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./search-form.component.scss']
 })
 export class SearchFormComponent {
+  @Input() isUsersOnly?: Boolean;
   @Output() search: EventEmitter<any> = new EventEmitter();
 
   public searchForm: FormGroup = this.fb.group({
@@ -17,6 +18,10 @@ export class SearchFormComponent {
   public onSearch() {
     console.log(this.searchForm.value);
     this.search.emit(this.searchForm.value);
+  }
+
+  public usersOnly() {
+    return Boolean(this.isUsersOnly);
   }
 
   constructor(private fb: FormBuilder) { }

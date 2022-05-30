@@ -6,15 +6,34 @@
     <span *ngIf="(orchestra$ | async)?.playersNo === 0; else players">
         Your orchestra has no players yet.
         Add them by clicking on this bjutiful button.
-
-        <button
-            mat-button
-            (click)="addPlayer()"
-        >
-            <span class="material-icons">add_circle</span>
-            <span>Add new player</span>
-        </button>
     </span>
+
+    <button
+        mat-button
+        (click)="openModal(search)"
+    >
+        <span class="material-icons">add_circle</span>
+        <span>Add new player</span>
+    </button>
+
+    <div class="search-modal">
+        <ng-template #search>
+            <app-search-form
+                [isUsersOnly]="true"
+                (search)="onSearch($event)"
+            >
+            </app-search-form>
+    
+            <div *ngIf="results$">
+                <app-search-result-list
+                    [isSelectable]="true"
+                    [resultArray]="results$"
+                    (personId)="addPlayer($event)"
+                >
+                </app-search-result-list>
+            </div>
+        </ng-template>
+    </div>
 
     <ng-template #players>
         <div *ngFor="let member of (players$ | async)">
