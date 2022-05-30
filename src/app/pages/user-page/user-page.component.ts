@@ -22,6 +22,7 @@ import { EventService } from 'src/app/services/event/event.service';
 })
 export class UserPageComponent {
   public isCollapsed = true;
+  public user?: User;
   
   public followTrigger$ = new BehaviorSubject<boolean>(true);
   public userTrigger$ = new BehaviorSubject<boolean>(true);
@@ -43,58 +44,51 @@ export class UserPageComponent {
     })
   );
 
-  public followed$ = combineLatest([this.user$, this.postTrigger$]).pipe(
+  public followed$ = combineLatest([of(this.getCurrentUser()!), this.postTrigger$]).pipe(
     map(([user]) => {
       return user;
     }),
-    switchMap((user) => {
+    mergeMap((user) => {
       return this.userService.isFollowedBy(this.getCurrentUser()!.id, user.id)
     })
   );
 
   public groupMemberships$: Observable<Array<GroupMembership>> = this.user$.pipe(
-    switchMap((user) => {
+    mergeMap((user) => {
+      this.user = user;
       return this.groupService.getGroupsByUser(user);
     }),
     tap(console.log)
   );
 
   public orchestraMembership$: Observable<OrchestraMembership | null> = this.user$.pipe(
-    switchMap((user) => {
+    mergeMap((user) => {
       return this.orchestraService.getOrchestraByPlayer(user);
     })
   );
 
-  public posts$: Observable<Array<Post> | null> = combineLatest([this.user$, this.postTrigger$]).pipe(
+  public posts$: Observable<Array<Post> | null> = combineLatest([of(this.getCurrentUser()!), this.postTrigger$]).pipe(
     map(([user]) => {
       return user;
     }),
-    switchMap((user) => {
+    mergeMap((user) => {
       return this.postService.getPostsOfUser(user);
     })
   );
 
-  public events$: Observable<Array<Event>> = combineLatest([this.user$, this.eventTrigger$]).pipe(
+  public events$: Observable<Array<Event>> = combineLatest([of(this.getCurrentUser()!), this.eventTrigger$]).pipe(
     map(([user]) => {
       return user;
     }),
-    switchMap((user) => {
+    mergeMap((user) => {
       return this.eventService.getEventsOrganizedByUser(user);
     }),
     tap(console.log)
   );
 
-  public followers$ = this.user$.pipe(
-    switchMap((user) => {
-      return this.userService.getFollowersOfUser(user);
-    })
-  );
+  public followers$ = this.userService.getFollowersOfUser(this.getCurrentUser()!);
 
-  public followees$ = this.user$.pipe(
-    switchMap((user) => {
-      return this.userService.getFollowedByUser(user);
-    })
-  );
+  public followees$ = this.userService.getFollowedByUser(this.getCurrentUser()!);
 
   public getUser(id: string | null) {
     this.modalService.dismissAll();
@@ -104,8 +98,6 @@ export class UserPageComponent {
   public getCurrentUser(): User | undefined {
     return this.authService.getAuthData()?.currentUser;
   };
-
- 
 
   public onFollow(): void {
     this.followed$ = of(true);

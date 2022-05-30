@@ -22,13 +22,19 @@
 </div>
 
 <div class="conductor">
-    <p>You are conducting an orchestra? Connect it here!</p>
-    <div>
-        <button mat-button (click)="openModal(orchestra)">
-            <span class="material-icons">add_circle</span>
-            <span>Add new orchestra</span>
-        </button>
-    </div>
+    <ng-container *ngIf="(myOrchestra$ | async)?.name; else noOrch">
+        aaa
+    </ng-container>
+    
+    <ng-template #noOrch>
+        <p>You are conducting an orchestra? Connect it here!</p>
+        <div>
+            <button mat-button (click)="openModal(orchestra)">
+                <span class="material-icons">add_circle</span>
+                <span>Add new orchestra</span>
+            </button>
+        </div>
+    </ng-template>
 
     <ng-template #orchestra>
         <app-orchestra-form

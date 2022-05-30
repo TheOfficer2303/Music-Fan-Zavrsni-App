@@ -41,6 +41,8 @@ export class HomePageComponent {
     })
   );
 
+  public myOrchestra$ = this.orchestraService.getOrchestraByConductor(this.getCurrentUser());
+
   public openModal(modal: any) {
     this.modalService.open(modal);
   };

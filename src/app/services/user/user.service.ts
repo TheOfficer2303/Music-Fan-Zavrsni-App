@@ -110,12 +110,10 @@ export class UserService {
   }
 
   public getPostsAndEventsOfFollowees(user: User) {
-    console.log("aaa")
     const url = `${baseUrl}${ApiPaths.USER}/${user.id}${ApiPaths.USER_FOLLOWING}`;
     const query = `include=posts,events`;
     return this.http.get(`${url}?${query}`).pipe(
       map((response: any) => {
-        // debugger;
         return response.followees.map((followee: any) => {
           let pe: {
             posts: Post[],
