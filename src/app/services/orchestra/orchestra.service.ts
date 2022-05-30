@@ -8,6 +8,7 @@ import { baseUrl } from 'src/environments/environment';
 import { User } from '../../models/user.model';
 import { UserService } from '../user/user.service';
 import { Orchestra, OrchestraMembership } from '../../models/orchestra.model';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,21 @@ export class OrchestraService {
     )
   }
 
+  public createOrchestra(orchestraFormData: any) {
+    const url = `${baseUrl}${ApiPaths.ORCHESTRA}`;
+
+    const orchestra = {
+      name: orchestraFormData.name,
+      info: orchestraFormData.info,
+      foundedAt: orchestraFormData.founded,
+      conductorId: this.authService.getAuthData()?.currentUser.id,
+      countryIsoCode: orchestraFormData.country
+    }
+
+    return this.http.post(url, {orchestra});
+  }
 
 
-  constructor(private userService: UserService, private http: HttpClient) { }
+
+  constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) { }
 }

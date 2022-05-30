@@ -5,6 +5,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { AppGuard } from './guards/app.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginContainerComponent } from './pages/login-container/login-container.component';
+import { OrchestraPageComponent } from './pages/orchestra-page/orchestra-page.component';
 import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
 
@@ -15,6 +16,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomePageComponent },
       { path: 'user/:id', component: UserPageComponent },
+      { path: 'my-orchestra', component: OrchestraPageComponent },
     ],
     canActivate: [AppGuard]
   },

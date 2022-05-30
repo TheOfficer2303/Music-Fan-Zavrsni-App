@@ -49,6 +49,8 @@ import { EventFormComponent } from './pages/user-page/components/event-form/even
 import { FollowerListComponent } from './pages/user-page/components/follower-list/follower-list.component';
 import { SearchFormComponent } from './pages/home-page/components/search-form/search-form.component';
 import { SearchResultListComponent } from './pages/home-page/components/search-result-list/search-result-list.component';
+import { OrchestraFormComponent } from './pages/home-page/components/orchestra-form/orchestra-form.component';
+import { OrchestraPageComponent } from './pages/orchestra-page/orchestra-page.component';
 
 
 
@@ -81,6 +83,8 @@ import { SearchResultListComponent } from './pages/home-page/components/search-r
     FollowerListComponent,
     SearchFormComponent,
     SearchResultListComponent,
+    OrchestraFormComponent,
+    OrchestraPageComponent,
   ],
   imports: [
     BrowserModule,
