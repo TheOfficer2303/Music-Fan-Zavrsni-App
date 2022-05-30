@@ -1,1 +1,24 @@
-<p>orchestra-page works!</p>
+<div class="info">
+    {{(orchestra$ | async)?.name}}
+</div>
+
+<div class="players">
+    <span *ngIf="(orchestra$ | async)?.playersNo === 0; else players">
+        Your orchestra has no players yet.
+        Add them by clicking on this bjutiful button.
+
+        <button
+            mat-button
+            (click)="addPlayer()"
+        >
+            <span class="material-icons">add_circle</span>
+            <span>Add new player</span>
+        </button>
+    </span>
+
+    <ng-template #players>
+        <div *ngFor="let member of (players$ | async)">
+            {{member.player.firstName}}
+        </div>
+    </ng-template>
+</div>

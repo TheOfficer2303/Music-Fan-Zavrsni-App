@@ -15,9 +15,23 @@ import { AuthService } from '../auth/auth.service';
 })
 export class OrchestraService {
 
+  public getPlayersOfOrchestra(orchestra: Orchestra) {
+    const url = `${baseUrl}${ApiPaths.ORCHESTRA_MEMBERSHIP}`;
+    const query = `orchestra_id=${orchestra.id}`;
+
+    return this.http.get(`${url}?${query}`).pipe(
+      map((response: any) => {
+        return response.orchMembs.map((player: any) => {
+          const user = new User(player.player_id, player.first_name, player.last_name, player.avatar_url, "", "");
+          return new OrchestraMembership(orchestra, player.joined_at, player.instrument, user);
+        })
+      })
+    )
+  }
+
   public getOrchestraByPlayer(user: User): Observable<OrchestraMembership | null>{
-    const url = `${baseUrl}${ApiPaths.ORCHESTRA_MEMBERSHIP}`
-    const query = `player_id=${user.id}`
+    const url = `${baseUrl}${ApiPaths.ORCHESTRA_MEMBERSHIP}`;
+    const query = `player_id=${user.id}`;
     return this.http.get<IRawOrchMemb>(`${url}?${query}`).pipe(
       mergeMap((response) => {
         return combineLatest([
@@ -36,6 +50,18 @@ export class OrchestraService {
       catchError((error) => {
         console.log(error);
         return of(null)
+      })
+    )
+  }
+
+  public getOrchestraByConductor(conductor: User) {
+    const url = `${baseUrl}${ApiPaths.ORCHESTRA}`;
+    const query = `conductor_id=${conductor.id}`;
+
+    return this.http.get(`${url}?${query}`).pipe(
+      map((response: any) => {
+        const resOrch = response.orchestras[0];
+        return new Orchestra(resOrch.orchestra_id, this.authService.getAuthData()?.currentUser, resOrch.name, resOrch.info, resOrch.players_no, resOrch.founded_at, resOrch.country_iso_code);
       })
     )
   }
