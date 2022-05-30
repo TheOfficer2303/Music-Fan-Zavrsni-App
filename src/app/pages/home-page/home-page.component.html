@@ -24,6 +24,23 @@
     </ng-template>
 </div>
 
+<div class="conductor">
+    <p>You are conducting an orchestra? Connect it here!</p>
+    <div>
+        <button mat-button (click)="openModal(orchestra)">
+            <span class="material-icons">add_circle</span>
+            <span>Add new orchestra</span>
+        </button>
+    </div>
+
+    <ng-template #orchestra>
+        <app-orchestra-form
+            (orchestraFormData)="onNewOrchestra($event)"
+        >
+        </app-orchestra-form>
+    </ng-template>
+</div>
+
 
 <ng-container *ngFor="let pe of (postsAndEvents$ | async)">
     <app-post-list 

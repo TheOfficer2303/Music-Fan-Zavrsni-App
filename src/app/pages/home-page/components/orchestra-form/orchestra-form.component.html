@@ -1,0 +1,41 @@
+
+<form [formGroup]="orchestraForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [type]="'text'" formControlName="name">
+
+        <mat-error *ngIf="orchestraForm.get('info')?.errors?.['required']">Cannot be empty</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Founded at</mat-label>
+        <input matInput [type]="'date'" formControlName="founded">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Info</mat-label>
+        <input matInput [type]="'text'" formControlName="info">
+        <mat-error *ngIf="orchestraForm.get('info')?.errors?.['required']">Cannot be empty</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="proba">
+        <mat-select formControlName="country">
+            <ng-container *ngFor="let country of (countries$ | async)">
+                <mat-option [value]="country.countryIsoCode">{{country.name}}</mat-option>                 
+            </ng-container>
+
+            <mat-error *ngIf="orchestraForm.get('info')?.errors?.['required']">Cannot be empty</mat-error>
+        </mat-select>
+        <mat-error *ngIf="orchestraForm.get('info')?.errors?.['required']">Cannot be unselected</mat-error>
+    </mat-form-field>
+
+
+    <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="orchestraForm.invalid"
+        (click)="onSave()"
+    >
+        Save
+    </button>
+</form>

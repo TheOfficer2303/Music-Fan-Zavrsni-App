@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, combineLatest, map, Observable, of, Subject, switchMap } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { EventService } from 'src/app/services/event/event.service';
+import { OrchestraService } from 'src/app/services/orchestra/orchestra.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { SearchService } from 'src/app/services/search/search.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -63,6 +65,13 @@ export class HomePageComponent {
     });
   }
 
+  public onNewOrchestra(orchFormData: any) {
+    this.orchestraService.createOrchestra(orchFormData).subscribe(() => {
+      this.modalService.dismissAll();
+      this.router.navigate(['my-orchestra']);
+    });
+  }
+
   public onSearch(event: any) {
     this.searchTrigger$.next(event);
   }
@@ -73,6 +82,6 @@ export class HomePageComponent {
 
   constructor(private authService: AuthService, private userService: UserService, 
     private postService: PostService, private eventService: EventService, private searchService: SearchService,
-    private modalService: NgbModal) { 
+    private modalService: NgbModal, private orchestraService: OrchestraService, private router: Router) { 
   }
 }
