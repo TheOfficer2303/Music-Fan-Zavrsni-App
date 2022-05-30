@@ -97,6 +97,7 @@ export class UserPageComponent {
   );
 
   public getUser(id: string | null) {
+    this.modalService.dismissAll();
     return this.userService.getUserById(id!);
   };
 

@@ -1,3 +1,30 @@
+<button mat-button (click)="openModal(search)">
+    <span class="material-icons">search</span>
+    <span>Search</span>
+</button>
+
+<div class="search-modal">
+    <ng-template #search>
+        <h2>What you want to search for?</h2>
+        
+        <app-search-form
+            (search)="onSearch($event)"
+        >
+        </app-search-form>
+
+        <div *ngIf="results$">
+            <app-search-result-list
+                [resultArray]="results$"
+            >
+            </app-search-result-list>
+        </div>
+
+
+
+    </ng-template>
+</div>
+
+
 <ng-container *ngFor="let pe of (postsAndEvents$ | async)">
     <app-post-list 
     (comment)="onComment($event)"

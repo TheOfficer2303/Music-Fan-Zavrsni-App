@@ -10,6 +10,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +47,9 @@ import { EventCardComponent } from './components/event-card/event-card.component
 import { EventListComponent } from './components/event-list/event-list.component';
 import { EventFormComponent } from './pages/user-page/components/event-form/event-form.component';
 import { FollowerListComponent } from './pages/user-page/components/follower-list/follower-list.component';
+import { SearchFormComponent } from './pages/home-page/components/search-form/search-form.component';
+import { SearchResultListComponent } from './pages/home-page/components/search-result-list/search-result-list.component';
+
 
 
 @NgModule({
@@ -75,6 +79,8 @@ import { FollowerListComponent } from './pages/user-page/components/follower-lis
     EventListComponent,
     EventFormComponent,
     FollowerListComponent,
+    SearchFormComponent,
+    SearchResultListComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +102,7 @@ import { FollowerListComponent } from './pages/user-page/components/follower-lis
     MatDividerModule,
     MatExpansionModule,
     MatMenuModule,
+    MatRadioModule,
   ],
   providers: [
     {

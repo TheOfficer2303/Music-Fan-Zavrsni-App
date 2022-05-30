@@ -16,14 +16,14 @@ export class OrchestraMembership {
 
 export class Orchestra {
     id: number;
-    conductor: User;
+    conductor: User | undefined;
     name: string;
     info: string;
     playersNo: number;
     foundedAt: string;
     countryIsoCode: string;
 
-    constructor(id: number, conductor: User, name: string, info: string, playersNo: number, foundedAt: string, countryIsoCode: string) {
+    constructor(id: number, conductor: User | undefined, name: string, info: string, playersNo: number, foundedAt: string, countryIsoCode: string) {
         this.id = id;
         this.conductor = conductor;
         this.name = name;

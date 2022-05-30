@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, of, switchMap } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, combineLatest, map, Observable, of, Subject, switchMap } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { EventService } from 'src/app/services/event/event.service';
 import { PostService } from 'src/app/services/post/post.service';
+import { SearchService } from 'src/app/services/search/search.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -12,7 +15,19 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class HomePageComponent {
   public trigger$ = new BehaviorSubject(true);
+  public searchTrigger$ = new Subject();
   public joined$ = new BehaviorSubject(false);
+  public searchValue?: string;
+
+  public results$ = combineLatest([this.searchTrigger$])
+  .pipe(
+    map(([event]) => {
+      return event
+    }),
+    switchMap((event: any) => {
+      return this.searchService.searchFor(event.table, event.searchQuery);
+    })
+  )
 
   public postsAndEvents$ = combineLatest([this.trigger$, of(this.getCurrentUser())])
   .pipe(
@@ -22,7 +37,11 @@ export class HomePageComponent {
     switchMap((user) => {
       return this.userService.getPostsAndEventsOfFollowees(user);
     })
-  ); 
+  );
+
+  public openModal(modal: any) {
+    this.modalService.open(modal);
+  };
 
   public onComment(event: any) {
     this.postService.createCommentOnPost(event.postId, event.event.comment).subscribe(() => {
@@ -44,11 +63,16 @@ export class HomePageComponent {
     });
   }
 
+  public onSearch(event: any) {
+    this.searchTrigger$.next(event);
+  }
+
   public getCurrentUser() {
     return this.authService.getAuthData()?.currentUser!;
   }
 
   constructor(private authService: AuthService, private userService: UserService, 
-    private postService: PostService, private eventService: EventService) { 
+    private postService: PostService, private eventService: EventService, private searchService: SearchService,
+    private modalService: NgbModal) { 
   }
 }

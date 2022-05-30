@@ -1,0 +1,15 @@
+<ng-container *ngFor="let result of (resultArray | async)">
+    <div *ngIf="result.title">
+        <span>{{result.title}}</span>
+    </div>
+    {{result}} {{resultArray}}
+    <div *ngIf="result.name">
+        <span>{{result.name}}</span>
+    </div>
+    <div *ngIf="result.firstName">
+        <a class="header" [routerLink]="['/user/', result.id!]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title> {{result.firstName}} {{result.lastName}} </mat-card-title>
+        </a>
+    </div>
+</ng-container>

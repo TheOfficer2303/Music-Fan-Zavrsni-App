@@ -11,6 +11,6 @@ export enum ApiPaths {
     EVENT_SUBSCRIPTION = '/event_subscriptions',
     POSTS = '/posts',
     EVENTS = '/events',
-    COMMENTS = '/comments'
-    
+    COMMENTS = '/comments',
+    SEARCH = '/search'
 }
