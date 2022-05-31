@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, finalize, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, finalize, map, mergeMap, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { IUserEditFormData } from 'src/app/interfaces/userEditFormData.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GroupMembership } from 'src/app/models/group.model';
@@ -45,11 +45,11 @@ export class UserPageComponent {
     })
   );
 
-  public followed$ = combineLatest([of(this.getCurrentUser()!), this.postTrigger$]).pipe(
+  public followed$ = combineLatest([this.user$, this.followTrigger$]).pipe(
     map(([user]) => {
       return user;
     }),
-    mergeMap((user) => {
+    switchMap((user) => {
       return this.userService.isFollowedBy(this.getCurrentUser()!.id, user.id)
     })
   );
@@ -71,7 +71,7 @@ export class UserPageComponent {
     })
   );
 
-  public posts$: Observable<Array<Post> | null> = combineLatest([of(this.getCurrentUser()!), this.postTrigger$]).pipe(
+  public posts$: Observable<Array<Post> | null> = combineLatest([this.user$, this.postTrigger$]).pipe(
     map(([user]) => {
       return user;
     }),
@@ -80,7 +80,7 @@ export class UserPageComponent {
     })
   );
 
-  public events$: Observable<Array<Event>> = combineLatest([of(this.getCurrentUser()!), this.eventTrigger$]).pipe(
+  public events$: Observable<Array<Event>> = combineLatest([this.user$, this.eventTrigger$]).pipe(
     map(([user]) => {
       return user;
     }),
@@ -90,12 +90,19 @@ export class UserPageComponent {
     tap(console.log)
   );
 
-  public followers$ = this.userService.getFollowersOfUser(this.getCurrentUser()!);
+  public followers$ = this.user$.pipe(
+    mergeMap((user) => {
+      return this.userService.getFollowersOfUser(user);
+    })
+  );
 
-  public followees$ = this.userService.getFollowedByUser(this.getCurrentUser()!);
+  public followees$ = this.user$.pipe(
+    mergeMap((user) => {
+      return this.userService.getFollowedByUser(user);
+    })
+  );
 
   public getUser(id: string | null) {
-    this.modalService.dismissAll();
     return this.userService.getUserById(id!);
   };
 
@@ -107,9 +114,12 @@ export class UserPageComponent {
     this.followed$ = of(true);
     this.user$.pipe(
       mergeMap((user) => {
+        if (user.id == this.getCurrentUser()?.id) {
+          return throwError("Cannot follow myself");
+        }
         return this.userService.followUser(user.id);
       })
-    ).subscribe()
+    ).subscribe();
   };
 
   public onUnfollow(): void {
@@ -118,7 +128,7 @@ export class UserPageComponent {
       mergeMap((user) => {
         return this.userService.unfollowUser(user.id);
       })
-    ).subscribe()
+    ).subscribe();
   };
 
   public openModal(modal: any) {
@@ -182,6 +192,7 @@ export class UserPageComponent {
   public onEditEvent(eventFormData: any) {
     this.eventService.editEvent(eventFormData).subscribe(() => {
       this.eventTrigger$.next(true);
+      this.modalService.dismissAll();
     });
   }
 

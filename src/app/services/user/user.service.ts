@@ -89,17 +89,18 @@ export class UserService {
   }
 
   public isFollowedBy(followerId: number, followeeId: number) {
-    const url = `${baseUrl}${ApiPaths.USER}/${followerId}${ApiPaths.USER_FOLLOWING}`;
+    const url = `${baseUrl}${ApiPaths.USER}/${followeeId}${ApiPaths.USER_FOLLOWERS}`;
     console.log(url)
     return this.http.get<any>(url).pipe(
       map((response) => {
+        debugger;
         console.log(response)
-        if (response.followees.length === 0) {
+        if (response.followers.length === 0) {
           return false;
         } else {
-          const followees = response.followees;
+          const followers = response.followers;
           
-          const value = followees.find((followee: { user_id: number; }) => followee.user_id == followeeId);
+          const value = followers.find((followee: { user_id: number; }) => followee.user_id == followerId);
           console.log(value)
           
           if (value) {
