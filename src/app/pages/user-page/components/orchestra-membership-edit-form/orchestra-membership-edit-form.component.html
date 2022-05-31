@@ -1,0 +1,12 @@
+<form [formGroup]="omForm">
+    <mat-form-field appearance="outline">
+        <input matInput formControlName="instrument" placeholder="Instrument">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Joined at</mat-label>
+        <input matInput [type]="'date'" formControlName="joinedAt">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="omForm.invalid" (click)="onSave()">Save</button>
+</form>

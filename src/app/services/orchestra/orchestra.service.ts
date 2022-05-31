@@ -91,5 +91,10 @@ export class OrchestraService {
     return this.http.post(url, {orchestraMembership});
   }
 
+  public editMembership(formData: any) {
+    const url = `${baseUrl}${ApiPaths.ORCHESTRA_MEMBERSHIP}`;
+    return this.http.put(url, formData);
+  }
+
   constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) { }
 }

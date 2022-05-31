@@ -51,6 +51,7 @@ import { SearchFormComponent } from './pages/home-page/components/search-form/se
 import { SearchResultListComponent } from './pages/home-page/components/search-result-list/search-result-list.component';
 import { OrchestraFormComponent } from './pages/home-page/components/orchestra-form/orchestra-form.component';
 import { OrchestraPageComponent } from './pages/orchestra-page/orchestra-page.component';
+import { OrchestraMembershipEditFormComponent } from './pages/user-page/components/orchestra-membership-edit-form/orchestra-membership-edit-form.component';
 
 
 
@@ -85,6 +86,7 @@ import { OrchestraPageComponent } from './pages/orchestra-page/orchestra-page.co
     SearchResultListComponent,
     OrchestraFormComponent,
     OrchestraPageComponent,
+    OrchestraMembershipEditFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -72,7 +72,22 @@
         <div class="memberships">
             <div class="orchestra">
                 <h2>My orchestra</h2>
-                <app-orchestra-membership [orchestraMembership]="orchestraMembership$ | async"></app-orchestra-membership>
+                <div *ngIf="orchestraMembership$ | async; let om">
+                    <button mat-button (click)="openModal(orchMembEdit)">
+                        <span class="material-icons">edit</span>
+                        <span>Edit</span>
+                    </button>
+                        <app-orchestra-membership [orchestraMembership]="om"></app-orchestra-membership>
+        
+                        <ng-template #orchMembEdit>
+                            <app-orchestra-membership-edit-form 
+                                [oldOm]="om"
+                                (om)="onEditOrchMemb($event)"
+                            >
+        
+                            </app-orchestra-membership-edit-form>
+                        </ng-template>
+                </div> 
             </div>
     
             <div class="groups">

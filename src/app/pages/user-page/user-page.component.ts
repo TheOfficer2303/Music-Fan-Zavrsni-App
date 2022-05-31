@@ -28,6 +28,7 @@ export class UserPageComponent {
   public userTrigger$ = new BehaviorSubject<boolean>(true);
   public postTrigger$ = new BehaviorSubject<boolean>(true);
   public eventTrigger$ = new BehaviorSubject<boolean>(true);
+  public orchTrigger$ = new BehaviorSubject<boolean>(true);
 
   public participants$?: Observable<Array<User>>;
   public joined$? = new BehaviorSubject<boolean>(false);
@@ -61,7 +62,10 @@ export class UserPageComponent {
     tap(console.log)
   );
 
-  public orchestraMembership$: Observable<OrchestraMembership | null> = this.user$.pipe(
+  public orchestraMembership$: Observable<OrchestraMembership | null> = combineLatest([this.orchTrigger$, this.user$]).pipe(
+    map(([,user]) => {
+      return user;
+    }),
     mergeMap((user) => {
       return this.orchestraService.getOrchestraByPlayer(user);
     })
@@ -193,6 +197,14 @@ export class UserPageComponent {
       this.eventTrigger$.next(true);
       this.joined$?.next(true);
     });
+  }
+
+  public onEditOrchMemb(editFormData: any) {
+    console.log(editFormData);
+    this.orchestraService.editMembership(editFormData).subscribe(() => {
+      this.modalService.dismissAll();
+      this.orchTrigger$.next(true);
+    })
   }
 
 
