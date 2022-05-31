@@ -23,7 +23,7 @@ export class PostEditFormComponent implements OnInit {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]); 
       reader.onload = (event) => { 
-        this.imageUrl$.next(event.target?.result as string) ;
+        this.imageUrl$.next(event.target?.result as string);
       }
 
       const file = event.target.files[0];

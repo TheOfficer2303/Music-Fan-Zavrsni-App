@@ -1,0 +1,27 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.user-avatar {
+    width: 250px;
+    margin-left: 100px;
+    margin-bottom: 10px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    width: fit-content;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.custom-file-upload:hover {
+    background-color: aliceblue;
+}

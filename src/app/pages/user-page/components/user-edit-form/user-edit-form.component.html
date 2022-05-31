@@ -1,5 +1,6 @@
 
-<form [formGroup]="edit">
+<form [formGroup]="edit" class="form">
+    <h2>About you</h2>
     <mat-form-field appearance="outline">
         <mat-label>First name</mat-label>
         <input matInput [type]="'text'" formControlName="firstName">
@@ -12,10 +13,15 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Info</mat-label>
-        <input matInput [type]="'text'" formControlName="info">
+        <textarea matInput class="content" formControlName="info"></textarea>
     </mat-form-field>
 
-    <input type="file" formControlName="image" (change)="onChange($event)" accept="image/*">
+    <img class="user-avatar" src="{{imageUrl$ | async}}" alt="">
+
+    <label class="custom-file-upload">
+        <input class="input-image" type="file" accept="image/*" formControlName="image" (change)="onChange($event)">
+        Upload image
+    </label>
 
     <button mat-raised-button  color="primary" (click)="onEdit()" [disabled]="edit.invalid">Save</button>
 </form>

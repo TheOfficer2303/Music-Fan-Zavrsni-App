@@ -43,15 +43,18 @@
                     </button>
                 </ng-template>
 
-                <button mat-button (click)="openModal(followers)">
-                    <span class="material-icons">people</span>
-                    <span>Followers</span>
-                </button>
+                <div class="followers">
+                    <button mat-button (click)="openModal(followers)">
+                        <span class="material-icons">people</span>
+                        <span>Followers</span>
+                    </button>
+    
+                    <button mat-button (click)="openModal(followees)">
+                        <span class="material-icons">people</span>
+                        <span>Following</span>
+                    </button>
+                </div>
 
-                <button mat-button (click)="openModal(followees)">
-                    <span class="material-icons">people</span>
-                    <span>Following</span>
-                </button>
                 
                 <ng-template #editForm>
                     <app-user-edit-form [user]="user" (editUser)="onEditUser($event)"></app-user-edit-form>

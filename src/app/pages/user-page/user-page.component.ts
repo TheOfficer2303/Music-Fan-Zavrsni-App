@@ -186,6 +186,7 @@ export class UserPageComponent {
   public onSaveEvent(eventFormData: any) {
     this.eventService.createEvent(eventFormData).subscribe(() => {
       this.eventTrigger$.next(true);
+      this.modalService.dismissAll();
     });
   }
 
