@@ -58,11 +58,17 @@
                 </ng-template>
 
                 <ng-template #followers>
-                    <app-follower-list [followers]="followers$ | async"></app-follower-list>
+                    <div class="follows">
+                        <h2>Your followers:</h2>
+                        <app-follower-list [followers]="followers$ | async"></app-follower-list>
+                    </div>
                 </ng-template>
 
                 <ng-template #followees>
-                    <app-follower-list [followers]="followees$ | async"></app-follower-list>
+                    <div class="follows">
+                        <h2>Your are following:</h2>
+                        <app-follower-list [followers]="followees$ | async"></app-follower-list>
+                    </div>
                 </ng-template>
             </div>
         </div>
@@ -106,9 +112,9 @@
             <mat-tab-group>
                 <mat-tab label="Info"> {{user.info}} </mat-tab>
                 <mat-tab label="Posts">
-                    <button mat-button *ngIf="user.id == getCurrentUser()?.id" (click)="openModal(postForm)">
+                    <button mat-button class="create-new" *ngIf="user.id == getCurrentUser()?.id" (click)="openModal(postForm)">
                         <span class="material-icons">add</span>
-                        <span>New post</span>
+                        <span>Create new Post</span>
                     </button>
 
                     <ng-template #postForm>

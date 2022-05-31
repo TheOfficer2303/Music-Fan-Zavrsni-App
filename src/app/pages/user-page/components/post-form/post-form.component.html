@@ -1,9 +1,16 @@
-<form [formGroup]="postForm">
+<form [formGroup]="postForm" class="form">
+    <h2>Create new post</h2>
     <mat-form-field appearance="outline">
-        <input matInput formControlName="content" placeholder="Content">
+        <mat-label>Content</mat-label>
+        <textarea matInput class="content" formControlName="content"></textarea>
     </mat-form-field>
 
-    <input type="file" formControlName="image" (change)="onChange($event)">
+    <img class="post-image" src="{{imageUrl$ | async}}" alt="">
 
-    <button mat-raised-button color="primary" (click)="onSave()">Add</button>
+    <label class="custom-file-upload">
+        <input class="input-image" type="file" formControlName="image" (change)="onChange($event)">
+        Upload image
+    </label>
+
+    <button mat-raised-button color="primary" [disabled]="postForm.invalid" (click)="onSave()">Post</button>
 </form>

@@ -53,7 +53,7 @@
     }
     .info-posts {
         width: 60%;
-
+        
         
     }
     display: flex;
@@ -68,8 +68,12 @@
 
 ::ng-deep .cdk-overlay-connected-position-bounding-box {
     z-index: 10000 !important;
-    }
+}
     
-    ::ng-deep .cdk-global-overlay-wrapper {
-    z-index: 1000 !important;
-    }
+::ng-deep .cdk-global-overlay-wrapper {
+z-index: 1000 !important;
+}
+
+.follows {
+    padding: 10px;
+}
