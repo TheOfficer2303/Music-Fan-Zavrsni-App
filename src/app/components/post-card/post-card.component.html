@@ -1,18 +1,18 @@
 <mat-card class="example-card">
     <mat-card-header>
         <a class="header" [routerLink]="['/user/', post?.creator!.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
-            <div mat-card-avatar class="example-header-image"></div>
+            <img mat-card-avatar class="example-header-image" src="{{post?.creator?.avatarUrl}}"/>
             <mat-card-title class="title">
                 {{post?.creator?.firstName}} {{post?.creator?.lastName}} 
                 <mat-card-subtitle class="subtitle"> {{post?.createdAt | date}} </mat-card-subtitle>
             </mat-card-title>
         </a>
 
-        <button *ngIf="post?.creator?.id === currentUser?.id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <button class="tri-dot-menu" *ngIf="post?.creator?.id === currentUser?.id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="onDelete()">
+        <mat-menu #menu="matMenu" class="mat-menu">
+          <button mat-menu-item class="delete" (click)="onDelete()">
             <mat-icon>delete</mat-icon>
             <span>Delete</span>
           </button>
@@ -23,7 +23,7 @@
         </mat-menu>
     </mat-card-header>
     <img mat-card-image src="{{post?.imageUrl}}" alt="Photo of a Shiba Inu">
-    <mat-card-content>
+    <mat-card-content class="content">
       <p>
         {{post?.content}}
       </p>
@@ -31,7 +31,8 @@
     <mat-card-actions>
         <button mat-button (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
           aria-controls="collapseExample">
-          COMMENT
+          <span class="material-icons">comment</span>
+          COMMENTS
         </button>
       <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
         <div class="card">

@@ -4,6 +4,7 @@
     .header {
         display: flex;
         margin: 8px 0px;
+        margin-right: 66px;
         text-decoration: none;
 
         .title {
@@ -15,7 +16,30 @@
             }
         }
     }
-  }
+
+    .content {
+        font-size: larger;
+    }
+
+    .tri-dot-menu {
+        margin-left: 50px;
+        // margin-bottom: 10px;
+    }
+}
+
+.delete mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
+    color: red;
+}
+
+.card {
+    padding: 10px;
+    border: none;
+    border-top: 2px solid rgba(0, 0, 0, 0.050);
+}
+
+button.mat-focus-indicator.delete.mat-menu-item {
+    color: red;
+}
 
   .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');

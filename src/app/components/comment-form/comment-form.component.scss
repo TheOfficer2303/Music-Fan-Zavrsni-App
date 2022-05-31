@@ -1,0 +1,21 @@
+.mat-form-field {
+    padding: 10px;
+    .mat-form-field-outline-start {
+        border-radius: 20px 0 0 20px !important;
+        min-width: 20px !important;
+    }
+
+    .mat-form-field-outline-end {
+        border-radius: 0 20px 20px 0 !important;
+    }
+}
+
+.mat-form-field-wrapper{
+    padding: 0px;
+ }
+
+.input {
+    border: 1px solid gainsboro;
+    border-radius: 32px;
+    padding: 15px;
+}

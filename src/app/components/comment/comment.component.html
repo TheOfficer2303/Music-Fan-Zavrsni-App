@@ -1,9 +1,17 @@
-<div class="commentator">
-    <img src="" alt="neka slika">
-    <span>{{ comment?.commentator?.firstName}} {{comment?.commentator?.lastName }}</span>
-    <div>{{ comment?.createdAt | date }}</div>
-</div>
-
-<div class="content">
-    {{ comment?.content }}
+<div class="comment-wrapper">
+    <a [routerLink]="['/user/', comment?.commentator?.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+        <img src="{{comment?.commentator?.avatarUrl}}" class="comment-image" alt="neka slika">
+    </a>
+    <div class="comment">
+        <div class="commentator">
+            <a [routerLink]="['/user/', comment?.commentator?.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+                <span>{{ comment?.commentator?.firstName}} {{comment?.commentator?.lastName }}</span>
+            </a>
+            <span> @ {{ comment?.createdAt | date }}</span>
+        </div>
+        
+        <div class="content">
+            {{ comment?.content }}
+        </div>
+    </div>
 </div>
