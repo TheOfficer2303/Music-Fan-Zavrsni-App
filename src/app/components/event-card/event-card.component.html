@@ -1,6 +1,5 @@
 <mat-card class="example-card">
-    <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-header class="header">
         <mat-card-title>{{event?.name}}</mat-card-title>
         <mat-card-subtitle>
             <div>
@@ -11,11 +10,11 @@
             </div>
             </mat-card-subtitle>
 
-            <button *ngIf="event?.organizator?.id === currentUser?.id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <button *ngIf="event?.organizator?.id == currentUser?.id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="onDelete()">
+                <button mat-menu-item class="delete" (click)="onDelete()">
                   <mat-icon>delete</mat-icon>
                   <span>Delete</span>
                 </button>
@@ -28,26 +27,26 @@
     <mat-card-content>
         <div class="info-tab">
             <h2>FROM</h2>
-            <span>{{event?.startTime | date:'medium'}}</span>
+            <span class="info-content">{{event?.startTime | date:'medium'}}</span>
         </div>
 
         <div class="info-tab">
             <h2>TO</h2>
-            <span>{{event?.endDate | date:'medium'}}</span>
+            <span class="info-content">{{event?.endDate | date:'medium'}}</span>
         </div>
 
         <div class="info-tab">
             <h2>WHERE</h2>
-            <span>{{event?.location}}, {{event?.address}}</span>
+            <span class="info-content">{{event?.location}}, {{event?.address}}</span>
             </div>
 
         <div class="info-tab">
             <h2>INFO</h2>
-            <span>{{event?.description}}</span>
+            <span class="info-content">{{event?.description}}</span>
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <span *ngIf="event?.organizator?.id !== currentUser?.id">
+        <span *ngIf="event?.organizator?.id != currentUser?.id">
             <button *ngIf="!(joined$ |async); else joined" mat-button
                 (click)="onJoinEvent()"    
             >

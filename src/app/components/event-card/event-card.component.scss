@@ -1,3 +1,33 @@
+.example-card {
+    width: 380px;
+
+    .header {
+        justify-content: space-between;
+    }
+
+    .tri-dot-menu {
+        margin-left: auto;
+    }
+}
+
 .info-tab {
     display: flex;
+
+    .info-content {
+        margin-left: 10px;
+        margin-top: 6px;
+    }
+}
+
+.delete mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
+    color: red;
+}
+
+button.mat-focus-indicator.delete.mat-menu-item {
+    color: red;
+}
+
+.card {
+    border: none;
+    padding: 10px;
 }
