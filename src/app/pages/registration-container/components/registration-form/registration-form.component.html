@@ -1,14 +1,16 @@
 
-<form [formGroup]="registration">
-    <mat-form-field appearance="outline">
-        <mat-label>First name</mat-label>
-        <input matInput [type]="'text'" formControlName="firstName">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Last name</mat-label>
-        <input matInput [type]="'text'" formControlName="lastName">
-    </mat-form-field>
+<form [formGroup]="registration" class="form">
+    <div class="common-fields">
+        <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input matInput [type]="'text'" formControlName="firstName">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput [type]="'text'" formControlName="lastName">
+        </mat-form-field>
+    </div>
 
     <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
@@ -20,7 +22,7 @@
         </ng-template>
     </mat-form-field>
 
-    <div formGroupName="passwords">
+    <div class="common-fields" formGroupName="passwords">
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput [type]="'password'" formControlName="password">
@@ -40,14 +42,14 @@
         </mat-error>
     </div>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field class="textarea" appearance="outline">
         <mat-label>Info</mat-label>
-        <input matInput [type]="'text'" formControlName="info">
+        <textarea matInput formControlName="info"></textarea> 
         <mat-error *ngIf="registration.get('info')?.errors?.['required']">Cannot be empty</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <mat-select formControlName="postNumber">
+        <mat-select placeholder="Your location" formControlName="postNumber">
             <ng-container *ngFor="let location of (locations$ | async)">
                 <mat-option [value]="location.postNumber">{{location.name}}</mat-option>                 
             </ng-container>
