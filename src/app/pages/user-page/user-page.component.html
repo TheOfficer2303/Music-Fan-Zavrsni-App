@@ -84,6 +84,7 @@
             <div class="orchestra">
                 <div *ngIf="orchestraMembership$ | async; let om">
                     <div class="orchedit">
+                        <span class="material-icons">piano</span>
                         <h2>My orchestra</h2>
                         <button mat-button (click)="openModal(orchMembEdit)">
                             <span class="material-icons">edit</span>
@@ -103,7 +104,11 @@
             </div>
     
             <div class="groups">
-                <h2>My groups</h2>
+                <span>
+                    <span class="material-icons">groups_2</span>
+                    <h2>My groups</h2>
+                </span>
+                
                 <div *ngIf="groupMemberships$ | async; let groupMemberships; else noGroup">
                     <app-group-memberships [groupMemberships]="groupMemberships"></app-group-memberships>
                 </div>
@@ -120,8 +125,15 @@
                     <ng-template mat-tab-label>
                         <span class="mat-tab-label">Info</span>
                     </ng-template>
-                    {{user.info}} 
+                    <div class="info">
+                        <div>Hi, my name is {{user.firstName}}.</div>
+                        <div>I am from {{user.location}}</div>
+                        <div>
+                            {{user.info}} 
+                        </div>
+                    </div>
                 </mat-tab>
+
                 <mat-tab>
                     <ng-template mat-tab-label>
                         <span class="mat-tab-label">Posts</span>
@@ -144,8 +156,6 @@
                         [posts]="posts$ | async"
                     >
                     </app-post-list>
-
-                
                 </mat-tab>
 
                 <mat-tab> 

@@ -82,6 +82,7 @@
 .activity {
     .memberships {
         width: 30%;
+        height: fit-content;
         margin: 15px;
         display: flex;
         flex-direction: column;
@@ -94,6 +95,11 @@
 
     .info-posts {
         width: 60%;
+        
+        .info {
+            padding: 20px;
+            font-size: 20px;
+        }
     }
     display: flex;
 }
