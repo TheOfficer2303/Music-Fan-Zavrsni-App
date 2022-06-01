@@ -1,6 +1,7 @@
 @import "src/app/styles/utils/colors";
 
 .main-content {
+    height: 100%;
     margin: 0px 250px;
     background-color: $background-not-content;
     color: whitesmoke;
@@ -22,6 +23,7 @@
     flex-direction: column;
     gap: 30px;
     width: 100%;
+    margin-bottom: 100px;
 }
 
 .name {
@@ -50,16 +52,16 @@
     width: fit-content;
     font-size: 20px;
     color: $color-link;
-    background-color: #f3f3f3;
+    background-color: $background-content-darker;
     padding: 8px;
 
     &.followers {
-        background-color: $background-content-darker;
+        
         color: white;
     }
 
     &.positive {
-        color: green;
+        color: rgb(26, 193, 26);
     }
 
     &.negative {

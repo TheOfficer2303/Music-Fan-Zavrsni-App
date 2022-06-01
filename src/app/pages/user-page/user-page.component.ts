@@ -115,7 +115,7 @@ export class UserPageComponent {
     this.user$.pipe(
       mergeMap((user) => {
         if (user.id == this.getCurrentUser()?.id) {
-          return throwError("Cannot follow myself");
+          return of(null);
         }
         return this.userService.followUser(user.id);
       })
@@ -126,6 +126,9 @@ export class UserPageComponent {
     this.followed$ = of(false);
     this.user$.pipe(
       mergeMap((user) => {
+        if (user.id == this.getCurrentUser()?.id) {
+          return of(null);
+        }
         return this.userService.unfollowUser(user.id);
       })
     ).subscribe();
