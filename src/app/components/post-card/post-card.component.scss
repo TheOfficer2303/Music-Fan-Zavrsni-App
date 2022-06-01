@@ -2,7 +2,7 @@
 
 .example-card {
     max-width: 550px;
-    background-color: $background-content;
+    background-color: $background-content-darker;
     color: white;
 
     .header {
@@ -29,6 +29,8 @@
 
     .content {
         font-size: larger;
+        padding-bottom: 5px;
+        border-bottom: 1px solid gainsboro;
     }
 
     .tri-dot-menu {
