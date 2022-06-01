@@ -1,8 +1,39 @@
+@import "src/app/styles/utils/colors";
+
 .example-card {
     width: 380px;
+    padding: 0;
 
     .header {
+        padding: 10px;
         justify-content: space-between;
+        background-color: $background-content-darker;
+        color: white;
+
+        .header-link {
+            text-decoration: none;
+            color: $color-link;
+            margin-left: 5px;
+        }
+
+        .header-link:hover {
+            color: $color-link-hover;
+        }
+    }
+
+    .content {
+        padding: 10px;
+        background-color: $background-content;
+        color: white;
+        margin-bottom: 0;
+    }
+
+    .actions {
+        border-top: 1px solid $background-content-darker;
+        margin: 0;
+        padding: 10px;
+        background-color: $background-content;
+        color: white;
     }
 
     .tri-dot-menu {
@@ -29,5 +60,4 @@ button.mat-focus-indicator.delete.mat-menu-item {
 
 .card {
     border: none;
-    padding: 10px;
 }

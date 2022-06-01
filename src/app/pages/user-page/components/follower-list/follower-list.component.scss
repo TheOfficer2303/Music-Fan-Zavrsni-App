@@ -1,11 +1,29 @@
+@import "src/app/styles/utils/colors";
+
+.card {
+  padding: 0;
+}
+
 .example-header-image {
   margin-right: 10px;
 }
 
 .user {
   display: flex;
+  color: $color-link;
+  text-decoration: none;
+  padding: 0;
 
   .name {
     margin-top: 7px;
   }
+}
+
+.user:hover {
+  color: $color-link-hover;
+}
+
+.list {
+  padding: 10px;
+  background-color: $background-content-darker;
 }

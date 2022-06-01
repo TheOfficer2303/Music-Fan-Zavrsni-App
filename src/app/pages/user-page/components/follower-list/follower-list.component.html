@@ -1,6 +1,6 @@
-<ng-container *ngFor="let follower of followers">
+<div *ngFor="let follower of followers" class="list">
     <a class="user" [routerLink]="['/user/', follower.id!]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
         <img mat-card-avatar class="example-header-image" src="{{follower?.avatarUrl}}"/>
         <mat-card-title class="name"> {{follower.firstName}} {{follower.lastName}} </mat-card-title>
     </a>
- </ng-container>
+ </div>

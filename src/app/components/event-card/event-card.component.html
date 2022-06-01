@@ -3,8 +3,8 @@
         <mat-card-title>{{event?.name}}</mat-card-title>
         <mat-card-subtitle>
             <div>
-                Organized by
-                <a class="header" [routerLink]="['/user/', event?.organizator?.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+                <span style="color: rgb(172, 172, 172);">Organized by</span>
+                <a class="header-link" [routerLink]="['/user/', event?.organizator?.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
                     <span>{{event?.organizator?.firstName}} {{event?.organizator?.lastName}}</span>
                 </a>
             </div>
@@ -24,7 +24,7 @@
                 </button>
               </mat-menu>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="content">
         <div class="info-tab">
             <h2>FROM</h2>
             <span class="info-content">{{event?.startTime | date:'medium'}}</span>
@@ -45,7 +45,7 @@
             <span class="info-content">{{event?.description}}</span>
         </div>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions class="actions">
         <span *ngIf="event?.organizator?.id != currentUser?.id">
             <button *ngIf="!(joined$ |async); else joined" mat-button
                 (click)="onJoinEvent()"    
