@@ -1,4 +1,11 @@
-<div *ngFor="let groupMemb of groupMemberships">
-    <div>Group title: {{groupMemb.group.title}}</div>
-    <div>My role: {{groupMemb.role}}</div>
-</div>
+<span class="gm" *ngFor="let groupMemb of groupMemberships">
+    <div>
+        <span class="tab">Group title: </span>
+        {{groupMemb.group.title}}
+    </div>
+
+    <div>
+        <span class="tab">My role: </span>
+        {{groupMemb.role}}
+    </div>
+</span>

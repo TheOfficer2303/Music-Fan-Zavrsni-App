@@ -4,11 +4,33 @@
 
         <div class="info">
             <div class="name">
+                <span *ngIf="getCurrentUser()?.id == user.id">
+                    <button mat-button class="button edit" (click)="openModal(editForm)">
+                        <span class="material-icons">edit</span>
+                    </button>
+                </span>
+
                 <h1>{{user.firstName}} {{user.lastName}}</h1>
+                <h2>
+                    <span class="material-icons">place</span>
+                    <span>{{user.location}}</span>
+                </h2>
             </div>
         
             <div class="buttons">
-                <span *ngIf="getCurrentUser()?.id != user.id; else currentUser">
+                <div class="followers">
+                    <button mat-button class="button followers" (click)="openModal(followers)">
+                        <span class="material-icons">people</span>
+                        <span>Followers</span>
+                    </button>
+    
+                    <button mat-button class="button followers" (click)="openModal(followees)">
+                        <span class="material-icons">people</span>
+                        <span>Following</span>
+                    </button>
+                </div>
+
+                <span *ngIf="getCurrentUser()?.id != user.id">
                     <span *ngIf="followed$ | async; else elseBlock">
                         <button class="button negative" mat-button (click)="onUnfollow()">
                             <mat-icon>person_remove</mat-icon>
@@ -35,27 +57,7 @@
                         </span>
                     </ng-template>
                 </span>
-        
-                <ng-template #currentUser>
-                    <button mat-button class="button" (click)="openModal(editForm)">
-                        <span class="material-icons">edit</span>
-                        <span>Edit profile</span>
-                    </button>
-                </ng-template>
 
-                <div class="followers">
-                    <button mat-button (click)="openModal(followers)">
-                        <span class="material-icons">people</span>
-                        <span>Followers</span>
-                    </button>
-    
-                    <button mat-button (click)="openModal(followees)">
-                        <span class="material-icons">people</span>
-                        <span>Following</span>
-                    </button>
-                </div>
-
-                
                 <ng-template #editForm>
                     <app-user-edit-form [user]="user" (editUser)="onEditUser($event)"></app-user-edit-form>
                 </ng-template>
@@ -80,20 +82,21 @@
     <div class="activity">
         <div class="memberships">
             <div class="orchestra">
-                <h2>My orchestra</h2>
                 <div *ngIf="orchestraMembership$ | async; let om">
-                    <button mat-button (click)="openModal(orchMembEdit)">
-                        <span class="material-icons">edit</span>
-                        <span>Edit</span>
-                    </button>
-                        <app-orchestra-membership [orchestraMembership]="om"></app-orchestra-membership>
+                    <div class="orchedit">
+                        <h2>My orchestra</h2>
+                        <button mat-button (click)="openModal(orchMembEdit)">
+                            <span class="material-icons">edit</span>
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                    <app-orchestra-membership class="om" [orchestraMembership]="om"></app-orchestra-membership>
         
                         <ng-template #orchMembEdit>
                             <app-orchestra-membership-edit-form 
                                 [oldOm]="om"
                                 (om)="onEditOrchMemb($event)"
                             >
-        
                             </app-orchestra-membership-edit-form>
                         </ng-template>
                 </div> 

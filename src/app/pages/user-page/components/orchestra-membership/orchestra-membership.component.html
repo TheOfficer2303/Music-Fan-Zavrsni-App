@@ -1,18 +1,18 @@
-<span *ngIf="orchestraMembership; let orchestraMembership; else noPlay"> 
+<span class="om" *ngIf="orchestraMembership; let orchestraMembership; else noPlay"> 
     <div>
-        Orchestra name:
+        <span class="tab">Orchestra name:</span>
         {{orchestraMembership.orchestra.name}}
     </div>
     <div>
-        Conductor
+        <span class="tab">Conductor</span>
         {{orchestraMembership.orchestra.conductor?.firstName}} {{orchestraMembership.orchestra.conductor?.lastName}}
     </div>
     <div>
-        Joined at:
-        {{orchestraMembership.joinedAt}}
+        <span class="tab">Joined at:</span>
+        {{orchestraMembership.joinedAt | date}}
     </div>
     <div>
-        Playing:
+        <span class="tab">Playing:</span>
         {{orchestraMembership.instrument}}
     </div>
 </span>

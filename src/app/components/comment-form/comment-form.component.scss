@@ -5,24 +5,39 @@
     background-color: $background-content-darker;
 }
 
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+    color: $color-link;
+  }
+
 .mat-form-field {
     color: white;
     padding: 10px;
 
+    .mat-form-field-label {
+        margin-left: 10px;
+        color: white;
+    }
+
     .mat-form-field-outline-start {
-        border-radius: 20px 0 0 20px !important;
-        min-width: 20px !important;
+        border-radius: 10px 0 0 10px !important;
+        min-width: 10px !important;
     }
 
     .mat-form-field-outline-end {
-        border-radius: 0 20px 20px 0 !important;
+        border-radius: 0 10px 10px 0 !important;
+    }
+}
+
+.mat-form-field.mat-focused {
+    .mat-form-field-label {
+        color: $color-link;
     }
 }
 
 .mat-form-field-wrapper {
     padding: 0px;
     background-color: $background-content;
-    border-radius: 20px;
+    border-radius: 10px;
  }
 
 .input {

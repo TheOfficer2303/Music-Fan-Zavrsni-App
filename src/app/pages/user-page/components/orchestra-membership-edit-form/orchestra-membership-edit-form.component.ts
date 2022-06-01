@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Orchestra, OrchestraMembership } from 'src/app/models/orchestra.model';
 
 @Component({
   selector: 'app-orchestra-membership-edit-form',
   templateUrl: './orchestra-membership-edit-form.component.html',
-  styleUrls: ['./orchestra-membership-edit-form.component.scss']
+  styleUrls: ['./orchestra-membership-edit-form.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class OrchestraMembershipEditFormComponent implements OnInit {
   @Input() oldOm?: OrchestraMembership | null;

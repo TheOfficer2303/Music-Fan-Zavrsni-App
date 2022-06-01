@@ -24,22 +24,39 @@
     width: 100%;
 }
 
-.name h1 {
-    font-size: 80px;
-    text-align: center;
+.name {
+    display: flex;
+    justify-content: space-around;
+
+    h1 {
+        font-size: 80px;
+        text-align: center;
+        font-weight: bold;
+    }
+}
+
+.followers {
+    display: flex;
+    margin-left: 50px;
+    justify-content: space-evenly;
 }
 
 .buttons>span {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .button {
     width: fit-content;
-    font-size: 40px;
-    color:darkcyan;
+    font-size: 20px;
+    color: $color-link;
     background-color: #f3f3f3;
-    padding: 10px;
+    padding: 8px;
+
+    &.followers {
+        background-color: $background-content-darker;
+        color: white;
+    }
 
     &.positive {
         color: green;
@@ -49,26 +66,46 @@
         color: red;
     }
 
+    &.edit {
+        margin-bottom: 10px;
+        font-size: 10px;
+        padding: 4px;
+    }
+
     .material-icons, .mat-icon {
-        font-size: 40px;
-        width: 40px;
-        height: 40px;
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
     }
 }
 
 .activity {
     .memberships {
-        width: 40%;
+        width: 30%;
         margin: 15px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 18px;
+        align-items: center;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: $background-content-darker;
     }
+
     .info-posts {
         width: 60%;
-        
-        
     }
     display: flex;
 }
 
+.orchedit {
+    display: flex;
+    align-items: flex-start;
+}
+
+.follows {
+    padding: 10px;
+}
 
 ::ng-deep .mat-tab-labels {
     display: flex;
@@ -82,8 +119,4 @@
     
 ::ng-deep .cdk-global-overlay-wrapper {
 z-index: 1000 !important;
-}
-
-.follows {
-    padding: 10px;
 }

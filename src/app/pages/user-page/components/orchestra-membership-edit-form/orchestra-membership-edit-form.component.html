@@ -1,5 +1,7 @@
-<form [formGroup]="omForm">
+<form [formGroup]="omForm" class="form">
+    <h2>Edit your membership in an orchestra</h2>
     <mat-form-field appearance="outline">
+        <mat-label>Instrument</mat-label>
         <input matInput formControlName="instrument" placeholder="Instrument">
     </mat-form-field>
 
