@@ -1,7 +1,17 @@
+@import "src/app/styles/utils/colors";
+
 .example-card {
     max-width: 550px;
+    background-color: $background-content;
+    color: white;
 
     .header {
+        color: $color-link;
+
+        &:hover {
+            color: $color-link-hover;
+        }
+        
         display: flex;
         margin: 8px 0px;
         margin-right: 66px;
@@ -26,14 +36,19 @@
     }
 }
 
+.comments {
+    background-color: $background-content-darker;
+}
+
 .delete mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
     color: red;
 }
 
 .card {
-    padding: 10px;
     border: none;
-    border-top: 2px solid rgba(0, 0, 0, 0.050);
+    // border-top: 2px solid rgba(0, 0, 0, 0.050);
+    border-radius: 4px;
+
 }
 
 button.mat-focus-indicator.delete.mat-menu-item {

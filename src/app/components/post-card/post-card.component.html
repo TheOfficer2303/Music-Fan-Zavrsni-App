@@ -8,7 +8,7 @@
             </mat-card-title>
         </a>
 
-        <button class="tri-dot-menu" *ngIf="post?.creator?.id === currentUser?.id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <button class="tri-dot-menu" *ngIf="post?.creator?.id == currentUser?.id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" class="mat-menu">
@@ -40,7 +40,7 @@
             No comments on this post yet.
           </div>
           <ng-template #elseBlock>
-            <app-comment-list [comments]="post?.comments"></app-comment-list>
+            <app-comment-list class="comments" [comments]="post?.comments"></app-comment-list>
           </ng-template>
 
           <app-comment-form (comment)="onComment($event)"></app-comment-form>

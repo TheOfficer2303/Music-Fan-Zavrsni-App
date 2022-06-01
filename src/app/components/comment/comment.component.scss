@@ -1,13 +1,24 @@
+@import "src/app/styles/utils/colors";
+
 .comment-wrapper {
   display: flex;  
   align-items: flex-start;
 }
 
 .comment {
-    background-color: rgba(0, 0, 0, 0.050);
+    background-color: $background-content;
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.commentator {
+    color: $color-link;
+    text-decoration: none;
+}
+
+.commentator:hover {
+    color: $color-link-hover;
 }
 
 .content {

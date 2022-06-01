@@ -113,8 +113,17 @@
     
         <div class="info-posts">
             <mat-tab-group>
-                <mat-tab label="Info"> {{user.info}} </mat-tab>
-                <mat-tab label="Posts">
+                <mat-tab> 
+                    <ng-template mat-tab-label>
+                        <span class="mat-tab-label">Info</span>
+                    </ng-template>
+                    {{user.info}} 
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <span class="mat-tab-label">Posts</span>
+                    </ng-template>
+
                     <button mat-button class="create-new" *ngIf="user.id == getCurrentUser()?.id" (click)="openModal(postForm)">
                         <span class="material-icons">add</span>
                         <span>Create new Post</span>
@@ -136,7 +145,11 @@
                 
                 </mat-tab>
 
-                <mat-tab label="Events"> 
+                <mat-tab> 
+                    <ng-template mat-tab-label>
+                        <span class="mat-tab-label">Events</span>
+                    </ng-template>
+
                     <button mat-button *ngIf="user.id == getCurrentUser()?.id" (click)="openModal(eventForm)">
                         <span class="material-icons">add</span>
                         <span>New event</span>

@@ -1,5 +1,15 @@
+@import "src/app/styles/utils/colors";
+
 .main-content {
     margin: 0px 250px;
+    background-color: $background-not-content;
+    color: whitesmoke;
+    padding-top: 10px;
+}
+
+.mat-tab-label {
+    color: white;
+    opacity: 1;
 }
 
 .about {

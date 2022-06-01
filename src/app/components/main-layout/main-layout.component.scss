@@ -1,0 +1,11 @@
+@import "src/app/styles/utils/colors";
+
+.content {
+    background-color: $background-not-content;
+}
+
+.nav {
+    background-color: $background-nav;
+    color: white;
+    border-bottom: 2px solid rgb(109, 109, 109);
+}

@@ -3,10 +3,10 @@
         <img src="{{comment?.commentator?.avatarUrl}}" class="comment-image" alt="neka slika">
     </a>
     <div class="comment">
-        <div class="commentator">
-            <a [routerLink]="['/user/', comment?.commentator?.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
-                <span>{{ comment?.commentator?.firstName}} {{comment?.commentator?.lastName }}</span>
-            </a>
+        <div class="">
+            <a [routerLink]="['/user/', comment?.commentator?.id]" class="commentator" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+                <span >{{ comment?.commentator?.firstName}} {{comment?.commentator?.lastName }}</span>
+            </a> 
             <span> @ {{ comment?.createdAt | date }}</span>
         </div>
         
