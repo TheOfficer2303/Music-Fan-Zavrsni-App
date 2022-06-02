@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IUserFormData } from 'src/app/interfaces/userFormData.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registration-container',
@@ -15,7 +16,7 @@ import { IUserFormData } from 'src/app/interfaces/userFormData.interface';
 export class RegistrationContainerComponent {
   public isLoading$:Subject<boolean> = new Subject<boolean>()
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   public onRegisterUser(userFormData: IUserFormData) {
     console.log(userFormData)
@@ -23,13 +24,16 @@ export class RegistrationContainerComponent {
     this.authService.register(userFormData).pipe(
       finalize(() => {
         this.isLoading$.next(false);
-        this.router.navigate(['']);
       })
     )
     .subscribe((userData: IUserFormData) => {
       this.router.navigate(['']);
     }, (errResponse: HttpErrorResponse) => {
-      this.router.navigate(['/register'])
+      if (errResponse.status == 400) {
+        console.log(errResponse)
+        this.snackBar.open(errResponse.error.error, "Close")
+      }
+      this.router.navigate(['/register']);
     })
   }
 }
