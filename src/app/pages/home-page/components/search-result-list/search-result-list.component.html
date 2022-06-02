@@ -1,4 +1,4 @@
-<ng-container *ngFor="let result of (resultArray | async)">
+<div class="results" *ngFor="let result of (resultArray | async)">
     <div *ngIf="result.title">
         <span>{{result.title}}</span>
     </div>
@@ -7,15 +7,15 @@
     </div>
     <div *ngIf="result.firstName">
         <span *ngIf="isSelectable">
-            <button mat-button (click)="selectPerson(result.id)">
-                <div mat-card-avatar class="example-header-image"></div>
+            <button mat-button class="link" (click)="selectPerson(result.id)">
+                <img src="{{result.avatarUrl}}" class="result-image">
                 <mat-card-title> {{result.firstName}} {{result.lastName}} </mat-card-title>
             </button>
         </span>
 
-        <a *ngIf="!isSelectable" class="header" [routerLink]="['/user/', result.id!]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
-            <div mat-card-avatar class="example-header-image"></div>
+        <a *ngIf="!isSelectable" class="link" [routerLink]="['/user/', result.id!]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+            <img src="{{result.avatarUrl}}" class="result-image">
             <mat-card-title> {{result.firstName}} {{result.lastName}} </mat-card-title>
         </a>
     </div>
-</ng-container>
+</div>
