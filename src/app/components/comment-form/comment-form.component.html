@@ -1,7 +1,7 @@
 <form [formGroup]="commentForm" class="form-comment">
     <mat-form-field appearance="outline" class="comment">
         <mat-label>Comment</mat-label>
-        <input matInput formControlName="comment" placeholder="Type your comment here...">
+        <input matInput formControlName="comment" type="text" placeholder="Type your comment here...">
     </mat-form-field>
 
     <button mat-button class="button" (click)="onComment()" [disabled]="commentForm.invalid">Add comment</button>
