@@ -22,7 +22,7 @@ export class OrchestraService {
     return this.http.get(`${url}?${query}`).pipe(
       map((response: any) => {
         return response.orchMembs.map((player: any) => {
-          const user = new User(player.player_id, player.first_name, player.last_name, player.avatar_url, "", "");
+          const user = new User(player.player_id, player.first_name, player.last_name, player.avatar_url, "", "", 0);
           return new OrchestraMembership(orchestra, player.joined_at, player.instrument, user);
         })
       })

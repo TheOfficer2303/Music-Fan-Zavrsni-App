@@ -21,7 +21,7 @@ export class SearchService {
       map((response: any) => {
           if (table == "User") {
             return response.resultArray.map((user: any) => {
-              return new User(user.id, user.firstName, user.lastName, user.avatarUrl, user.info, "");
+              return new User(user.id, user.firstName, user.lastName, user.avatarUrl, user.info, "", 0);
             });
           } else if (table == "Group") {
               return response.resultArray.map((group: any) => {

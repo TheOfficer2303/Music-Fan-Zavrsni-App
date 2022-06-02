@@ -22,7 +22,8 @@ export class UserService {
   public getUserById(id: string | number) {
     return this.http.get<IRawUser>(`${baseUrl}${ApiPaths.USER}/${id}`).pipe(
       map((response) => {
-        return new User(response.user.id, response.user.first_name, response.user.last_name, response.user.avatar_url, response.user.info, response.user.location)
+        return new User(response.user.id, response.user.first_name, response.user.last_name, 
+          response.user.avatar_url, response.user.info, response.user.location, response.user.ability_level)
       })
     );
   }
@@ -52,7 +53,7 @@ export class UserService {
         console.log(response)
         const userResponse = response.body?.user;
         const editedUser = new User(userResponse!.id, userResponse!.first_name, userResponse!.last_name, userResponse!.avatar_url,
-          userResponse!.info, userResponse!.location);
+          userResponse!.info, userResponse!.location, userResponse!.ability_level);
 
         const token = this.authService.getAuthData()?.token;
         const newAuthData: IAuthData = {
@@ -70,7 +71,7 @@ export class UserService {
     return this.http.get<any>(url).pipe(
       map((response) => {
         return response.followers.map((follower: any) => {
-          return new User(follower.user_id, follower.first_name, follower.last_name, follower.avatar_url, follower.info, follower.last_name);
+          return new User(follower.user_id, follower.first_name, follower.last_name, follower.avatar_url, follower.info, follower.last_name, follower.ability_level);
         })
       })
     )
@@ -82,7 +83,7 @@ export class UserService {
     return this.http.get<any>(url).pipe(
       map((response) => {
         return response.followees.map((follower: any) => {
-          return new User(follower.user_id, follower.first_name, follower.last_name, follower.avatar_url, follower.info, follower.last_name);
+          return new User(follower.user_id, follower.first_name, follower.last_name, follower.avatar_url, follower.info, follower.last_name, follower.ability_level);
         })
       })
     )
@@ -141,7 +142,7 @@ export class UserService {
           pe.events = followee.events.map((event: any) => {
             let coming: User[] = [];
             coming = event.coming.map((user: any) => {
-              return new User(user.user_id, user.first_name, user.last_name, user.avatar_url, user.info, user.location.name)
+              return new User(user.user_id, user.first_name, user.last_name, user.avatar_url, user.info, user.location.name, user.ability_level)
             })
             return new Event(event.id, event.name, event.description, event.startDate, event.endDate, 
               event.startTime, event.address, event.organizatorId, event.location, coming);

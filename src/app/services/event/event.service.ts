@@ -53,7 +53,7 @@ export class EventService {
         return response.events.map((event) => {
           let coming: User[] = [];
           coming = event.coming.map((user: any) => {
-            return new User(user.user_id, user.first_name, user.last_name, user.avatar_url, user.info, user.location.name)
+            return new User(user.user_id, user.first_name, user.last_name, user.avatar_url, user.info, user.location.name, 0)
           })
           return new Event(event.id, event.name, event.description, event.startDate, event.endDate, 
             event.startTime, event.address, event.organizatorId, event.location, coming);
@@ -75,7 +75,8 @@ export class EventService {
             user.last_name,
             user.avatar_url,
             user.info,
-            user.location.name
+            user.location.name,
+            0
           )
         })
       })

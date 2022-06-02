@@ -7,5 +7,6 @@ export interface IRawUser {
         avatar_url: string,
         location: string
         info: string
+        ability_level: number
     }
 }

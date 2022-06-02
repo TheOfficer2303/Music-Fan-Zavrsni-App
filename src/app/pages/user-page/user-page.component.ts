@@ -14,6 +14,7 @@ import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user/user.service';
 import { Event } from 'src/app/models/event.model';
 import { EventService } from 'src/app/services/event/event.service';
+import { AppRoles } from 'src/app/consts/roles.constants';
 
 @Component({
   selector: 'app-user-page',
@@ -23,6 +24,7 @@ import { EventService } from 'src/app/services/event/event.service';
 export class UserPageComponent {
   public isCollapsed = true;
   public user?: User;
+  public adminRole = AppRoles.ADMIN;
   
   public followTrigger$ = new BehaviorSubject<boolean>(true);
   public userTrigger$ = new BehaviorSubject<boolean>(true);
@@ -142,7 +144,7 @@ export class UserPageComponent {
     this.modalService.dismissAll();
     const currentUser = this.getCurrentUser();
     const userToEdit = new User(currentUser!.id, userEditFormData.user.firstName, userEditFormData.user.lastName,
-      userEditFormData.user.imageSource, userEditFormData.user.info, currentUser!.location);
+      userEditFormData.user.imageSource, userEditFormData.user.info, currentUser!.location, currentUser!.abilityLevel);
 
     this.userService.updateUser(userToEdit).subscribe(() => {
       this.userTrigger$.next(true);
