@@ -76,7 +76,10 @@
                     <div class="orchedit">
                         <span class="material-icons">piano</span>
                         <h2>My orchestra</h2>
-                        <button mat-button (click)="openModal(orchMembEdit)">
+                        <button *ngIf="om.player.id == getCurrentUser()?.id || getCurrentUser()?.id == adminRole"
+                        mat-button 
+                        (click)="openModal(orchMembEdit)"
+                        >
                             <span class="material-icons">edit</span>
                             <span>Edit</span>
                         </button>
@@ -150,6 +153,7 @@
                         (editPost)="onEditPost($event)"
                         [currentUser]="getCurrentUser()" 
                         [posts]="posts$ | async"
+                        [adminRole]="adminRole"
                     >
                     </app-post-list>
                 </mat-tab>
@@ -179,6 +183,7 @@
                         [events]="events$ | async"
                         [joined$]="joined$"
                         [currentUser]="getCurrentUser()"
+                        [adminRole]="adminRole"
                     >
                     </app-event-list>
                 </mat-tab>

@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, combineLatest, tap, map, Observable, of, Subject, switchMap } from 'rxjs';
+import { AppRoles } from 'src/app/consts/roles.constants';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { EventService } from 'src/app/services/event/event.service';
@@ -21,6 +22,7 @@ export class HomePageComponent {
   public searchTrigger$ = new Subject();
   public joined$ = new BehaviorSubject(false);
   public searchValue?: string;
+  public adminRole = AppRoles.ADMIN;
 
   public results$ = combineLatest([this.searchTrigger$])
   .pipe(

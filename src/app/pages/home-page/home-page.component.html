@@ -63,6 +63,7 @@
             <app-post-list 
             (comment)="onComment($event)"
             [posts]="pe?.posts"
+            [adminRole]="adminRole"
             >
             </app-post-list>
         
@@ -72,6 +73,7 @@
                 [events]="pe?.events"
                 [joined$]="joined$"
                 [currentUser]="getCurrentUser()"
+                [adminRole]="adminRole"
             >
             </app-event-list>
 

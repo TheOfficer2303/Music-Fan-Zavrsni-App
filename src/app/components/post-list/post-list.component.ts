@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AppRoles } from 'src/app/consts/roles.constants';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
 
@@ -10,6 +11,7 @@ import { User } from 'src/app/models/user.model';
 export class PostListComponent {
   @Input() posts?: Array<Post> | null;
   @Input() currentUser?: User;
+  @Input() adminRole?: number;
   @Output() comment: EventEmitter<any> = new EventEmitter();
   @Output() deletePost: EventEmitter<any> = new EventEmitter();
   @Output() editPost: EventEmitter<any> = new EventEmitter();

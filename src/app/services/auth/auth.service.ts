@@ -42,7 +42,8 @@ export class AuthService {
               userResponse.last_name, 
               userResponse.avatar_url,
               userResponse.info,
-              userResponse.location
+              userResponse.location,
+              userResponse.ability_level
           );
 
           const authData: IAuthData = {

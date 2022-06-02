@@ -13,6 +13,8 @@ export class EventCardComponent implements OnInit {
   @Input() event?: Event;
   @Input() currentUser?: User;
   @Input() joined$: Observable<boolean> | undefined;
+  @Input() adminRole?: number;
+  
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   @Output() editEvent: EventEmitter<any> = new EventEmitter();
   @Output() joinEvent: EventEmitter<any> = new EventEmitter();

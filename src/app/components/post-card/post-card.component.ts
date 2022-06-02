@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoles } from 'src/app/consts/roles.constants';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -12,6 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class PostCardComponent implements OnInit {
   @Input() post?: Post;
   @Input() currentUser?: User;
+  @Input() adminRole?: number;
   @Output() comment: EventEmitter<any> = new EventEmitter();
   @Output() deletePost: EventEmitter<any> = new EventEmitter();
   @Output() editPost: EventEmitter<any> = new EventEmitter();

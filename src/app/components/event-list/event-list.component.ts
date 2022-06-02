@@ -12,6 +12,8 @@ export class EventListComponent {
   @Input() events?: Array<Event> | null;
   @Input() currentUser?: User;
   @Input() joined$: Observable<boolean> | undefined;
+  @Input() adminRole?: number;
+  
   @Output() comment: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   @Output() editEvent: EventEmitter<any> = new EventEmitter();
