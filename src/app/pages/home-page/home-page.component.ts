@@ -40,7 +40,7 @@ export class HomePageComponent {
     })
   )
 
-  public postsAndEvents$ = combineLatest([this.trigger$, of(this.getCurrentUser())])
+  public postsAndEvents$: Observable<Array<any>> = combineLatest([this.trigger$, of(this.getCurrentUser())])
   .pipe(
     map(([, user]) => {
       return user;

@@ -58,21 +58,25 @@
 
 
 <div class="posts-events">
-    <ng-container *ngFor="let pe of (postsAndEvents$ | async)">
-        <app-post-list 
-        (comment)="onComment($event)"
-        [posts]="pe?.posts"
-        >
-        </app-post-list>
-    
-        <app-event-list 
-            (joinEventId)="onJoinEvent($event)"
-            (quitEventId)="onQuitEvent($event)"
-            [events]="pe?.events"
-            [joined$]="joined$"
-            [currentUser]="getCurrentUser()"
-        >
-        </app-event-list>
+    <ng-container *ngIf="(postsAndEvents$ | async); let postAndEvents; else bc">
+        <ng-container *ngFor="let pe of postAndEvents">
+            <app-post-list 
+            (comment)="onComment($event)"
+            [posts]="pe?.posts"
+            >
+            </app-post-list>
+        
+            <app-event-list 
+                (joinEventId)="onJoinEvent($event)"
+                (quitEventId)="onQuitEvent($event)"
+                [events]="pe?.events"
+                [joined$]="joined$"
+                [currentUser]="getCurrentUser()"
+            >
+            </app-event-list>
+
+        </ng-container>
     </ng-container>
+    <ng-template #bc>AAa</ng-template>
 </div>
 

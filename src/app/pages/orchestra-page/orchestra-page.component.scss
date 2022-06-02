@@ -1,0 +1,39 @@
+@import "src/app/styles/utils/colors";
+
+:host {
+    color: white;
+    padding: 10px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.tab {
+    display: flex;
+    
+    h2 {
+        margin-right: 5px;
+    }
+}
+
+.value {
+    margin-top: 7px;
+}
+
+.players {
+    display: flex;
+    column-gap: 20px;
+}
+
+.add-button {
+    height: fit-content;
+}
+
+.player {
+    background-color: $background-content;
+    border-radius: 8px;
+    width: fit-content;
+    padding: 10px;
+}
