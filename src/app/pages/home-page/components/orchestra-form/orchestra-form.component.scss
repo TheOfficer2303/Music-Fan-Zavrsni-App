@@ -1,3 +1,9 @@
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
     z-index: 10000 !important;
 }
+
+.form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}

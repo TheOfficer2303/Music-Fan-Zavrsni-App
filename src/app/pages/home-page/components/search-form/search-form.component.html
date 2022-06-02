@@ -1,6 +1,7 @@
-<form [formGroup]="searchForm">
+<form [formGroup]="searchForm" class="form">
+    <h2>What do you want to search for?</h2>
     <mat-form-field appearance="outline">
-        <input matInput formControlName="searchQuery" placeholder="You wanted to ask me something...?">
+        <input matInput [type]="'text'" formControlName="searchQuery" placeholder="You wanted to ask me something...?">
     </mat-form-field>
 
     <mat-radio-group formControlName="table">
@@ -9,5 +10,5 @@
         <mat-radio-button value="Orchestra" [disabled]="usersOnly()">Orchestra</mat-radio-button>
     </mat-radio-group>
    
-    <button mat-raised-button color="primary" (click)="onSearch()">Search</button>
+    <button mat-raised-button color="primary" [disabled]="searchForm.invalid" (click)="onSearch()">Search</button>
 </form>

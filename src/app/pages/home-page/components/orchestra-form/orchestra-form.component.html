@@ -1,5 +1,6 @@
 
-<form [formGroup]="orchestraForm">
+<form [formGroup]="orchestraForm" class="form">
+    <h2>Create new orchestra</h2>
     <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
         <input matInput [type]="'text'" formControlName="name">
@@ -19,12 +20,10 @@
     </mat-form-field>
 
     <mat-form-field class="proba">
-        <mat-select formControlName="country">
+        <mat-select formControlName="country" placeholder="Country">
             <ng-container *ngFor="let country of (countries$ | async)">
                 <mat-option [value]="country.countryIsoCode">{{country.name}}</mat-option>                 
             </ng-container>
-
-            <mat-error *ngIf="orchestraForm.get('info')?.errors?.['required']">Cannot be empty</mat-error>
         </mat-select>
         <mat-error *ngIf="orchestraForm.get('info')?.errors?.['required']">Cannot be unselected</mat-error>
     </mat-form-field>
