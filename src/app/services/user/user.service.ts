@@ -4,7 +4,7 @@ import { map, Observable, tap } from 'rxjs';
 import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { IAuthData } from 'src/app/interfaces/authData.interface';
 import { IRawUser } from 'src/app/interfaces/rawUser.interface';
-import { baseUrl } from 'src/environments/environment';
+import { baseUrl} from 'src/app/enums/ApiPath.enum';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../../models/user.model';
 import { Post } from 'src/app/models/post.model';

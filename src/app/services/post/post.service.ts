@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { IPostResponse, IRawPost } from 'src/app/interfaces/rawPost.interface';
-import { baseUrl } from 'src/environments/environment';
+import { baseUrl} from 'src/app/enums/ApiPath.enum';
 import { User } from '../../models/user.model';
 import { Post } from '../../models/post.model';
 import { IRawComment } from 'src/app/interfaces/rawComment.interface';

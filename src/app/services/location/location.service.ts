@@ -5,7 +5,7 @@ import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { ICountryResponse, ILocationResponse } from 'src/app/interfaces/locationResponse.interface';
 import { IRawCountry, IRawLocation } from 'src/app/interfaces/rawLocation.interface';
 import { Country } from 'src/app/models/country.model';
-import { baseUrl } from 'src/environments/environment';
+import { baseUrl} from 'src/app/enums/ApiPath.enum';
 import { Location } from '../../models/location.model';
 
 @Injectable({

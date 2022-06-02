@@ -5,7 +5,7 @@ import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { IEventResponse } from 'src/app/interfaces/rawEvent.interface';
 import { Event, EventSubscription } from 'src/app/models/event.model';
 import { User } from 'src/app/models/user.model';
-import { baseUrl } from 'src/environments/environment';
+import { baseUrl} from 'src/app/enums/ApiPath.enum';
 
 @Injectable({
   providedIn: 'root'

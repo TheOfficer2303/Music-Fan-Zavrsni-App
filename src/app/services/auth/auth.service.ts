@@ -5,7 +5,7 @@ import { ApiPaths } from 'src/app/enums/ApiPath.enum';
 import { IAuthData } from 'src/app/interfaces/authData.interface';
 import { ILoginFormData } from 'src/app/interfaces/loginFormData.interface';
 import { IUserFormData } from 'src/app/interfaces/userFormData.interface';
-import { baseUrl } from 'src/environments/environment';
+import { baseUrl} from 'src/app/enums/ApiPath.enum';
 import { StorageService } from '../storage/storage.service';
 import { User } from '../../models/user.model';
 

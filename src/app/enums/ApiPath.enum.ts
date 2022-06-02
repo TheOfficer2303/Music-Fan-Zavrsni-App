@@ -16,3 +16,5 @@ export enum ApiPaths {
     COMMENTS = '/comments',
     SEARCH = '/search'
 }
+
+export const baseUrl = 'https://music-fan-api.herokuapp.com'
