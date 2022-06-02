@@ -1,7 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, map, mergeMap, Observable, of, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, map, mergeMap, Observable, of, Subject, switchMap } from 'rxjs';
 import { Orchestra, OrchestraMembership } from 'src/app/models/orchestra.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -54,8 +55,21 @@ export class OrchestraPageComponent {
 
   public addPlayer(playerId: string) {
     this.modalService.dismissAll();
-    this.orchestraService.addPlayerToOrchestra(playerId, this.orchestra!).subscribe(() => {
-      this.snackBar.open("Player added. Please refresh the page!", "Close");
+    this.orchestraService.addPlayerToOrchestra(playerId, this.orchestra!)
+    .pipe(
+      catchError((errResponse: HttpErrorResponse) => {
+        if (errResponse.status == 400) {
+          this.snackBar.open("Player is already in an orchestra!", "Close", {
+            duration: 3500
+          });
+        }
+        return EMPTY;
+      })
+    )
+    .subscribe(() => {
+      this.snackBar.open("Player added. Please refresh the page!", "Close", {
+        duration: 3500
+      });
     });
   }
 
