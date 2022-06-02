@@ -1,58 +1,64 @@
-<div class="info">
-    <h1>Orchestra {{(orchestra$ | async)?.name}}</h1>
-</div>
-
-<div class="players">
-    <span *ngIf="(orchestra$ | async)?.playersNo === 0; else players">
-        Your orchestra has no players yet.
-        Add them by clicking on this bjutiful button.
-    </span>
-
-    <button
-        mat-button
-        (click)="openModal(search)"
-        class="add-button"
-    >
-        <span class="material-icons">add_circle</span>
-        <span>Add new player</span>
-    </button>
-
-    <div class="search-modal">
-        <ng-template #search>
-            <app-search-form
-                [isUsersOnly]="true"
-                (search)="onSearch($event)"
-            >
-            </app-search-form>
+<div *ngIf="(orchestra$ | async); let orchestra" class="info">
+    <h1>Orchestra {{orchestra?.name}}</h1>
+    <h2>
+        Conducted by <a [routerLink]="['/user/', orchestra?.conductor?.id]"> {{orchestra?.conductor?.firstName}} {{orchestra?.conductor?.lastName}}</a>
+    </h2>
+    <div class="players">
+        <span *ngIf="orchestra?.playersNo === 0; else players">
+            Your orchestra has no players yet.
+            Add them by clicking on this bjutiful button.
+        </span>
     
-            <div *ngIf="results$">
-                <app-search-result-list
-                    [isSelectable]="true"
-                    [resultArray]="results$"
-                    (personId)="addPlayer($event)"
+        <button
+            mat-button
+            (click)="openModal(search)"
+            class="add-button"
+        >
+            <span class="material-icons">add_circle</span>
+            <span>Add new player</span>
+        </button>
+    
+        <div class="search-modal">
+            <ng-template #search>
+                <app-search-form
+                    [isUsersOnly]="true"
+                    (search)="onSearch($event)"
                 >
-                </app-search-result-list>
+                </app-search-form>
+        
+                <div *ngIf="results$">
+                    <app-search-result-list
+                        [isSelectable]="true"
+                        [resultArray]="results$"
+                        (personId)="addPlayer($event)"
+                    >
+                    </app-search-result-list>
+                </div>
+            </ng-template>
+        </div>
+    
+        <ng-template #players>
+            <div class="players" *ngFor="let member of (players$ | async)">
+                <div class="player">
+                    <span class="tab"> 
+                        <h2>First name:</h2> <span class="value">{{member.player.firstName}} </span>
+                    </span>
+                    <span class="tab"> 
+                        <h2>Last name:</h2> <span class="value">{{member.player.lastName}} </span>
+                    </span>
+                    <span class="tab"> 
+                        <h2>Playing:</h2> <span class="value">{{member.instrument}} </span>
+                    </span>
+                    <span class="tab"> 
+                        <h2>Joined at:</h2> <span class="value">{{member.joinedAt | date}} </span>
+                    </span>
+                    <button mat-button (click)="removePlayer(member.player.id)">
+                        <span class="material-icons">delete</span>
+                    </button>
+                </div>
+                
             </div>
         </ng-template>
     </div>
-
-    <ng-template #players>
-        <div class="players" *ngFor="let member of (players$ | async)">
-            <div class="player">
-                <span class="tab"> 
-                    <h2>First name:</h2> <span class="value">{{member.player.firstName}} </span>
-                </span>
-                <span class="tab"> 
-                    <h2>Last name:</h2> <span class="value">{{member.player.lastName}} </span>
-                </span>
-                <span class="tab"> 
-                    <h2>Playing:</h2> <span class="value">{{member.instrument}} </span>
-                </span>
-                <span class="tab"> 
-                    <h2>Joined at:</h2> <span class="value">{{member.joinedAt | date}} </span>
-                </span>
-            </div>
-            
-        </div>
-    </ng-template>
 </div>
+

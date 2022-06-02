@@ -73,6 +73,15 @@ export class OrchestraPageComponent {
     });
   }
 
+  public removePlayer(playerId: number) {
+    this.orchestraService.removePlayerFromOrchestra(playerId, this.orchestra!)
+    .subscribe(() => {
+      this.snackBar.open("Player removed. Please refresh the page!", "Close", {
+        duration: 3500
+      });
+    });
+  }
+
   public onSearch(event: any) {
     this.searchTrigger$.next(event);
   }

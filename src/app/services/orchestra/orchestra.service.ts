@@ -91,6 +91,11 @@ export class OrchestraService {
     return this.http.post(url, {orchestraMembership});
   }
 
+  public removePlayerFromOrchestra(playerId: number, orchestra: Orchestra) {
+    const url = `${baseUrl}${ApiPaths.ORCHESTRA_MEMBERSHIP}/${orchestra.id}/player/${playerId}`;
+    return this.http.delete(url);
+  }
+
   public editMembership(formData: any) {
     const url = `${baseUrl}${ApiPaths.ORCHESTRA_MEMBERSHIP}`;
     return this.http.put(url, formData);

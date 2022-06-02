@@ -19,6 +19,6 @@
         <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long</mat-error>
     </mat-form-field>
 
-    <button mat-raised-button  color="primary" (click)="onLogin()" [disabled]="loginForm.invalid">Sign up</button>
+    <button mat-raised-button  color="primary" (click)="onLogin()" [disabled]="loginForm.invalid">Sign in</button>
     <p>Don't have an account <a [routerLink]="'/register'" > <b>Register</b></a></p>
 </form>
