@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, map, Observable, of, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, tap, map, Observable, of, Subject, switchMap } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { EventService } from 'src/app/services/event/event.service';
@@ -28,6 +29,14 @@ export class HomePageComponent {
     }),
     switchMap((event: any) => {
       return this.searchService.searchFor(event.table, event.searchQuery);
+    }),
+    tap((resultArray) => {
+      if (resultArray.length == 0) {
+        this.snackBar.open("No results found", "Close", {
+          duration: 3500
+        });
+        this.modalService.dismissAll();
+      }
     })
   )
 
@@ -84,6 +93,7 @@ export class HomePageComponent {
 
   constructor(private authService: AuthService, private userService: UserService, 
     private postService: PostService, private eventService: EventService, private searchService: SearchService,
-    private modalService: NgbModal, private orchestraService: OrchestraService, private router: Router) { 
+    private modalService: NgbModal, private orchestraService: OrchestraService, private router: Router,
+    private snackBar: MatSnackBar ) { 
   }
 }

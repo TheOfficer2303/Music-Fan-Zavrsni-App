@@ -1,66 +1,78 @@
-<button mat-button (click)="openModal(search)">
-    <span class="material-icons">search</span>
-    <span>Search</span>
-</button>
+<div class="sidebar">
+    <div class="search">
+        <h2>Looking for something?</h2>
+        <button mat-button class="home-page__button" (click)="openModal(search)">
+            <span class="material-icons">search</span>
+            <span>Search</span>
+        </button>
+    </div>
 
-<div class="search-modal">
-    <ng-template #search>
-        <h2>What you want to search for?</h2>
-        
-        <app-search-form
-            (search)="onSearch($event)"
-        >
-        </app-search-form>
-
-        <div *ngIf="results$">
-            <app-search-result-list
-                [resultArray]="results$"
+    <div class="search-modal">
+        <ng-template #search>
+            <app-search-form
+                (search)="onSearch($event)"
             >
-            </app-search-result-list>
-        </div>
-    </ng-template>
-</div>
-
-<div class="conductor">
-    <ng-container *ngIf="(myOrchestra$ | async)?.name; let name; else noOrch">
-        <a class="header" [routerLink]="['/my-orchestra']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
-            <span>{{name}}</span>
-        </a>
-    </ng-container>
+            </app-search-form>
     
-    <ng-template #noOrch>
-        <p>You are conducting an orchestra? Connect it here!</p>
-        <div>
-            <button mat-button (click)="openModal(orchestra)">
-                <span class="material-icons">add_circle</span>
-                <span>Add new orchestra</span>
-            </button>
-        </div>
-    </ng-template>
+            <div *ngIf="results$">
+                <app-search-result-list
+                    [resultArray]="results$"
+                >
+                </app-search-result-list>
+            </div>
+        </ng-template>
+    </div>
 
-    <ng-template #orchestra>
-        <app-orchestra-form
-            (orchestraFormData)="onNewOrchestra($event)"
-        >
-        </app-orchestra-form>
-    </ng-template>
+    <div class="conductor">
+        <ng-container *ngIf="(myOrchestra$ | async)?.name; let name; else noOrch">
+            <div style="display: flex;">
+                <span class="material-icons">piano</span>
+                <h2>You are conducting an orchestra!</h2>
+            </div>
+            <a class="link" [routerLink]="['/my-orchestra']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+                <span>{{name}}</span>
+            </a>
+        </ng-container>
+        
+        <ng-template #noOrch>
+            <h2>You are conducting an orchestra? Connect it here!</h2>
+            <div>
+                <button mat-button class="home-page__button" (click)="openModal(orchestra)">
+                    <span class="material-icons">add_circle</span>
+                    <span>Add new orchestra</span>
+                </button>
+            </div>
+        </ng-template>
+    
+        <ng-template #orchestra>
+            <app-orchestra-form
+                (orchestraFormData)="onNewOrchestra($event)"
+            >
+            </app-orchestra-form>
+        </ng-template>
+    </div>
 </div>
 
 
-<ng-container *ngFor="let pe of (postsAndEvents$ | async)">
-    <app-post-list 
-    (comment)="onComment($event)"
-    [posts]="pe?.posts"
-    >
-    </app-post-list>
 
-    <app-event-list 
-        (joinEventId)="onJoinEvent($event)"
-        (quitEventId)="onQuitEvent($event)"
-        [events]="pe?.events"
-        [joined$]="joined$"
-        [currentUser]="getCurrentUser()"
-    >
-    </app-event-list>
-</ng-container>
+
+
+<div class="posts-events">
+    <ng-container *ngFor="let pe of (postsAndEvents$ | async)">
+        <app-post-list 
+        (comment)="onComment($event)"
+        [posts]="pe?.posts"
+        >
+        </app-post-list>
+    
+        <app-event-list 
+            (joinEventId)="onJoinEvent($event)"
+            (quitEventId)="onQuitEvent($event)"
+            [events]="pe?.events"
+            [joined$]="joined$"
+            [currentUser]="getCurrentUser()"
+        >
+        </app-event-list>
+    </ng-container>
+</div>
 
