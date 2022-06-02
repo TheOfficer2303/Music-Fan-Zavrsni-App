@@ -122,6 +122,11 @@ export class UserService {
             posts: Post[],
             events: Event[]
           } = {posts: [], events: []}
+          
+          if (!followee.posts) {
+            return;
+          }
+
           pe.posts = followee.posts.map((post: any) => {
             let comments: Comment[] = [];
             comments = post.comments.map((comment: IRawComment) => {
@@ -130,6 +135,9 @@ export class UserService {
             return new Post(post.id, post.creatorId, post.content, post.imageUrl, post.createdAt, comments);
           });
 
+          if (!followee.events) {
+            return;
+          }
           pe.events = followee.events.map((event: any) => {
             let coming: User[] = [];
             coming = event.coming.map((user: any) => {
