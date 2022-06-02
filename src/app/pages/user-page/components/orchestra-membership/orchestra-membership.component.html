@@ -1,21 +1,17 @@
-<span class="om" *ngIf="orchestraMembership; let orchestraMembership; else noPlay"> 
-    <div>
-        <span class="tab">Orchestra name:</span>
-        {{orchestraMembership.orchestra.name}}
-    </div>
-    <div>
-        <span class="tab">Conductor</span>
-        {{orchestraMembership.orchestra.conductor?.firstName}} {{orchestraMembership.orchestra.conductor?.lastName}}
-    </div>
-    <div>
-        <span class="tab">Joined at:</span>
-        {{orchestraMembership.joinedAt | date}}
-    </div>
-    <div>
-        <span class="tab">Playing:</span>
-        {{orchestraMembership.instrument}}
-    </div>
-</span>
-<ng-template #noPlay>
-    <span>I don't play in any orchestra</span>
-</ng-template>
+<div>
+    <span class="tab">Orchestra name:</span>
+    {{orchestraMembership?.orchestra?.name}}
+</div>
+<div>
+    <span class="tab">Conductor</span>
+    {{orchestraMembership?.orchestra?.conductor?.firstName}} {{orchestraMembership?.orchestra?.conductor?.lastName}}
+</div>
+<div>
+    <span class="tab">Joined at:</span>
+    {{orchestraMembership?.joinedAt | date}}
+</div>
+<div>
+    <span class="tab">Playing:</span>
+    {{orchestraMembership?.instrument}}
+</div>
+

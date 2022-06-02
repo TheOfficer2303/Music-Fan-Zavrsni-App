@@ -72,7 +72,7 @@
     <div class="activity">
         <div class="memberships">
             <div class="orchestra">
-                <div *ngIf="orchestraMembership$ | async; let om">
+                <div *ngIf="orchestraMembership$ | async; let om; else noPlay">
                     <div class="orchedit">
                         <span class="material-icons">piano</span>
                         <h2>My orchestra</h2>
@@ -91,6 +91,12 @@
                             </app-orchestra-membership-edit-form>
                         </ng-template>
                 </div> 
+
+                <ng-template #noPlay>
+                    <span class="material-icons">piano</span>
+                    <h2>My orchestra</h2>
+                    <div>I don't play in any orchestra</div>
+                </ng-template>
             </div>
     
             <div class="groups">

@@ -93,7 +93,6 @@ export class UserService {
     console.log(url)
     return this.http.get<any>(url).pipe(
       map((response) => {
-        debugger;
         console.log(response)
         if (response.followers.length === 0) {
           return false;
