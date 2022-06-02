@@ -4,10 +4,10 @@
         <input matInput [type]="'text'" formControlName="searchQuery" placeholder="You wanted to ask me something...?">
     </mat-form-field>
 
-    <mat-radio-group formControlName="table">
+    <mat-radio-group formControlName="table" class="radios">
         <mat-radio-button value="User">User</mat-radio-button>
-        <mat-radio-button value="Group" [disabled]="usersOnly()">Group</mat-radio-button>
-        <mat-radio-button value="Orchestra" [disabled]="usersOnly()">Orchestra</mat-radio-button>
+        <mat-radio-button *ngIf="!usersOnly()" value="Group" [disabled]="usersOnly()">Group</mat-radio-button>
+        <mat-radio-button *ngIf="!usersOnly()" value="Orchestra" [disabled]="usersOnly()">Orchestra</mat-radio-button>
     </mat-radio-group>
    
     <button mat-raised-button color="primary" [disabled]="searchForm.invalid" (click)="onSearch()">Search</button>
