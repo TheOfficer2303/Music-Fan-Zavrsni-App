@@ -53,6 +53,7 @@ import { OrchestraFormComponent } from './pages/home-page/components/orchestra-f
 import { OrchestraPageComponent } from './pages/orchestra-page/orchestra-page.component';
 import { OrchestraMembershipEditFormComponent } from './pages/user-page/components/orchestra-membership-edit-form/orchestra-membership-edit-form.component';
 import { CountryFormComponent } from './pages/home-page/components/country-form/country-form.component';
+import { LocationFormComponent } from './pages/home-page/components/location-form/location-form.component';
 
 
 
@@ -89,6 +90,7 @@ import { CountryFormComponent } from './pages/home-page/components/country-form/
     OrchestraPageComponent,
     OrchestraMembershipEditFormComponent,
     CountryFormComponent,
+    LocationFormComponent,
   ],
   imports: [
     BrowserModule,

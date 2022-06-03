@@ -56,7 +56,20 @@
             </div>
 
             <div class="locations">
-
+                <br><br>
+                <h2>
+                    Locations
+                    <button mat-button (click)="collapse1.toggle()" [attr.aria-expanded]="!isCollapsed1">
+                        New
+                    </button>
+                </h2>
+                <div #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed1">
+                    <app-location-form (location)="onNewLocation($event)">
+                    </app-location-form>
+                </div>
+                <div *ngFor="let location of (locations$ | async)">
+                    {{location?.postNumber}} ({{location?.countryIsoCode}}): {{location?.name}}
+                </div>
             </div>
         </ng-template>
     </div>

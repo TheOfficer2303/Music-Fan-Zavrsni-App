@@ -1,0 +1,22 @@
+<form [formGroup]="locationForm" class="form-location">
+    <h2>Insert new country</h2>
+    <mat-form-field appearance="outline">
+        <mat-label>Location name</mat-label>
+        <input matInput formControlName="name" type="text" >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Post number</mat-label>
+        <input matInput formControlName="postNumber" type="number" >
+    </mat-form-field>
+
+    <mat-form-field class="proba">
+        <mat-select formControlName="countryIsoCode" placeholder="Country">
+            <ng-container *ngFor="let country of (countries$ | async)">
+                <mat-option [value]="country.countryIsoCode">{{country.name}}</mat-option>                 
+            </ng-container>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="locationForm.invalid" (click)="onSave()">Post</button>
+</form>

@@ -16,8 +16,10 @@ export class TopNavComponent implements OnInit {
 
   public adminRole = AppRoles.ADMIN;
   public isCollapsed = true;
+  public isCollapsed1 = true;
 
   public countries$ = this.locationService.getCountries();
+  public locations$ = this.locationService.getLocations();
 
   public getCurrentUserProfileLink() {
     return `user/${this.currentUser?.id.toString()}`;
@@ -27,13 +29,20 @@ export class TopNavComponent implements OnInit {
     this.modalService.open(modal);
   }
 
-  public onNewCountry(event: any) {
-    this.locationService.createCountry(event).subscribe(() => {
+  public onNewCountry(country: any) {
+    this.locationService.createCountry(country).subscribe(() => {
       this.modalService.dismissAll();
-      
-    }
-    )
+      this.isCollapsed = true;
+    });
   }
+
+  public onNewLocation(location: any) {
+    this.locationService.createLocation(location).subscribe(() => {
+      this.modalService.dismissAll();
+      this.isCollapsed1 = true;
+    });
+  }
+
 
   public logOut() {
     this.authService.logOut();
