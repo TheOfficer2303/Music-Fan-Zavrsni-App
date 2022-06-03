@@ -39,10 +39,16 @@
             <div class="countries">
                 <h2>
                     Countries
-                    <button mat-button>
-                        <span class="material-icons">add</span>
+                    <button mat-button (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed">
                         New
                     </button>
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                        <app-country-form
+                            (country)="onNewCountry($event)"
+                        >
+
+                        </app-country-form>
+                    </div>
                 </h2>
                 <div *ngFor="let country of (countries$ | async)">
                     {{country?.countryIsoCode}}: {{country?.name}}

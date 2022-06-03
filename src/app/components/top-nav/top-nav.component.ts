@@ -15,6 +15,7 @@ export class TopNavComponent implements OnInit {
   @Input() currentUser?: User;
 
   public adminRole = AppRoles.ADMIN;
+  public isCollapsed = true;
 
   public countries$ = this.locationService.getCountries();
 
@@ -24,6 +25,14 @@ export class TopNavComponent implements OnInit {
 
   public openModal(modal: any) {
     this.modalService.open(modal);
+  }
+
+  public onNewCountry(event: any) {
+    this.locationService.createCountry(event).subscribe(() => {
+      this.modalService.dismissAll();
+      
+    }
+    )
   }
 
   public logOut() {

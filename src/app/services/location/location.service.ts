@@ -34,4 +34,9 @@ export class LocationService {
       })
     )
   }
+
+  public createCountry(country: any) {
+    const url = `${baseUrl}${ApiPaths.LOCATIONS}${ApiPaths.COUNTRIES}`;
+    return this.http.post(url, {country});
+  }
 }
