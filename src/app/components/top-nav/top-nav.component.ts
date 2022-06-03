@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoles } from 'src/app/consts/roles.constants';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { LocationService } from 'src/app/services/location/location.service';
 
 @Component({
   selector: 'app-top-nav',
@@ -8,9 +12,18 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./top-nav.component.scss']
 })
 export class TopNavComponent implements OnInit {
+  @Input() currentUser?: User;
+
+  public adminRole = AppRoles.ADMIN;
+
+  public countries$ = this.locationService.getCountries();
 
   public getCurrentUserProfileLink() {
-    return `user/${this.authService.getAuthData()?.currentUser.id.toString()}`;
+    return `user/${this.currentUser?.id.toString()}`;
+  }
+
+  public openModal(modal: any) {
+    this.modalService.open(modal);
   }
 
   public logOut() {
@@ -18,7 +31,8 @@ export class TopNavComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private modalService: NgbModal,
+    private locationService: LocationService) { }
 
   ngOnInit(): void {
   }

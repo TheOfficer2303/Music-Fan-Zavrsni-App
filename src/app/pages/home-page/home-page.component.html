@@ -53,12 +53,8 @@
     </div>
 </div>
 
-
-
-
-
 <div class="posts-events">
-    <ng-container *ngIf="(postsAndEvents$ | async); let postAndEvents; else bc">
+    <ng-container *ngIf="(postsAndEvents$ | async)?.length != 0 && (postsAndEvents$ | async); let postAndEvents; else bc">
         <ng-container *ngFor="let pe of postAndEvents">
             <app-post-list 
             (comment)="onComment($event)"
@@ -79,6 +75,8 @@
 
         </ng-container>
     </ng-container>
-    <ng-template #bc>AAa</ng-template>
+    <ng-template #bc>
+        <h1>aaaa</h1>
+    </ng-template>
 </div>
 

@@ -125,28 +125,31 @@ export class UserService {
           } = {posts: [], events: []}
           
           if (!followee.posts) {
-            return;
-          }
-
-          pe.posts = followee.posts.map((post: any) => {
-            let comments: Comment[] = [];
-            comments = post.comments.map((comment: IRawComment) => {
-              return new Comment(comment.id, post.id, comment.content, comment.commentatorId, comment.createdAt);
+            pe.posts = []
+          } else {
+            pe.posts = followee.posts.map((post: any) => {
+              let comments: Comment[] = [];
+              comments = post.comments.map((comment: IRawComment) => {
+                return new Comment(comment.id, post.id, comment.content, comment.commentatorId, comment.createdAt);
+              });
+              return new Post(post.id, post.creatorId, post.content, post.imageUrl, post.createdAt, comments);
             });
-            return new Post(post.id, post.creatorId, post.content, post.imageUrl, post.createdAt, comments);
-          });
+          }
 
           if (!followee.events) {
-            return;
+            pe.events = []
+          } else {
+            pe.events = followee.events.map((event: any) => {
+              let coming: User[] = [];
+              coming = event.coming.map((user: any) => {
+                return new User(user.user_id, user.first_name, user.last_name, user.avatar_url, user.info, user.location.name, user.ability_level)
+              })
+              return new Event(event.id, event.name, event.description, event.startDate, event.endDate, 
+                event.startTime, event.address, event.organizatorId, event.location, coming);
+            })
           }
-          pe.events = followee.events.map((event: any) => {
-            let coming: User[] = [];
-            coming = event.coming.map((user: any) => {
-              return new User(user.user_id, user.first_name, user.last_name, user.avatar_url, user.info, user.location.name, user.ability_level)
-            })
-            return new Event(event.id, event.name, event.description, event.startDate, event.endDate, 
-              event.startTime, event.address, event.organizatorId, event.location, coming);
-            })
+
+          console.log(pe);
           return pe;
         })
       })
