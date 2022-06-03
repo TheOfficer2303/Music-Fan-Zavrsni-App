@@ -11,7 +11,7 @@ export class LoginFormComponent {
   @Output() loginUser: EventEmitter<ILoginFormData> = new EventEmitter()
 
   public loginForm: FormGroup = this.fb.group({
-    email: ['', Validators.required, Validators.email],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
 

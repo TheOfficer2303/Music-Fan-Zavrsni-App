@@ -55,7 +55,9 @@
 
 <div class="posts-events">
     <ng-container *ngIf="(postsAndEvents$ | async)?.length != 0 && (postsAndEvents$ | async); let postAndEvents; else bc">
+
         <ng-container *ngFor="let pe of postAndEvents">
+            
             <app-post-list 
             (comment)="onComment($event)"
             [posts]="pe?.posts"

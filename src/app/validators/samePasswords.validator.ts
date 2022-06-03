@@ -6,3 +6,13 @@ export function samePasswordsValidator(control: AbstractControl): ValidationErro
 
 	return password && confirmPassword && password.value === confirmPassword.value ? null : { notSame: 'Retry pls' }	
 }
+
+export function nameValidator(control: AbstractControl): ValidationErrors | null {
+	const name = control.value;
+
+	if (/^[a-zA-Z ]+$/.test(name)) {
+		return null
+	} else {
+		return {invalidName: 'Use letters only!'}
+	}
+}

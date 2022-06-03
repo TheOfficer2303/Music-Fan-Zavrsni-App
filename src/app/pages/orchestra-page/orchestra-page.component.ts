@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, catchError, combineLatest, EMPTY, map, mergeMap, Observable, of, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, map, mergeMap, Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { Orchestra, OrchestraMembership } from 'src/app/models/orchestra.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -29,6 +29,9 @@ export class OrchestraPageComponent {
     }),
     switchMap((user: User) => {
       return this.orchestraService.getOrchestraByConductor(user);
+    }),
+    tap((result: any) => {
+      this.orchestra = result
     })
   );
 

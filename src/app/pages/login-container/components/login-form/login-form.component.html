@@ -5,10 +5,7 @@
         <mat-label>Email</mat-label>
         <input matInput  formControlName="email">
         <mat-icon matPrefix>person</mat-icon>
-        <mat-error *ngIf="loginForm.get('email')?.errors?.['required'] else notEmpty">Cannot be empty</mat-error>
-        <ng-template #notEmpty>
-            <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">Hey! That's not an email!</mat-error>
-        </ng-template>
+        <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">Hey! That's not an email!</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize, Observable, tap } from 'rxjs';
 import { Location } from 'src/app/models/location.model';
 import { LocationService } from 'src/app/services/location/location.service';
-import { samePasswordsValidator } from 'src/app/validators/samePasswords.validator';
+import { nameValidator, samePasswordsValidator } from 'src/app/validators/samePasswords.validator';
 import { IUserFormData } from 'src/app/interfaces/userFormData.interface';
 
 @Component({
@@ -16,8 +16,8 @@ export class RegistrationFormComponent {
   @Output() registerUser: EventEmitter<IUserFormData> = new EventEmitter()
 
   public registration: FormGroup = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    firstName: ['', [Validators.required, nameValidator]],
+    lastName: ['', [Validators.required, nameValidator]],
     info: ['', Validators.required],
     postNumber: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],

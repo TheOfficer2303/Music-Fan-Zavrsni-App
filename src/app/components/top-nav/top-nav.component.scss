@@ -7,6 +7,20 @@
     padding: 10px;
 }
 
+.logo {
+    display: flex;    
+    align-items: center;
+
+    h1 {
+        margin-top: 15px;
+        margin-left: 12px;
+    }
+}
+
+.logo-image {
+    width: 50px;
+}
+
 .links {
     display: flex;
 }

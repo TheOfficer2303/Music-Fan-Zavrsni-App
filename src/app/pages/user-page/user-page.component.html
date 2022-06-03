@@ -76,7 +76,7 @@
                     <div class="orchedit">
                         <span class="material-icons">piano</span>
                         <h2>My orchestra</h2>
-                        <button *ngIf="om.player.id == getCurrentUser()?.id || getCurrentUser()?.id == adminRole"
+                        <button *ngIf="om.player.id == getCurrentUser()?.id || getCurrentUser()?.abilityLevel == adminRole"
                         mat-button 
                         (click)="openModal(orchMembEdit)"
                         >
