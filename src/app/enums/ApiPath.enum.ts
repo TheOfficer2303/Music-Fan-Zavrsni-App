@@ -17,4 +17,4 @@ export enum ApiPaths {
     SEARCH = '/search'
 }
 
-export const baseUrl = 'http://localhost:3000'
+export const baseUrl = 'https://music-fan-api.herokuapp.com'
